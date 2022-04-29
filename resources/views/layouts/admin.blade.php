@@ -15,13 +15,19 @@
     <link rel="stylesheet" href="{{asset('vendors/css/vendor.bundle.base.css')}}">
     <!-- endinject -->
     <!-- Plugin css for this page -->
+{{--    <link rel="stylesheet" href="{{asset('vendors/datatables.net-bs4/dataTables.bootstrap4.css')}}">--}}
+{{--    <link rel="stylesheet" href="{{asset('js/select.dataTables.min.css')}}">--}}
+
     <link rel="stylesheet" href="{{asset('vendors/datatables.net-bs4/dataTables.bootstrap4.css')}}">
-    <link rel="stylesheet" href="{{asset('js/select.dataTables.min.css')}}">
-    <!-- End plugin css for this page -->
+<!-- End plugin css for this page -->
     <!-- inject:css -->
     <link rel="stylesheet" href="{{asset('css/vertical-layout-light/style.css')}}">
-    <!-- endinject -->
-    <link rel="shortcut icon" href="images/favicon.png"/>
+{{--    <link href="{{ asset('css/datatables.css') }}" rel="stylesheet"/>--}}
+{{--    <link href="{{ asset('css/dataTables.bootstrap4.min.css') }}" rel="stylesheet"/>--}}
+<!-- endinject -->
+{{--    <link rel="shortcut icon" href="images/favicon.png"/>--}}
+
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- Scripts -->
     {{--    <script src="{{ asset('js/app.js') }}" defer></script>--}}
@@ -54,7 +60,15 @@
 <!-- container-scroller -->
 
 <!-- plugins:js -->
+<!-- Plugin js for this page-->
+<script src="{{asset('js/jquery-3.6.0.min.js')}}"></script>
+<script src="{{asset('vendors/datatables.net/jquery.dataTables.js')}}"></script>
+<script src="{{asset('vendors/datatables.net-bs4/dataTables.bootstrap4.js')}}"></script>
+
+<script src="{{ asset('js/jquery.dataTables.min.js') }}"></script>
+<script src="{{asset('/js/datatables.js')}}"></script>
 <script src="{{asset('vendors/js/vendor.bundle.base.js')}}"></script>
+<script src="{{asset('/js/sweetalert2.all.min.js')}}"></script>
 <!-- endinject -->
 <!-- Plugin js for this page -->
 <script src="{{asset('vendors/chart.js/Chart.min.js')}}"></script>
@@ -73,6 +87,7 @@
 <script src="{{asset('js/jquery.cookie.js')}}" type="text/javascript"></script>
 <script src="{{asset('js/dashboard.js')}}"></script>
 <script src="{{asset('js/Chart.roundedBarCharts.js')}}"></script>
+<script src="{{asset('js/custom.js')}}"></script>
 <!-- End custom js for this page-->
 </body>
 

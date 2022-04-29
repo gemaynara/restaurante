@@ -22,7 +22,6 @@ class CreateSubCategoriaCardapiosTable extends Migration
 
             $table->string('nome', 50);
             $table->string('descricao', 200)->nullable();
-            $table->boolean('ativo')->default(1);
             $table->timestamps();
             $table->softDeletes();
         });

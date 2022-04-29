@@ -19,7 +19,6 @@ class CreateSetoresTable extends Migration
             $table->foreign('empresa_id')->on('empresas')->references('id');
             $table->string('nome', 50);
             $table->string('descricao', 200)->nullable();
-            $table->boolean('ativo')->default(1);
             $table->timestamps();
             $table->softDeletes();
         });

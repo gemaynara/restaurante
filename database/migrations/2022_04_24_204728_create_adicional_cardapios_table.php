@@ -23,7 +23,6 @@ class CreateAdicionalCardapiosTable extends Migration
 
             $table->string('nome', 50);
             $table->decimal('valor', 11,2);
-            $table->boolean('ativo')->default(1);
             $table->timestamps();
             $table->softDeletes();
         });

@@ -6,18 +6,19 @@
             </button>
         </div>
         <div>
-            <a class="navbar-brand brand-logo" href="index.html">
-                <img src="images/logo.svg" alt="logo"/>
+            <a class="navbar-brand brand-logo" href="{{url('/')}}">
+                <img src="{{asset('/imgs/empresas/'. auth()->user()->empresa->parametros->logo)}}" alt="logo" width="100px"/>
             </a>
-            <a class="navbar-brand brand-logo-mini" href="index.html">
-                <img src="images/logo-mini.svg" alt="logo"/>
+            <a class="navbar-brand brand-logo-mini" href="{{url('/')}}">
+                <img src="{{asset('/imgs/empresas/'. auth()->user()->empresa->parametros->logo)}}" alt="logo" width="50px"/>
             </a>
         </div>
     </div>
     <div class="navbar-menu-wrapper d-flex align-items-top">
         <ul class="navbar-nav">
             <li class="nav-item font-weight-semibold d-none d-lg-block ms-0">
-                <h1 class="welcome-text">Good Morning, <span class="text-black fw-bold">John Doe</span></h1>
+{{--                <h1 class="welcome-text">Good Morning, <span class="text-black fw-bold">John Doe</span></h1>--}}
+                <h1 class="welcome-text"><span>{{ auth()->user()->empresa->razao_social}}</span></h1>
 {{--                <h3 class="welcome-sub-text">Your performance summary this week </h3>--}}
             </li>
         </ul>
@@ -31,7 +32,9 @@
                         <img class="img-md rounded-circle" src="{{asset('images/faces/face8.jpg')}}"
                              alt="Profile image">
                         <p class="mb-1 mt-3 font-weight-semibold">{{auth()->user()->name}}</p>
-                        <p class="fw-light text-muted mb-0">{{auth()->user()->name}}</p>
+                        <p class="fw-light text-muted mb-0">{{auth()->user()->empresa->razao_social}}</p>
+
+
                     </div>
                     <a class="dropdown-item"><i
                             class="dropdown-item-icon mdi mdi-account-outline text-primary me-2"></i> My Profile </a>

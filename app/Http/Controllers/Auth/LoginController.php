@@ -54,18 +54,21 @@ class LoginController extends Controller
         ]);
 
         $credentials = $request->only('username', 'password');
-        if (Auth::attempt($credentials)) {
-            return redirect()->intended('home')
-                ->withSuccess('You have Successfully loggedin');
+        if (Auth::attempt(['username'=> $request->username, 'password'=>$request->password, 'active'=>1])) {
+            return redirect()->intended('home');
+//                ->withSuccess('You have Successfully loggedin');
         }
 
-        return redirect("login")->withSuccess('Oppes! You have entered invalid credentials');
+        return back()
+            ->withErrors(['username' => trans('auth.failed')])
+            ->withInput(request(['username']));
+//        return redirect("/")->withSuccess('Oppes! You have entered invalid credentials');
     }
 
     public function logout() {
         Session::flush();
         Auth::logout();
 
-        return Redirect('login');
+        return Redirect('/');
     }
 }

@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Empresa extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory;
 
     protected $table = 'empresas';
 
@@ -24,4 +24,9 @@ class Empresa extends Model
         'estado',
         'ativo'
     ];
+
+    public function parametros(){
+        return $this->hasOne(EmpresaParametros::class, 'empresa_id');
+    }
+
 }

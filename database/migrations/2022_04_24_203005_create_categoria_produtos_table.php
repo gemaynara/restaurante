@@ -19,7 +19,6 @@ class CreateCategoriaProdutosTable extends Migration
             $table->foreign('empresa_id')->on('empresas')->references('id');
             $table->string('nome', 200);
             $table->string('descricao', 500)->nullable();
-            $table->boolean('ativo')->default(1);
             $table->timestamps();
             $table->softDeletes();
         });

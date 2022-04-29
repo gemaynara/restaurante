@@ -29,7 +29,6 @@ class CreateProdutosTable extends Migration
             $table->integer('estoque_max')->default(0);
             $table->string('lote')->nullable();
             $table->decimal('valor', 11,2)->default(0.00)->nullable();
-            $table->boolean('ativo')->default(1);
             $table->timestamps();
             $table->softDeletes();
         });

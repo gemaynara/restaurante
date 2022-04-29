@@ -20,7 +20,6 @@ class CreateCategoriaCardapiosTable extends Migration
             $table->string('nome', 50);
             $table->string('descricao', 200)->nullable();
             $table->string('icone', 500)->nullable();
-            $table->boolean('ativo')->default(1);
             $table->timestamps();
             $table->softDeletes();
         });
