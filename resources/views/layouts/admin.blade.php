@@ -12,6 +12,9 @@
     <link rel="stylesheet" href="{{asset('vendors/ti-icons/css/themify-icons.css')}}">
     <link rel="stylesheet" href="{{asset('vendors/typicons/typicons.css')}}">
     <link rel="stylesheet" href="{{asset('vendors/simple-line-icons/css/simple-line-icons.css')}}">
+
+    <link href="{{ asset('css/datatables.min.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('css/dataTables.bootstrap4.min.css') }}" rel="stylesheet"/>
     <link rel="stylesheet" href="{{asset('vendors/css/vendor.bundle.base.css')}}">
     <!-- endinject -->
     <!-- Plugin css for this page -->
@@ -61,13 +64,10 @@
 
 <!-- plugins:js -->
 <!-- Plugin js for this page-->
-<script src="{{asset('js/jquery-3.6.0.min.js')}}"></script>
-<script src="{{asset('vendors/datatables.net/jquery.dataTables.js')}}"></script>
-<script src="{{asset('vendors/datatables.net-bs4/dataTables.bootstrap4.js')}}"></script>
-
-<script src="{{ asset('js/jquery.dataTables.min.js') }}"></script>
-<script src="{{asset('/js/datatables.js')}}"></script>
 <script src="{{asset('vendors/js/vendor.bundle.base.js')}}"></script>
+<script src="{{ asset('js/jquery-3.6.0.min.js') }}"></script>
+<script src="{{ asset('js/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('js/jquery.mask.js') }}"></script>
 <script src="{{asset('/js/sweetalert2.all.min.js')}}"></script>
 <!-- endinject -->
 <!-- Plugin js for this page -->
@@ -88,7 +88,9 @@
 <script src="{{asset('js/dashboard.js')}}"></script>
 <script src="{{asset('js/Chart.roundedBarCharts.js')}}"></script>
 <script src="{{asset('js/custom.js')}}"></script>
+<script src="{{asset('js/validate.js')}}"></script>
 <!-- End custom js for this page-->
+@stack('scripts')
 </body>
 
 </html>

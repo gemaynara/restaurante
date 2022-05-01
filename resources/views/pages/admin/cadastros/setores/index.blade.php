@@ -11,8 +11,8 @@
                             <a href="{{route('setores.create')}}" type="button"
                                class="btn btn-dark btn-rounded btn-fw">Novo Registro</a>
                         </p>
-                        <div class="table-responsive">
-                            <table class="table dt">
+                        <div class="table-responsive table-striped">
+                            <table class="table table-bordered dt">
                                 <thead>
                                 <tr>
                                     <th>#ID</th>

@@ -12,7 +12,7 @@
                                class="btn btn-dark btn-rounded btn-fw">Novo Registro</a>
                         </p>
                         <div class="table-responsive">
-                            <table class="table dt">
+                            <table class="table table-bordered dt">
                                 <thead>
                                 <tr>
                                     <th>#ID</th>

@@ -19,7 +19,6 @@ class CategoriaCardapioController extends Controller
         return view('pages.admin.cardapio.categorias.index', compact('categorias'));
     }
 
-
     public function create()
     {
         return view('pages.admin.cardapio.categorias.create');

@@ -1,53 +1,42 @@
 @extends('layouts.admin')
 @section('content')
     <div class="content-wrapper">
+        @include('pages.admin.cardapio.adicionais.form')
         <div class="row">
             <div class="col-lg-12 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Lista de Sub Categorias</h4>
-                        @include('layouts.partials.alerts')
-                        <p class="card-description float-right">
-                            <a href="{{route('sub-categorias-cardapio.create')}}" type="button"
-                               class="btn btn-dark btn-rounded btn-fw">Novo Registro</a>
-                        </p>
+                        <h4 class="card-title">Lista de Adicionais</h4>
                         <div class="table-responsive">
                             <table class="table table-bordered dt">
                                 <thead>
                                 <tr>
                                     <th>#ID</th>
                                     <th>Nome</th>
-                                    <th>Descrição</th>
-                                    <th>Categoria</th>
+                                    <th>Valor</th>
                                     <th>Ações</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($subcategorias as $sub)
+                                @foreach($adicionais as $adc)
                                     <tr>
-                                        <td>{{$sub->id}}</td>
-                                        <td>{{$sub->nome}}</td>
-                                        <td>{{$sub->descricao}}</td>
-                                        <td>{{$sub->categoriaCardapio->nome}}</td>
+                                        <td>{{$adc->id}}</td>
+                                        <td>{{$adc->nome}}</td>
+                                        <td>{{$adc->valor}}</td>
                                         <td>
-                                            <a type="button" href="{{route('sub-categorias-cardapio.edit', $sub->id)}}"
+                                            <a type="button"
+                                               href="{{route('adicionais.edit',['subcategoria'=> $subcategoria->id, 'id'=> $adc->id])}}"
                                                class="btn btn-outline-secondary btn-rounded btn-icon btn-sm">
                                                 <i class="ti-pencil text-primary"></i>
                                             </a>
 
                                             <button type="button"
-                                                    data-remote="{{route('sub-categorias-cardapio.destroy', $sub->id)}}"
-                                                    data-id="{{$sub->id}}"
+                                                    data-remote="{{route('adicionais.destroy', $adc->id)}}"
+                                                    data-id="{{$adc->id}}"
                                                     class="btn btn-outline-secondary btn-rounded btn-icon btn-sm delete">
                                                 <i class="ti-trash text-danger"></i>
                                             </button>
 
-
-                                            <a type="button" href="{{route('adicionais', ['subcategoria'=>$sub->id])}}"
-                                               class="btn btn-outline-dark btn-rounded btn-icon btn-sm">
-                                                <i class="ti-plus text-primary"></i> Adicionais
-                                            </a>
-                                        </td>
                                     </tr>
 
                                 @endforeach

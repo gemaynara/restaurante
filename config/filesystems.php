@@ -51,6 +51,11 @@ return [
             'driver' => 'local',
             'root' => public_path() . '/imgs/categorias',
         ],
+
+        'cardapios' => [
+            'driver' => 'local',
+            'root' => public_path() . '/imgs/cardapios',
+        ],
         'produtos' => [
             'driver' => 'local',
             'root' => public_path() . '/imgs/produtos',
