@@ -39,6 +39,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('produtos', \App\Http\Controllers\ProdutoController::class);
     Route::resource('fornecedores', \App\Http\Controllers\FornecedorController::class);
     Route::resource('notas-fiscais', \App\Http\Controllers\NotaFiscalController::class);
+    Route::resource('saidas', \App\Http\Controllers\SaidaController::class);
 
     Route::get('sub-categorias-cardapio/{subcategoria}/adicionais', [\App\Http\Controllers\AdicionalCardapioController::class, 'index'])->name('adicionais');
     Route::post('/adicionais/store', [\App\Http\Controllers\AdicionalCardapioController::class, 'store'])->name('adicionais.store');

@@ -5,7 +5,7 @@
             <div class="col-12 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Inserir Nots Fiscal</h4>
+                        <h4 class="card-title">Inserir Nota Fiscal</h4>
                         @include('layouts.partials.alerts')
                         <form class="forms-sample" method="post" action="{{route('notas-fiscais.store')}}"
                               enctype="multipart/form-data">

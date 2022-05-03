@@ -7,6 +7,7 @@ $(".cnpj").mask('00.000.000/0000-00')
 $(".cpf").mask('000.000.000-00')
 $(".taxa").mask("###.00", {reverse: true})
 $(".qnt").mask("999999")
+$(".dec_estoque").mask("9999.999")
 
 $(".time").mask("HH:Mm:Ss", {
     translation: {

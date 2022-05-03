@@ -98,7 +98,7 @@
                     <ul class="nav flex-column sub-menu">
                         <li class="nav-item"><a class="nav-link" href="{{route('fornecedores.index')}}">Fornecedores</a></li>
                         <li class="nav-item"><a class="nav-link" href="{{route('notas-fiscais.index')}}">Notas Fiscais</a></li>
-                        <li class="nav-item"><a class="nav-link" href="pages/forms/basic_elements.html">Saída de Produtos</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{route('saidas.index')}}">Saída de Produtos</a></li>
                     </ul>
                 </div>
             </li>
