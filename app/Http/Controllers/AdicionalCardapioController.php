@@ -15,6 +15,7 @@ class AdicionalCardapioController extends Controller
     {
         $subcategoria = SubCategoriaCardapio::find($id);
         $adicionais = AdicionalCardapio::with('subCategoriaCardapio')
+            ->where('empresa_id', auth()->user()->empresa->id)
             ->where('subcategoria_cardapio_id', $id)
             ->get();
 

@@ -14,7 +14,9 @@ class CategoriaCardapioController extends Controller
 
     public function index()
     {
-        $categorias = CategoriaCardapio::query()->get();
+        $categorias = CategoriaCardapio::query()
+            ->where('empresa_id', auth()->user()->empresa->id)
+            ->get();
 
         return view('pages.admin.cardapio.categorias.index', compact('categorias'));
     }

@@ -13,9 +13,12 @@
     <link rel="stylesheet" href="{{asset('vendors/typicons/typicons.css')}}">
     <link rel="stylesheet" href="{{asset('vendors/simple-line-icons/css/simple-line-icons.css')}}">
 
+
     <link href="{{ asset('css/datatables.min.css') }}" rel="stylesheet"/>
     <link href="{{ asset('css/dataTables.bootstrap4.min.css') }}" rel="stylesheet"/>
     <link rel="stylesheet" href="{{asset('vendors/css/vendor.bundle.base.css')}}">
+    <link rel="stylesheet" href="{{asset('vendors/select2/select2.min.css')}}">
+    <link rel="stylesheet" href="{{asset('vendors/select2-bootstrap-theme/select2-bootstrap.min.css')}}">
     <!-- endinject -->
     <!-- Plugin css for this page -->
 {{--    <link rel="stylesheet" href="{{asset('vendors/datatables.net-bs4/dataTables.bootstrap4.css')}}">--}}
@@ -76,6 +79,10 @@
 <script src="{{asset('vendors/progressbar.js/progressbar.min.js')}}"></script>
 
 <!-- End plugin js for this page -->
+
+<script src="{{asset('vendors/select2/select2.min.js')}}"></script>
+
+<script src="{{asset('js/select2.js')}}"></script>
 <!-- inject:js -->
 <script src="{{asset('js/off-canvas.js')}}"></script>
 <script src="{{asset('js/hoverable-collapse.js')}}"></script>

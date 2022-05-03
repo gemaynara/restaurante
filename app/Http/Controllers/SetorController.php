@@ -13,7 +13,8 @@ class SetorController extends Controller
 
     public function index()
     {
-        $setores = Setor::query()->get();
+        $setores = Setor::query()
+            ->where('empresa_id', auth()->user()->empresa->id)->get();
 
         return view('pages.admin.cadastros.setores.index', compact('setores'));
     }

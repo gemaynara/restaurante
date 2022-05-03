@@ -20,7 +20,9 @@ class CardapioController extends Controller
      */
     public function index()
     {
-        $cardapios = Cardapio::query()->get();
+        $cardapios = Cardapio::query()
+            ->where('empresa_id', auth()->user()->empresa->id)
+            ->get();
         return view('pages.admin.cardapio.cardapio.index', compact('cardapios'));
     }
 
@@ -31,8 +33,8 @@ class CardapioController extends Controller
      */
     public function create()
     {
-        $setores = Setor::all();
-        $categorias = CategoriaCardapio::all();
+        $setores = Setor::where('empresa_id', auth()->user()->empresa->id)->get();
+        $categorias = CategoriaCardapio::where('empresa_id', auth()->user()->empresa->id)->get();
         return view('pages.admin.cardapio.cardapio.create', compact('setores', 'categorias'));
     }
 
@@ -82,8 +84,8 @@ class CardapioController extends Controller
     public function edit($id)
     {
         $cardapio = Cardapio::query()->find($id);
-        $setores = Setor::all();
-        $categorias = CategoriaCardapio::all();
+        $setores = Setor::where('empresa_id', auth()->user()->empresa->id)->get();
+        $categorias = CategoriaCardapio::where('empresa_id', auth()->user()->empresa->id)->get();
         return view('pages.admin.cardapio.cardapio.edit', compact('cardapio', 'setores', 'categorias'));
 
 

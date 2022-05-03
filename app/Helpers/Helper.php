@@ -2,6 +2,7 @@
 
 namespace App\Helpers;
 
+use App\Models\Produto;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 
@@ -26,5 +27,7 @@ class Helper
         return false;
 
     }
+
+
 
 }

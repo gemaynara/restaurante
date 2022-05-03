@@ -27,4 +27,9 @@ class Cardapio extends Model
         'contador_pedidos',
         'ativo',
     ];
+
+    public function categoriasCardapio()
+    {
+        return $this->belongsTo(CategoriaCardapio::class, 'categoria_cardapio_id');
+    }
 }

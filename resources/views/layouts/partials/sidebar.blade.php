@@ -89,29 +89,33 @@
 
             <li class="nav-item nav-category">Controle de Estoque</li>
             <li class="nav-item">
-                <a class="nav-link" data-bs-toggle="collapse" href="#stock" aria-expanded="false" aria-controls="stock">
-                    <i class="menu-icon mdi mdi-drawing-box"></i>
+                <a class="nav-link" data-bs-toggle="collapse" href="#notes" aria-expanded="false" aria-controls="notes">
+                    <i class="menu-icon mdi mdi-set-left-center"></i>
                     <span class="menu-title">Entrada e Saída</span>
+                    <i class="menu-arrow"></i>
+                </a>
+                <div class="collapse" id="notes">
+                    <ul class="nav flex-column sub-menu">
+                        <li class="nav-item"><a class="nav-link" href="{{route('fornecedores.index')}}">Fornecedores</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{route('notas-fiscais.index')}}">Notas Fiscais</a></li>
+                        <li class="nav-item"><a class="nav-link" href="pages/forms/basic_elements.html">Saída de Produtos</a></li>
+                    </ul>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="collapse" href="#stock" aria-expanded="false" aria-controls="stock">
+                    <i class="menu-icon mdi mdi-apps-box"></i>
+                    <span class="menu-title">Controle de Produtos</span>
                     <i class="menu-arrow"></i>
                 </a>
                 <div class="collapse" id="stock">
                     <ul class="nav flex-column sub-menu">
-                        <li class="nav-item"> <a class="nav-link" href="pages/samples/login.html">Notas Fiscais </a></li>
-                        <li class="nav-item"> <a class="nav-link" href="pages/samples/login.html">Saídas de Insumos </a></li>
-                    </ul>
-                </div>
-                <a class="nav-link" data-bs-toggle="collapse" href="#insumos" aria-expanded="false" aria-controls="insumos">
-                    <i class="menu-icon mdi mdi-stocking"></i>
-                    <span class="menu-title">Estoque de Insumos</span>
-                    <i class="menu-arrow"></i>
-                </a>
-                <div class="collapse" id="insumos">
-                    <ul class="nav flex-column sub-menu">
-                        <li class="nav-item"> <a class="nav-link" href="pages/samples/login.html">Categorias </a></li>
-                        <li class="nav-item"> <a class="nav-link" href="pages/samples/login.html">Insumos </a></li>
+                        <li class="nav-item"> <a class="nav-link" href="{{route('categorias-produto.index')}}">Categorias</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="{{route('produtos.index')}}">Produtos</a></li>
                     </ul>
                 </div>
             </li>
+
           <li class="nav-item nav-category">controle de caixa</li>
           <li class="nav-item">
             <a class="nav-link" data-bs-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
