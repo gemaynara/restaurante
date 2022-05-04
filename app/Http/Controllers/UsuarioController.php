@@ -10,12 +10,13 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
 
-class UserController extends Controller
+class UsuarioController extends Controller
 {
     public function index()
     {
-        $data = User::query()->with('empresa')->orderBy('name', 'asc')->get();
-        return view('pages.super-admin.usuarios.index', compact('data'));
+        $data = User::query()->with('empresa')->orderBy('name', 'asc')
+            ->where('empresa_id', auth()->user()->empresa->id)->get();
+        return view('pages.admin.cadastros.usuarios.index', compact('data'));
     }
 
     /**
@@ -25,9 +26,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        $empresas = Empresa::query()->whereNotIn('razao_social', ['Painel Admin'])->get();
         $roles = Role::pluck('name', 'name')->all();
-        return view('pages.super-admin.usuarios.create', compact('roles', 'empresas'));
+        return view('pages.admin.cadastros.usuarios.create', compact('roles'));
     }
 
     /**
@@ -49,26 +49,13 @@ class UserController extends Controller
         $input = $request->all();
         $input['password'] = Hash::make($input['password']);
 
-        $input['empresa_id'] = auth()->user()->empresa->id;
         $user = User::create($input);
         $user->assignRole($request->input('roles'));
 
-        return redirect()->route('users.index')
+        return redirect()->route('usuarios.index')
             ->with('success', 'Usuário criado com sucesso');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        $user = User::find($id);
-
-        return view('pages.superadmin.usuarios.show', compact('user'));
-    }
 
     /**
      * Show the form for editing the specified resource.
@@ -82,7 +69,7 @@ class UserController extends Controller
         $roles = Role::pluck('name', 'name')->all();
         $userRole = $user->roles->pluck('name', 'name')->all();
 
-        return view('pages.super-admin.usuarios.edit', compact('user', 'roles', 'userRole'));
+        return view('pages.admin.cadastros.usuarios.edit', compact('user', 'roles', 'userRole'));
     }
 
     /**
@@ -108,14 +95,14 @@ class UserController extends Controller
         } else {
             $input = Arr::except($input, array('password'));
         }
-        $input['empresa_id'] = auth()->user()->empresa->id;
+
         $user = User::find($id);
         $user->update($input);
         DB::table('model_has_roles')->where('model_id', $id)->delete();
 
         $user->assignRole($request->input('roles'));
 
-        return redirect()->route('usuarios.index')
+        return redirect()->route('users.index')
             ->with('success', 'Usuário removido com sucesso');
     }
 

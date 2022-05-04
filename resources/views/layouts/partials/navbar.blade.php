@@ -37,12 +37,12 @@
 
                     </div>
                     <a class="dropdown-item"><i
-                            class="dropdown-item-icon mdi mdi-account-outline text-primary me-2"></i> My Profile </a>
+                            class="dropdown-item-icon mdi mdi-account-outline text-primary me-2"></i> Perfil </a>
                     <a class="dropdown-item"
                        href="{{ route('logout') }}"
                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();"
-                    ><i class="dropdown-item-icon mdi mdi-power text-primary me-2"></i>Sign Out</a>
+                    ><i class="dropdown-item-icon mdi mdi-power text-primary me-2"></i>Sair</a>
                 </div>
 
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">

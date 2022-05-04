@@ -155,6 +155,22 @@
                 </div>
             </li>
         @endcan
+        @can('acessos')
+            <li class="nav-item nav-category">controle de acesso</li>
+            <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="collapse" href="#users" aria-expanded="false" aria-controls="users">
+                    <i class="menu-icon mdi mdi-account"></i>
+                    <span class="menu-title">Acesso</span>
+                    <i class="menu-arrow"></i>
+                </a>
+                <div class="collapse" id="users">
+                    <ul class="nav flex-column sub-menu">
+                        <li class="nav-item"><a class="nav-link" href="{{route('usuarios.index')}}">Usuários </a></li>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+        @endcan
         @can('ajustes')
             <li class="nav-item nav-category">Ajustes</li>
             <li class="nav-item">
