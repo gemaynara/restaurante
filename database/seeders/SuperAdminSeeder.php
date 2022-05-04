@@ -8,6 +8,8 @@ use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Testing\Fluent\Concerns\Has;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 class SuperAdminSeeder extends Seeder
 {
@@ -19,7 +21,7 @@ class SuperAdminSeeder extends Seeder
     public function run()
     {
         $empresa = Empresa::query()->create([
-            'razao_social' => 'Empresa Teste',
+            'razao_social' => 'Painel Admin',
             'cnpj' => '00.000.000/0001-00'
         ]);
 
@@ -32,12 +34,20 @@ class SuperAdminSeeder extends Seeder
             'longitude' => 00,
         ]);
 
-        User::query()->create([
+        $user = User::query()->create([
             'empresa_id' => $empresa->id,
             'name' => 'Super Admin',
-            'username' => 'super',
-            'email' => 'admin@email.com',
+            'username' => 'superadmin',
+            'email' => 'super@email.com',
             'password' => Hash::make('123456')
         ]);
+
+        $role = Role::where('name','Super Admin')->first();
+
+        $permissions = Permission::pluck('id', 'id')->all();
+
+        $role->syncPermissions($permissions);
+
+        $user->assignRole([$role->id]);
     }
 }

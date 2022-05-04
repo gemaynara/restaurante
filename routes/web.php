@@ -21,6 +21,16 @@ Route::group(['middleware' => ['guest']], function () {
 
 });
 Route::group(['middleware' => ['auth']], function () {
+    Route::resource('roles', \App\Http\Controllers\RoleController::class);
+    Route::resource('users', \App\Http\Controllers\UserController::class);
+    Route::put('users/ativar/{id}', [\App\Http\Controllers\EmpresaController::class, 'ativar'])->name('users.ativar');
+    Route::put('users/desativar/{id}', [\App\Http\Controllers\EmpresaController::class, 'desativar'])->name('users.desativar');
+
+    Route::resource('empresas', \App\Http\Controllers\EmpresaController::class);
+    Route::resource('parametros', \App\Http\Controllers\ParametrosEmpresaController::class);
+    Route::put('empresas/ativar/{id}', [\App\Http\Controllers\EmpresaController::class, 'ativar'])->name('empresas.ativar');
+    Route::put('empresas/desativar/{id}', [\App\Http\Controllers\EmpresaController::class, 'desativar'])->name('empresas.desativar');
+
     Route::post('/logout', [\App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
 
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

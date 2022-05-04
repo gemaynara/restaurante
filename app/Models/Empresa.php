@@ -17,7 +17,7 @@ class Empresa extends Model
         'cnpj',
         'email',
         'endereco',
-        'complemento',
+        'bairro',
         'cep',
         'telefone',
         'cidade',

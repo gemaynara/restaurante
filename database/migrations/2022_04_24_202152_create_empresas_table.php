@@ -19,7 +19,7 @@ class CreateEmpresasTable extends Migration
             $table->string('cnpj', 18)->nullable();
             $table->string('email', 255)->nullable();
             $table->string('endereco', 200)->nullable();
-            $table->string('complemento', 200)->nullable();
+            $table->string('bairro', 200)->nullable();
             $table->string('cep', 9)->nullable();
             $table->string('telefone', 15)->nullable();
             $table->string('cidade', 50)->nullable();
