@@ -51,8 +51,9 @@
     <script>
 
         $(document).ready(function() {
+            var url = window.location.origin + '/brasazd';
             $.ajax({
-                url: "/dashboard",
+                url: url+ "/dashboard",
                 cache: false,
                 success: function (data) {
                     console.log(data)

@@ -10,27 +10,45 @@ $(".qnt").mask("999999")
 $(".dec_estoque").mask("9999.999")
 
 // $(".time").mask("HH:Mm:Ss", {
-$(".time").mask("Mm:Ss", {
-    translation: {
-        // 'H': {
-        //     pattern: /([0-1])/,
-        //     optional: false
-        // },
-        'M': {
-            pattern: /[0-59]/,
-            optional: false
-        },
-        'm': {
-            pattern: /[0-9]/,
-            optional: false
-        },
-        'S': {
-            pattern: /[0-5]/,
-            optional: false
-        },
-        's': {
-            pattern: /[0-9]/,
-            optional: false
+// $(".time").mask("Mm:Ss", {
+//     translation: {
+//         // 'H': {
+//         //     pattern: /([0-1])/,
+//         //     optional: false
+//         // },
+//         'M': {
+//             pattern: /[0-59]/,
+//             optional: false
+//         },
+//         'm': {
+//             pattern: /[0-9]/,
+//             optional: false
+//         },
+//         'S': {
+//             pattern: /[0-5]/,
+//             optional: false
+//         },
+//         's': {
+//             pattern: /[0-9]/,
+//             optional: false
+//         }
+//     }
+// });
+
+var mask = "HH:MM:SS",
+
+    pattern = {
+        'translation': {
+            'H': {
+                pattern: /[0-23]/
+            },
+            'M': {
+                pattern: /[0-59]/
+            },
+            'S': {
+                pattern: /[0-59]/
+            }
         }
-    }
-});
+    };
+
+$(".time").mask(mask, pattern);

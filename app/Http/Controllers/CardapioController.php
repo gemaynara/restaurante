@@ -54,7 +54,7 @@ class CardapioController extends Controller
                 $data['imagem'] = Helper::uploadImage($request->file('imagem'), 'cardapios');
             }
 
-            $data['tempo_preparo'] = '00:'. $data['tempo_preparo'];
+//            $data['tempo_preparo'] = '00:'. $data['tempo_preparo'];
             Cardapio::create($data);
 
             return redirect()->route('cardapios.index')->with('success', 'Item salvo com sucesso');
@@ -104,7 +104,7 @@ class CardapioController extends Controller
         try {
             $data = $request->except('_token', '_method');
             $data['empresa_id'] = auth()->user()->empresa->id;
-            $data['tempo_preparo'] = '00:'. $data['tempo_preparo'];
+//            $data['tempo_preparo'] = '00:'. $data['tempo_preparo'];
             if (!is_null($request->file('imagem'))) {
                 $data['imagem'] = Helper::uploadImage($request->file('imagem'), 'cardapios');
             }
