@@ -31,13 +31,13 @@
 {{--    <link href="{{ asset('css/datatables.css') }}" rel="stylesheet"/>--}}
 {{--    <link href="{{ asset('css/dataTables.bootstrap4.min.css') }}" rel="stylesheet"/>--}}
 <!-- endinject -->
-{{--    <link rel="shortcut icon" href="images/favicon.png"/>--}}
+    <link rel="shortcut icon" href="images/favicon.png"/>
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- Scripts -->
     {{--    <script src="{{ asset('js/app.js') }}" defer></script>--}}
-    {{--    <link href="{{ asset('css/app.css') }}" rel="stylesheet">--}}
+        <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
 <div class="container-scroller">
