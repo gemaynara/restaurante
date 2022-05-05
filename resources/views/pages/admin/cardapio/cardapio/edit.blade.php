@@ -112,7 +112,7 @@
                                         <label class="col-sm-3 col-form-label">Descrição</label>
                                         <div class="col-sm-9">
                                             <textarea class="form-control"
-                                                      name="descricao">{{$cardapio->descricao}}"</textarea>
+                                                      name="descricao">{{$cardapio->descricao}}</textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -176,6 +176,7 @@
         });
 
         $(document).ready(function () {
+            var url = window.location.origin + '/brasazd';
             var categoria = $('#categoria').val();
             if (categoria != 0) {
                 $.ajax({
