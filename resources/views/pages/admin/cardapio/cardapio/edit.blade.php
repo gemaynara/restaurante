@@ -80,7 +80,7 @@
                                     <div class="form-group row">
                                         <label class="col-sm-3 col-form-label">Tempo de Preparo</label>
                                         <div class="col-sm-9">
-                                            <input type="time" class="form-control " name="tempo_preparo"
+                                            <input type="text" class="form-control time" name="tempo_preparo"
                                                    value="{{$cardapio->tempo_preparo}}" required>
                                         </div>
                                     </div>
