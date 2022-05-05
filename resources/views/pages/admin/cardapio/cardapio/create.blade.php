@@ -148,7 +148,7 @@
 @endsection
 @push('scripts')
     <script>
-        var url = window.location.href + '/brasazd';
+        var url = window.location.origin + '/brasazd';
         $(document).ready(function () {
             $("#categoria").on('change', function (e) {
                 e.preventDefault()
