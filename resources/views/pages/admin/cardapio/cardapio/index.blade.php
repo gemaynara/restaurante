@@ -57,7 +57,7 @@
                                                 <button type="button"
                                                         data-remote="{{route('cardapios.ativar', $ca->id)}}"
                                                         data-id="{{$ca->id}}"
-                                                        class="btn btn-outline-secondary btn-rounded btn-icon btn-sm active">
+                                                        class="btn btn-outline-secondary btn-rounded btn-icon btn-sm ativar">
                                                     <i class="ti-check text-warning"></i>
                                                 </button>
                                             @endif

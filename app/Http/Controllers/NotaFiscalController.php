@@ -36,7 +36,7 @@ class NotaFiscalController extends Controller
     {
         $fornecedores = Fornecedor::query()
             ->where('empresa_id', auth()->user()->empresa->id)
-            ->orderBy('nome')
+            ->orderBy('razao_social')
             ->get();
 
         $produtos = Produto::with('categoriasProduto')

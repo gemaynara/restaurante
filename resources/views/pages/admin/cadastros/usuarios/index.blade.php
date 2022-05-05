@@ -62,7 +62,7 @@
                                                 <button type="button"
                                                         data-remote="{{route('users.ativar', $user->id)}}"
                                                         data-id="{{$user->id}}"
-                                                        class="btn btn-outline-secondary btn-rounded btn-icon btn-sm active">
+                                                        class="btn btn-outline-secondary btn-rounded btn-icon btn-sm ativar">
                                                     <i class="ti-check text-warning"></i>
                                                 </button>
                                             @endif

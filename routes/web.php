@@ -21,6 +21,7 @@ Route::group(['middleware' => ['guest']], function () {
 
 });
 Route::group(['middleware' => ['auth']], function () {
+    Route::get('dashboard', [\App\Http\Controllers\DashboardController::class, 'index']);
     Route::resource('roles', \App\Http\Controllers\RoleController::class);
     Route::resource('users', \App\Http\Controllers\UserController::class);
     Route::resource('usuarios', \App\Http\Controllers\UsuarioController::class);

@@ -111,7 +111,7 @@ $(".disable").on('click', function (e) {
     })
 });
 
-$(".active").on('click', function (e) {
+$(".ativar").on('click', function (e) {
     e.preventDefault();
     var url = $(this).data('remote');
     var id = $(this).data("id");
