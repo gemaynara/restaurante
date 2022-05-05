@@ -7,10 +7,10 @@
         </div>
         <div>
             <a class="navbar-brand brand-logo" href="{{url('/')}}">
-                <img src="{{asset('/imgs/empresas/'. auth()->user()->empresa->parametros->logo)}}" alt="logo" width="100px"/>
+                <img src="{{asset('/imgs/empresas/'. auth()->user()->empresa->parametros->logo)}}" alt="logo" />
             </a>
             <a class="navbar-brand brand-logo-mini" href="{{url('/')}}">
-                <img src="{{asset('/imgs/empresas/'. auth()->user()->empresa->parametros->logo)}}" alt="logo" width="50px"/>
+                <img src="{{asset('/imgs/empresas/'. auth()->user()->empresa->parametros->logo)}}" alt="logo" />
             </a>
         </div>
     </div>
