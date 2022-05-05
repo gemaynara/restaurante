@@ -40,7 +40,7 @@
                                         <label class="col-sm-3 col-form-label">CEP</label>
                                         <div class="col-sm-9">
                                             <input type="text" class="form-control cep" name="cep" id="cep"
-                                                   value="{{old('cep')}}"
+                                                   value="{{old('cep')}}" maxlength="8"
                                             >
                                         </div>
                                     </div>

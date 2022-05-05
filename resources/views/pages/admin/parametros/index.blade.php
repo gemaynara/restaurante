@@ -17,7 +17,7 @@
                                         <label class="col-sm-3 col-form-label">Nome/ Razão Social</label>
                                         <div class="col-sm-9">
                                             <input type="text" class="form-control" name="razao_social"
-                                                   value="{{$empresa->razao_social}}"
+                                                   value="{{$empresa->razao_social}}" ma
                                                    required>
                                         </div>
                                     </div>
@@ -27,7 +27,7 @@
                                         <label class="col-sm-3 col-form-label">CNPJ</label>
                                         <div class="col-sm-9">
                                             <input type="text" class="form-control cnpj" name="cnpj"
-                                                   value="{{$empresa->cnpj}}" required>
+                                                   value="{{$empresa->cnpj}}" required maxlength="19">
                                         </div>
                                     </div>
                                 </div>
@@ -40,7 +40,7 @@
                                         <label class="col-sm-3 col-form-label">CEP</label>
                                         <div class="col-sm-9">
                                             <input type="text" class="form-control cep" name="cep" id="cep"
-                                                   value="{{$empresa->cep}}">
+                                                   value="{{$empresa->cep}}" maxlength="8">
                                         </div>
                                     </div>
                                 </div>

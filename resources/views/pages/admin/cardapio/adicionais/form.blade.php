@@ -17,7 +17,7 @@
 
                     <div class="form-group">
                         <label for="exampleInputName1">Valor</label>
-                        <input type="text" class="form-control" name="valor" required value="{{isset($adicional)? $adicional->valor : old('valor')}}">
+                        <input type="text" class="form-control valor" name="valor" required value="{{isset($adicional)? $adicional->valor : old('valor')}}">
                     </div>
 
 
