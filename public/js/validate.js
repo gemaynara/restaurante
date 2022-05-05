@@ -9,14 +9,15 @@ $(".taxa").mask("###.00", {reverse: true})
 $(".qnt").mask("999999")
 $(".dec_estoque").mask("9999.999")
 
-$(".time").mask("HH:Mm:Ss", {
+// $(".time").mask("HH:Mm:Ss", {
+$(".time").mask("Mm:Ss", {
     translation: {
-        'H': {
-            pattern: /([0-1][0-9]{1}|2[0-3])/,
-            optional: false
-        },
+        // 'H': {
+        //     pattern: /([0-1])/,
+        //     optional: false
+        // },
         'M': {
-            pattern: /[0-5]/,
+            pattern: /[0-59]/,
             optional: false
         },
         'm': {

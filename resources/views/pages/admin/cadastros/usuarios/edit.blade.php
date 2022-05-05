@@ -7,7 +7,7 @@
                     <div class="card-body">
                         <h4 class="card-title">Editar Usuário</h4>
                         @include('layouts.partials.alerts')
-                        <form class="forms-sample" method="post" action="{{route('users.update', $user->id)}}"
+                        <form class="forms-sample" method="post" action="{{route('usuarios.update', $user->id)}}"
                               enctype="multipart/form-data">
                             @csrf
                             @method('put')

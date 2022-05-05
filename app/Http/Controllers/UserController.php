@@ -80,8 +80,9 @@ class UserController extends Controller
         $user = User::find($id);
         $roles = Role::pluck('name', 'name')->all();
         $userRole = $user->roles->pluck('name', 'name')->all();
+        $empresas = Empresa::query()->whereNotIn('razao_social', ['Painel Admin'])->get();
 
-        return view('pages.super-admin.usuarios.edit', compact('user', 'roles', 'userRole'));
+        return view('pages.super-admin.usuarios.edit', compact('user', 'roles', 'userRole', 'empresas'));
     }
 
     /**
