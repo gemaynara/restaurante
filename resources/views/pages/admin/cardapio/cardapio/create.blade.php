@@ -148,11 +148,10 @@
 @endsection
 @push('scripts')
     <script>
-
+        var url = window.location.href + '/brasazd';
         $(document).ready(function () {
             $("#categoria").on('change', function (e) {
                 e.preventDefault()
-                var url = window.location.origin;
                 var categoria = $(this).val();
                 $.ajax({
                     type: 'GET',

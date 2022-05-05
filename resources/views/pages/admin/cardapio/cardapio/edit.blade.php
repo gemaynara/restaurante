@@ -154,7 +154,7 @@
     <script>
         var subcategoria_id = @json($cardapio->subcategoria_cardapio_id);
         $(document).ready(function () {
-            var url = window.location.origin;
+            var url = window.location.href + '/brasazd';
             $("#categoria").on('change', function (e) {
                 e.preventDefault()
                 var categoria = $(this).val();
