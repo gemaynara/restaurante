@@ -114,13 +114,23 @@
             var dadosProduto = $("#produto option:selected").val().split("_");
             var quantidade = $("#quantidade").val();
             var estoque = dadosProduto[3];
-
-            if (parseInt(quantidade) > parseInt(estoque)) {
+            var result = produtos.find(element => element.id_produto === dadosProduto[0]);
+            if (quantidade <= 0 || dadosProduto === "") {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Verifique os campos e tente novamente'
+                });
+            }else if(result !== undefined){
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Produto já existe na lista'
+                });
+            }else if (parseInt(quantidade) > parseInt(estoque)) {
                 Swal.fire({
                     icon: 'error',
                     title: 'Estoque Baixo!',
                     text: 'A quantidade retirada não pode ser superior a quantidade em estoque',
-                    footer: 'Estoque disponível: ' + estoque + ' '+dadosProduto[1]
+                    footer: 'Estoque disponível: ' + estoque + ' ' + dadosProduto[1]
                 });
 
             } else {
@@ -150,7 +160,7 @@
         function remover(index) {
             $("#detalhe" + index).remove();
             produtos.splice(produtos.indexOf(index), 1);
-            $("input[name=produtosNota]").val(JSON.stringify(produtos));
+            $("input[name=produtos]").val(JSON.stringify(produtos));
             ocultar();
         }
 
