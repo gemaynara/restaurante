@@ -55,7 +55,7 @@
                                                 <option value="">Selecione</option>
                                                 @foreach($categorias as $list)
                                                     <option value="{{$list->id}}"
-                                                   {{$cardapio->categoria_cardapio_id == $list->id ? 'selected': ''}} >{{$list->nome}}</option>
+                                                        {{$cardapio->categoria_cardapio_id == $list->id ? 'selected': ''}} >{{$list->nome}}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -111,7 +111,8 @@
                                     <div class="form-group row">
                                         <label class="col-sm-3 col-form-label">Descrição</label>
                                         <div class="col-sm-9">
-                                            <textarea class="form-control" name="descricao">{{$cardapio->descricao}}"</textarea>
+                                            <textarea class="form-control"
+                                                      name="descricao">{{$cardapio->descricao}}"</textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -131,7 +132,8 @@
                                 <div class="col-md-6">
                                     <div class="form-group row">
                                         <div class="col-sm-9">
-                                            <img src="{{asset('imgs/cardapios/'. $cardapio->imagem)}}" alt="" id="img" width="300px">
+                                            <img src="{{asset('imgs/cardapios/'. $cardapio->imagem)}}" alt="" id="img"
+                                                 width="300px">
                                         </div>
                                     </div>
                                 </div>
@@ -152,13 +154,14 @@
     <script>
         var subcategoria_id = @json($cardapio->subcategoria_cardapio_id);
         $(document).ready(function () {
+            var url = window.location.origin;
             $("#categoria").on('change', function (e) {
                 e.preventDefault()
                 var categoria = $(this).val();
                 $.ajax({
                     type: 'GET',
                     cache: false,
-                    url: '/sub-categorias-cardapio/listaSubCategoriasCardapio/' + categoria,
+                    url: url + '/sub-categorias-cardapio/listaSubCategoriasCardapio/' + categoria,
                     success: function (data) {
                         $('.subcategoria').empty()
                         $(".subcategoria").attr('required', true);
@@ -178,7 +181,7 @@
                 $.ajax({
                     type: 'GET',
                     cache: false,
-                    url: '/sub-categorias-cardapio/listaSubCategoriasCardapio/' + categoria,
+                    url: url + '/sub-categorias-cardapio/listaSubCategoriasCardapio/' + categoria,
                     success: function (data) {
                         $('.subcategoria').empty()
                         $(".subcategoria").attr('required', true);

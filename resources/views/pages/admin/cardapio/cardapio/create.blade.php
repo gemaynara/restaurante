@@ -16,7 +16,8 @@
                                     <div class="form-group row">
                                         <label class="col-sm-3 col-form-label">Nome</label>
                                         <div class="col-sm-9">
-                                            <input type="text" class="form-control" name="nome" value="{{old('nome')}}" required>
+                                            <input type="text" class="form-control" name="nome" value="{{old('nome')}}"
+                                                   required>
                                         </div>
                                     </div>
                                 </div>
@@ -48,7 +49,8 @@
                                     <div class="form-group row">
                                         <label class="col-sm-3 col-form-label">Categoria</label>
                                         <div class="col-sm-9">
-                                            <select class="form-control" name="categoria_cardapio_id" id="categoria" required>
+                                            <select class="form-control" name="categoria_cardapio_id" id="categoria"
+                                                    required>
                                                 <option value="">Selecione</option>
                                                 @foreach($categorias as $list)
                                                     <option value="{{$list->id}}">{{$list->nome}}</option>
@@ -62,7 +64,8 @@
                                     <div class="form-group row">
                                         <label class="col-sm-3 col-form-label">Sub Categoria</label>
                                         <div class="col-sm-9">
-                                            <select class="form-control subcategoria" name="subcategoria_cardapio_id" id="subcategoria_id" required>
+                                            <select class="form-control subcategoria" name="subcategoria_cardapio_id"
+                                                    id="subcategoria_id" required>
                                                 <option value="">Selecione</option>
                                             </select>
                                         </div>
@@ -149,11 +152,12 @@
         $(document).ready(function () {
             $("#categoria").on('change', function (e) {
                 e.preventDefault()
+                var url = window.location.origin;
                 var categoria = $(this).val();
                 $.ajax({
                     type: 'GET',
                     cache: false,
-                    url: '/sub-categorias-cardapio/listaSubCategoriasCardapio/' + categoria,
+                    url: url + '/sub-categorias-cardapio/listaSubCategoriasCardapio/' + categoria,
                     success: function (data) {
                         $('.subcategoria').empty()
                         $(".subcategoria").attr('required', true);
