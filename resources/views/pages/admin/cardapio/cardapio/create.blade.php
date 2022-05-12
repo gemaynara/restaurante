@@ -122,7 +122,7 @@
                                         <label class="col-sm-3 col-form-label">Imagem</label>
                                         <div class="col-sm-9">
                                             <input type="file" class="form-control" name="imagem"
-                                                   onchange="previewFile(this)">
+                                                   onchange="previewFile(this)" accept="image/*" >
                                         </div>
                                     </div>
                                 </div>
@@ -148,7 +148,8 @@
 @endsection
 @push('scripts')
     <script>
-        var url = window.location.origin + '/brasazd';
+        // var url = window.location.origin + '/brasazd';
+        var url = '{{env('URL_JS')}}' ;
         $(document).ready(function () {
             $("#categoria").on('change', function (e) {
                 e.preventDefault()

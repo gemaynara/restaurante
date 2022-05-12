@@ -50,9 +50,11 @@
                 </form>
             </li>
         </ul>
-{{--        <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button"--}}
-{{--                data-bs-toggle="offcanvas">--}}
-{{--            <span class="mdi mdi-menu"></span>--}}
-{{--        </button>--}}
+        <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button"
+                data-bs-toggle="offcanvas">
+            <span class="mdi mdi-menu"></span>
+        </button>
     </div>
 </nav>
+
+

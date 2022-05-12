@@ -24,7 +24,8 @@ class User extends Authenticatable
         'username',
         'email',
         'password',
-        'active'
+        'active',
+        'type'
     ];
 
     /**
@@ -47,7 +48,10 @@ class User extends Authenticatable
     ];
 
     public function empresa(){
-
         return $this->belongsTo(Empresa::class)->with('parametros');
+    }
+
+    public function endereco(){
+        return $this->belongsTo(Endereco::class);
     }
 }

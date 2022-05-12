@@ -9,6 +9,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Exception;
+use Illuminate\Support\Str;
 
 class EmpresaController extends Controller
 {
@@ -46,7 +47,8 @@ class EmpresaController extends Controller
             $empresa = Empresa::create($data);
             EmpresaParametros::query()->create([
                 'empresa_id' => $empresa->id,
-                'logo' => 'no-image.png'
+                'logo' => 'no-image.png',
+                'slug' => Str::slug($data['razao_social'])
             ]);
 
 

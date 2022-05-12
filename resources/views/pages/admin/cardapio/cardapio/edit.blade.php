@@ -125,7 +125,7 @@
                                         <label class="col-sm-3 col-form-label">Imagem</label>
                                         <div class="col-sm-9">
                                             <input type="file" class="form-control" name="imagem"
-                                                   onchange="previewFile(this)">
+                                                   onchange="previewFile(this)" accept="image/*" >
                                         </div>
                                     </div>
                                 </div>
@@ -154,7 +154,8 @@
     <script>
         var subcategoria_id = @json($cardapio->subcategoria_cardapio_id);
         $(document).ready(function () {
-            var url = window.location.origin + '/brasazd';
+            // var url = window.location.origin + '/brasazd';
+            var url = '{{env('URL_JS')}}' ;
             $("#categoria").on('change', function (e) {
                 e.preventDefault()
                 var categoria = $(this).val();
@@ -176,7 +177,8 @@
         });
 
         $(document).ready(function () {
-            var url = window.location.origin + '/brasazd';
+            var url = '{{env('URL_JS')}}' ;
+            // var url = window.location.origin + '/brasazd';
             var categoria = $('#categoria').val();
             if (categoria != 0) {
                 $.ajax({

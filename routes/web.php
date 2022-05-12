@@ -13,6 +13,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::group(['prefix' => 'app'], function () {
+    Route::get('{slug}/login', [\App\Http\Controllers\Cliente\LoginController::class, 'login'])->name('app.login');
+    Route::post('post-login', [\App\Http\Controllers\Cliente\LoginController::class, 'postLogin'])->name('app.post-login');
+    Route::get('{slug}/register', [\App\Http\Controllers\Cliente\LoginController::class, 'register'])->name('app.register');
+    Route::post('post-register', [\App\Http\Controllers\Cliente\LoginController::class, 'postRegistration'])->name('app.post-register');
+    Route::get('{slug}/pages', [\App\Http\Controllers\Cliente\AppController::class, 'menu'])->name('app.pages');
+    Route::get('{slug}/principal', [\App\Http\Controllers\Cliente\AppController::class, 'index'])->name('app.home');
+    Route::get('{slug}/ver-pedido', [\App\Http\Controllers\Cliente\AppController::class, 'verPedido'])->name('app.ver-pedido');
+    Route::get('/produto/{id}', [\App\Http\Controllers\Cliente\AppController::class, 'verProduto'])->name('detalhe.produto');
+    Route::post('/add-produto-carrinho', [\App\Http\Controllers\Cliente\AppController::class, 'addProduto'])->name('add.produto');
+    Route::post('/checkout', [\App\Http\Controllers\Cliente\AppController::class, 'checkoutStep1'])->name('app.checkout');
+    Route::post('/checkout/step2', [\App\Http\Controllers\Cliente\AppController::class, 'checkoutStep2'])->name('app.checkout-step2');
+});
 
 
 Route::group(['middleware' => ['guest']], function () {

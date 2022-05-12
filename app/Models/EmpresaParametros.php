@@ -17,7 +17,8 @@ class EmpresaParametros extends Model
         'gorjeta',
         'taxa_entrega',
         'latitude',
-        'longitude'
+        'longitude',
+        'slug'
     ];
 
     public function empresa(){

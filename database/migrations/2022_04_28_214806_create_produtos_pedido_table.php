@@ -21,7 +21,7 @@ class CreateProdutosPedidoTable extends Migration
             $table->unsignedBigInteger('pedido_id');
             $table->foreign('pedido_id')->references('id')->on('pedidos');
             $table->unsignedBigInteger('produto_id');
-            $table->foreign('produto_id')->references('id')->on('produtos');
+            $table->foreign('produto_id')->references('id')->on('cardapios');
             $table->integer('quantidade');
             $table->decimal('valor_unitario', 11,2);
             $table->decimal('valor_subtotal', 11,2);

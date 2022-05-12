@@ -25,16 +25,16 @@
                                             <p class="statistics-title">Vendas do Mês</p>
                                             <h3 class="rate-percentage">RS 1.000,00</h3>
                                         </div>
-{{--                                        <div class="d-none d-md-block">--}}
-{{--                                            <p class="statistics-title">New Sessions</p>--}}
-{{--                                            <h3 class="rate-percentage">68.8</h3>--}}
-{{--                                          --}}
-{{--                                        </div>--}}
-{{--                                        <div class="d-none d-md-block">--}}
-{{--                                            <p class="statistics-title">Avg. Time on Site</p>--}}
-{{--                                            <h3 class="rate-percentage">2m:35s</h3>--}}
-{{--                                           --}}
-{{--                                        </div>--}}
+                                        <div class="d-none d-md-block">
+                                            <p class="statistics-title">Acessar cardápio delivery</p>
+                                            <h3 class="rate-percentage link-app" ></h3>
+
+                                        </div>
+                                        {{--                                        <div class="d-none d-md-block">--}}
+                                        {{--                                            <p class="statistics-title">Avg. Time on Site</p>--}}
+                                        {{--                                            <h3 class="rate-percentage">2m:35s</h3>--}}
+                                        {{--                                           --}}
+                                        {{--                                        </div>--}}
                                     </div>
                                 </div>
                             </div>
@@ -49,11 +49,11 @@
 @endsection
 @push('scripts')
     <script>
-
-        $(document).ready(function() {
-            var url = window.location.origin + '/brasazd';
+        $(document).ready(function () {
+            var url = '{{env('URL_JS')}}';
+            // var url = window.location.origin + '/brasazd';
             $.ajax({
-                url: url+ "/dashboard",
+                url: url + "/dashboard",
                 cache: false,
                 success: function (data) {
                     console.log(data)
@@ -61,6 +61,9 @@
                     $(".produtos").html(data.produtos);
                     $(".entradas").html(data.entradas);
                     $(".saidas").html(data.saidas);
+                    var empresa = data.empresa.slug
+                    var rota = url + '/app/' + empresa + '/principal'
+                    $(".link-app").html('<a target="_blank" href="' + rota + '">clique aqui</a>');
                 }
             });
         })

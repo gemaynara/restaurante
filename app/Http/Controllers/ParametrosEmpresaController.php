@@ -8,6 +8,7 @@ use App\Models\EmpresaParametros;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Exception;
+use Illuminate\Support\Str;
 
 class ParametrosEmpresaController extends Controller
 {
@@ -45,6 +46,7 @@ class ParametrosEmpresaController extends Controller
                 ->update([
                     'gorjeta' => $data['gorjeta'],
                     'taxa_entrega' => $data['taxa_entrega'],
+                    'slug' => Str::slug($data['razao_social'])
                 ]);
 
             return redirect()->route('parametros.index')->with('success', 'Ajustes alterados com sucesso');

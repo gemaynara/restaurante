@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cardapio;
+use App\Models\EmpresaParametros;
 use App\Models\NotaFiscal;
 use App\Models\Produto;
 use App\Models\Saida;
@@ -15,6 +16,9 @@ class DashboardController extends Controller
     {
         $user = auth()->user()->empresa->id;
         $today = date('Y-m-d');
+        $empresa = EmpresaParametros::where('empresa_id', $user)
+            ->first();
+
         $itensCardapio = Cardapio::where('empresa_id', $user)->count();
         $produtos = Produto::where('empresa_id', $user)->count();
         $entradas = NotaFiscal::where('empresa_id', $user)
@@ -29,6 +33,7 @@ class DashboardController extends Controller
             'entradas' => is_null($entradas->total)? '0.00': $entradas->total,
             'saidas' => is_null($saidas)? '0.00': $saidas,
             'itensCardapio' => $itensCardapio,
+            'empresa' => $empresa,
         ];
 
     }

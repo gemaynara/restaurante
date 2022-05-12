@@ -28,6 +28,19 @@ class Helper
 
     }
 
+    public static function generateNumber($lenght)
+    {
+        $random = '';
+        for ($i = 0; $i < $lenght; $i++) {
+            $random .= rand(0, 1) ? rand(0, 9) : chr(rand(ord('0'), ord('9')));
+        }
+        return $random;
+    }
+
+    public static function generateUsername($string)
+    {
+        return preg_replace('/(\S+) (\S{2}).*/', '$1$2', strtolower($string)) . random_int(0, 9999);
+    }
 
 
 }
