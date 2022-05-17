@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cardapio;
+use App\Models\CategoriaCardapio;
+use App\Models\EmpresaParametros;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class HomeController extends Controller
 {
@@ -24,6 +28,13 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('pages.dashboard');
+        if (auth()->user()->type == 'employee') {
+            return view('pages.dashboard');
+        } elseif (auth()->user()->type == 'client') {
+            Session::flush();
+            Auth::logout();
+            return Redirect('/');
+        }
     }
+
 }

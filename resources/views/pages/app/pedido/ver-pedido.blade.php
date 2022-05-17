@@ -26,51 +26,65 @@
                         <div class="wrap-title">
                             <h3>Carrinho</h3>
                         </div>
-                        @if(isset($pedido) && count($pedido) > 0)
-                            <div class="row">
-                                @foreach($pedido as $p)
-                                    <div class="col-40">
-                                        <div class="content-image">
-                                            <img src="{{asset('imgs/cardapios/'. $p['produto']->imagem)}}" alt="">
-                                        </div>
+                        @if(count($pedido->detalhes)>0)
+                        <div class="row">
+                            @foreach($pedido->detalhes  as $p)
+                                <div class="col-40 mt-2">
+                                    <div class="content-image">
+                                        <img src="{{asset('imgs/cardapios/'. $p->cardapio->imagem)}}" alt="">
                                     </div>
-
-                                    <div class="col-60">
-                                        <div class="content-text">
-                                            <h5>{{$p['quantidade']}}x {{$p['produto']->nome}}</h5>
-                                            <p class="price">@money($p['valor'])</p>
-
-                                            <a href="#" class="button-order"><i class="ti-pencil"></i>Editar</a>
-                                            <a href="#" class="button-order"><i class="ti-trash"></i>Remover</a>
-                                        </div>
-                                    </div>
-                                @endforeach
-
-                            </div>
-                            <div class="row">
-                                <div class="col-100">
-                                    <form action="{{route('app.checkout')}}" method="post">
-                                        @method('post')
-                                        @csrf
-                                        <input type="hidden" name="restaurante_id"
-                                               value="{{$restaurante->empresa->id}}">
-                                        <button type="submit" class="button"><i class="ti-shopping-cart-full"></i>Concluir
-                                            Pedido
-                                        </button>
-                                    </form>
                                 </div>
-                            </div>
-                        @else
 
-                            <div class="row">
-                                <div class="col-100">
+                                <div class="col-60 mt-2">
                                     <div class="content-text">
-                                       <h5>Carrinho vazio</h5>
-                                        <a href="{{route('app.home', $restaurante->slug)}}" class="link-app button-order">Adicionar itens</a>
+                                        <h5>{{$p->quantidade}}x {{$p->cardapio->nome}}</h5>
+                                        <p class="price">@money($p->valor_subtotal)</p>
+                                        <span>{{$p->observacoes}}</span>
+
+                                        @if(!is_null($p->adicionais))
+                                            @foreach($p->adicionais as $adc)
+                                                <span>- {{$adc->adicionalPedido->nome}} - @money($adc->subtotal)</span>
+                                                <br>
+                                            @endforeach
+                                        @endif
+
+                                        <div>
+                                            <a href="#" class="button-order"><i class="ti-pencil"></i>Editar</a>
+                                            <form action="">
+                                                <a href="{{route('remove.item', $p->id)}}" class="button-order"><i class="ti-trash"></i>Remover</a>
+                                            </form>
+
+                                        </div>
+
                                     </div>
                                 </div>
+                            @endforeach
+
+                        </div>
+                        <div class="row">
+                            <div class="col-100">
+                                <form action="{{route('app.checkout')}}" method="post">
+                                    @method('post')
+                                    @csrf
+                                    <input type="hidden" name="restaurante_id"
+                                           value="{{$restaurante->empresa->id}}">
+                                    <button type="submit" class="button"><i class="ti-shopping-cart-full"></i>Concluir
+                                        Pedido
+                                    </button>
+                                </form>
                             </div>
-                        @endif
+                        </div>
+                                                @else
+
+                                                    <div class="row">
+                                                        <div class="col-100">
+                                                            <div class="content-text">
+                                                               <h5>Sem itens</h5>
+                                                                <a href="{{route('app.home', $restaurante->slug)}}" class="link-app button-order">Adicionar itens</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                @endif
                     </div>
                 </div>
             </div>

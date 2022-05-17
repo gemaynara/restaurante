@@ -1,8 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Cliente;
+namespace App\Http\Controllers\App;
 
+use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
+use App\Http\Services\PedidoService;
+use App\Models\AdicionalCardapio;
 use App\Models\Cardapio;
 use App\Models\CategoriaCardapio;
 use App\Models\Empresa;
@@ -13,6 +16,8 @@ use Illuminate\Http\Request;
 
 class AppController extends Controller
 {
+
+
     public function menu($slug)
     {
         $restaurante = EmpresaParametros::query()->with('empresa')
@@ -48,21 +53,36 @@ class AppController extends Controller
             ->where('id', $id)
             ->first();
 
+        $adicionais = AdicionalCardapio::where('subcategoria_cardapio_id', $produto->subcategoria_cardapio_id)
+            ->get();
+
         $restaurante = EmpresaParametros::query()->with('empresa')
             ->where('empresa_id', $produto->empresa_id)
             ->first();
 
-        return view('pages.app.detalhe-produto', compact('produto', 'restaurante'));
+        return view('pages.app.detalhe-produto', compact('produto', 'restaurante', 'adicionais'));
     }
 
-    public function verPedido($slug)
+    public function removeItem($id)
+    {
+
+        dd($id);
+
+        $restaurante = EmpresaParametros::query()->with('empresa')
+            ->where('empresa_id', $produto->empresa_id)
+            ->first();
+
+        return view('pages.app.detalhe-produto', compact('produto', 'restaurante', 'adicionais'));
+    }
+
+    public function verPedido(Request $request, $slug)
     {
 
         $restaurante = EmpresaParametros::query()->with('empresa')
             ->where('slug', $slug)
             ->first();
 
-        $pedido = session()->get('carrinho');
+        $pedido = PedidoService::getPedidoUsuario(auth()->user());
 
         return view('pages.app.pedido.ver-pedido', compact('pedido', 'restaurante'));
     }
@@ -77,19 +97,28 @@ class AppController extends Controller
             ->where('empresa_id', $produto->empresa_id)
             ->first();
 
-        $data = [
+        $produto = [
             'id_produto' => $produto->id,
             'produto' => $produto,
             'quantidade' => $request->quantidade,
             'empresa' => $produto->empresa_id,
-            'valor' => $produto->valor
+            'valor' => $produto->valor,
+            'observacoes' => $request->observacoes,
+            'adicionais' => $request->adicionais
         ];
 
-        if (auth()->guest()) {
-            session()->push('carrinho', $data);
-        } else {
-            Pedido::editPedido($data, 'delivery', auth()->user(), $restaurante);
+        if (auth()->guest() || auth()->user()->type != 'client') {
+            return redirect()->route('app.login', $restaurante->slug)
+                ->with('restaurante', $restaurante);
+//            $request->session()->push('carrinho', $data);
         }
+        if (auth()->user()->type == 'client') {
+            $user = auth()->user();
+            $ped = PedidoService::createOrUpdatePedido($produto, 'delivery', $user, $restaurante);
+            $pedido = $ped->id;
+//            $request->session()->forget('carrinho');
+        }
+
 
         return redirect()->route('app.ver-pedido', $restaurante->slug)
             ->with('restaurante', $restaurante);
@@ -108,17 +137,17 @@ class AppController extends Controller
                 ->with('restaurante', $restaurante);
 
         } elseif ($user->type == 'client') {
-            $data = session()->get('carrinho');
-            Pedido::createPedido($data, 'delivery', $user, $restaurante);
-
+//            $data = $request->session()->get('carrinho');
+//            Pedido::createPedido($data, 'delivery', $user, $restaurante);
+//            $request->session()->forget('carrinho');
             $enderecos = Endereco::query()->where('user_id', $user->id)->get();
+
             return view('pages.app.checkout.step1', compact('restaurante', 'enderecos'));
 
         } else {
             return redirect()->route('app.login', $restaurante->slug)
                 ->with('restaurante', $restaurante);
         }
-
 
     }
 
@@ -141,17 +170,18 @@ class AppController extends Controller
                     'endereco' => $request->endereco,
                     'complemento' => $request->complemento,
                     'bairro' => $request->bairro,
-                    'cep' => $request->cep,
-//            'cidade',
-//            'estado',
+                    'cep' => $request->cep
                 ]);
         }
 
 
         $pedido = Pedido::with('detalhes', 'endereco')
-            ->where('user_id', $user->id)->first();
+            ->where('usuario_id', $user->id)
+            ->orderBy('id', 'desc')
+            ->first();
 
-        $pedido->update(['endereco_id' => $endereco->id]);
+        Pedido::where('usuario_id', $user->id)
+            ->where('status_pedido', 'Pedido Efetuado')->update(['endereco_id' => $endereco->id]);
 
         return view('pages.app.checkout.step2', compact('pedido', 'restaurante', 'endereco'));
     }

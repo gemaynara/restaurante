@@ -17,4 +17,10 @@ class Setor extends Model
         'nome',
         'descricao'
     ];
+
+    public static function listaSetores()
+    {
+        return Setor::query()->where('empresa_id', auth()->user()->empresa->id)
+            ->get();
+    }
 }

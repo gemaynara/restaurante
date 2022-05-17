@@ -18,11 +18,19 @@ class CreatePedidosTable extends Migration
             $table->unsignedBigInteger('empresa_id');
             $table->foreign('empresa_id')->on('empresas')->references('id');
 
+            $table->unsignedBigInteger('usuario_id')->nullable();
+            $table->foreign('usuario_id')->on('users')->references('id');
+
+            $table->unsignedBigInteger('endereco_id')->nullable();
+            $table->foreign('endereco_id')->on('enderecos')->references('id');
+
+            $table->unsignedBigInteger('mesa_id')->nullable();
+            $table->foreign('mesa_id')->on('mesas')->references('id');
+
             $table->string('tipo_pedido', 20)->default('mesa');
             $table->integer('numero_pedido');
             $table->integer('numero_pessoas')->default(1);
             $table->string('nome',200);
-            $table->string('telefone',15);
             $table->string('cpf',14)->nullable();
             $table->string('email')->nullable();
             $table->decimal('subtotal', 11,2)->default(0.00);

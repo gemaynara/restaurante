@@ -54,7 +54,7 @@ class LoginController extends Controller
         ]);
 
         $credentials = $request->only('username', 'password');
-        if (Auth::attempt(['username'=> $request->username, 'password'=>$request->password, 'active'=>1])) {
+        if (Auth::attempt(['username'=> $request->username, 'password'=>$request->password, 'active'=>1, 'type'=> 'employee'])) {
             return redirect()->intended('home');
 //                ->withSuccess('You have Successfully loggedin');
         }

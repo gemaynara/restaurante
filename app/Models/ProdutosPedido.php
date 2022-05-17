@@ -24,4 +24,9 @@ class ProdutosPedido extends Model
     public function cardapio(){
         return $this->belongsTo(Cardapio::class, 'produto_id');
     }
+
+    public function adicionais(){
+        return $this->hasMany(AdicionalPedido::class, 'produto_pedido_id')
+            ->with('adicionalPedido');
+    }
 }

@@ -157,7 +157,7 @@
                 $.ajax({
                     type: 'GET',
                     cache: false,
-                    url: url + '/sub-categorias-cardapio/listaSubCategoriasCardapio/' + categoria,
+                    url: url + '/cardapio/sub-categorias-cardapio/listaSubCategoriasCardapio/' + categoria,
                     success: function (data) {
                         $('.subcategoria').empty()
                         $(".subcategoria").attr('required', true);

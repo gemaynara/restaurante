@@ -2,12 +2,28 @@
 
 namespace App\Helpers;
 
+use App\Models\EmpresaParametros;
 use App\Models\Produto;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 
 class Helper
 {
+
+    public static function verifyClient()
+    {
+        $user = auth()->user();
+        $restaurante = EmpresaParametros::query()->with('empresa')
+            ->where('empresa_id', $user->empresa_id)
+            ->first();
+
+        if (auth()->guest()) {
+            return redirect()->route('app.home', $restaurante->slug);
+        } else if ($user->type == 'client') {
+            return redirect()->route('app.home', $restaurante->slug);
+        }
+    }
+
     public static function uploadImage($file, $disk = 'imagens')
     {
         $extensions = ['jpg', 'jpeg', 'png']; // all extension type for images
@@ -42,5 +58,11 @@ class Helper
         return preg_replace('/(\S+) (\S{2}).*/', '$1$2', strtolower($string)) . random_int(0, 9999);
     }
 
+    public static function getAmountTaxa($value)
+    {
+        $taxa = app('restaurante')['parametros']['gorjeta'];
+        $total = ($value) * ($taxa / 100);
+        return number_format($total, 2);
+    }
 
 }

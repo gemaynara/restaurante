@@ -27604,6 +27604,8 @@ dl li {
 
 .pricing-table .pricing-card .pricing-card-body .plan-features {
     width: 100%;
+    font-size: 14px!important;
+    float: left!important;
     margin-bottom: 32px;
 }
 

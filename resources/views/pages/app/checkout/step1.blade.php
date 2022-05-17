@@ -21,15 +21,17 @@
                         @csrf
                         <input type="hidden" name="restaurante_id" value="{{$restaurante->empresa->id}}">
                         <input type="hidden" name="slug" value="{{$restaurante->slug}}">
-                        <div class="item-input-wrap input-dropdown-wrap">
-                            <select placeholder="Selecione" name="endereco_id">
-                                <option value="" disabled selected>Selecione um endereço</option>
-                                @foreach($enderecos as $e)
-                                <option value="{{$e->id}}">{{$e->endereco}} - {{$e->bairro}}</option>
-                                @endforeach
-                            </select>
-                        </div>
 
+                        @if(count($enderecos)> 0)
+                            <div class="item-input-wrap input-dropdown-wrap">
+                                <select placeholder="Selecione" name="endereco_id">
+                                    <option value="" disabled selected>Selecione um endereço</option>
+                                    @foreach($enderecos as $e)
+                                        <option value="{{$e->id}}">{{$e->endereco}} - {{$e->bairro}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        @endif
 
                         <div class="item-input-wrap input-dropdown-wrap">
                             <select placeholder="Tipo de Endereço" name="tipo">
@@ -40,10 +42,10 @@
                             </select>
                         </div>
                         <div class="item-input-wrap">
-                            <input type="text" placeholder="CEP" name="cep" class="cep" >
+                            <input type="text" placeholder="CEP" name="cep" class="cep">
                         </div>
                         <div class="item-input-wrap">
-                            <input type="text" placeholder="Endereço" name="endereco"  maxlength="200">
+                            <input type="text" placeholder="Endereço" name="endereco" maxlength="200">
                         </div>
 
                         <div class="item-input-wrap">

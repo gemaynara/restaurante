@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\Helper;
+use App\Http\Services\PedidoService;
 use App\Models\Cardapio;
 use App\Models\CategoriaCardapio;
+use App\Models\EmpresaParametros;
 use App\Models\Setor;
 use App\Models\SubCategoriaCardapio;
 use Illuminate\Http\Request;
@@ -119,6 +121,22 @@ class CardapioController extends Controller
         }
     }
 
+    public function verCardapio($id)
+    {
+        $empresa = auth()->user()->empresa->id;
+        $categorias = CategoriaCardapio::where('empresa_id', $empresa)->get();
+
+        $cardapio = Cardapio::with('categoriasCardapio')
+            ->where('empresa_id', $empresa);
+
+        $produtos = $cardapio->get();
+
+        $pedido = PedidoService::getPedidoMesa($id);
+
+        return view('pages.admin.pedidos.cardapio', compact('categorias', 'produtos', 'pedido'));
+
+    }
+
     /**
      * Remove the specified resource from storage.
      *
@@ -132,11 +150,11 @@ class CardapioController extends Controller
 
     public function ativar($id)
     {
-        Cardapio::where('id', $id)->update(['ativo'=>1]);
+        Cardapio::where('id', $id)->update(['ativo' => 1]);
     }
 
     public function desativar($id)
     {
-        Cardapio::where('id', $id)->update(['ativo'=>0]);
+        Cardapio::where('id', $id)->update(['ativo' => 0]);
     }
 }

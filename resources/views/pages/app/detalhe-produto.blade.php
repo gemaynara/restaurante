@@ -36,9 +36,9 @@
                                         <p class="price">@money($produto->valor)</p>
                                         <span>{{$produto->categoriasCardapio->nome}}</span>
                                         <h4>{{$produto->nome}}</h4>
-
                                         <p>{{$produto->descricao}}</p>
-                                        <div class="row">
+
+                                        <div class="row" style="padding-top: 20px">
                                             <div class="col-25">
                                                 <a href="" class="button btn-minus">
                                                     <i class="ti-minus"></i>
@@ -55,6 +55,29 @@
                                                     <i class="ti-plus"></i>
                                                 </a>
                                             </div>
+                                        </div>
+
+                                        <div class="row mt-5">
+                                            <span class="text-center">Adicionais</span>
+                                            <div class="d-flex gap-5 justify-content-center col-12">
+                                                <div class="list-group mx-0 w-auto col-100">
+                                                    @foreach($adicionais as $key=> $adc)
+                                                        <label class="list-group-item d-flex gap-2">
+                                                            <input class="form-check-input flex-shrink-0"
+                                                                   type="checkbox"
+                                                                   value="{{$adc->id}}_{{$adc->valor}}" name="adicionais[]">
+                                                            <span>{{$adc->nome}} - @money($adc->valor)</span>
+                                                        </label>
+                                                    @endforeach
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="">
+                                                <textarea placeholder="Insira as observações aqui"
+                                                          name="observacoes" maxlenght="100"></textarea>
+                                            </div>
+
                                         </div>
 
 

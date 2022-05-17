@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Cliente;
+namespace App\Http\Controllers\App;
 
 use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
@@ -29,7 +29,7 @@ class LoginController extends Controller
         ]);
 
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password, 'active' => 1, 'type' => 'client'])) {
-            return redirect()->route('app.home', $request->slug);
+            return redirect()->intended( "app/".$request->slug.'/principal')->with('slug', $request->slug);
         }
 
         return back()
@@ -51,13 +51,14 @@ class LoginController extends Controller
         $request->validate([
             'name' => 'required',
             'email' => 'required|email|unique:users',
-            'password' => 'required|string|min:6|confirmed',
+            'password' => 'required|string|min:4|confirmed',
             'password_confirmation' => 'required',
         ]);
 
         $user = User::create([
             'username' => Helper::generateUsername($request->name),
             'name' => $request->name,
+            'telefone' => $request->telefone,
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'type' => 'client',

@@ -1,30 +1,31 @@
+<?php $producao = \App\Models\Setor::listaSetores() ?>
 <nav class="sidebar sidebar-offcanvas" id="sidebar">
     @if(auth()->user()->hasRole('Super Admin'))
         <ul class="nav">
-        <li class="nav-item nav-category">controle de acesso</li>
-        <li class="nav-item">
-            <a class="nav-link" data-bs-toggle="collapse" href="#users" aria-expanded="false" aria-controls="users">
-                <i class="menu-icon mdi mdi-account"></i>
-                <span class="menu-title">Acesso</span>
-                <i class="menu-arrow"></i>
-            </a>
-            <div class="collapse" id="users">
-                <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"><a class="nav-link" href="{{route('users.index')}}">Usuários </a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{route('roles.index')}}">Perfil de Acesso </a>
-                    </li>
-                </ul>
-            </div>
-        </li>
+            <li class="nav-item nav-category">controle de acesso</li>
+            <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="collapse" href="#users" aria-expanded="false" aria-controls="users">
+                    <i class="menu-icon mdi mdi-account"></i>
+                    <span class="menu-title">Acesso</span>
+                    <i class="menu-arrow"></i>
+                </a>
+                <div class="collapse" id="users">
+                    <ul class="nav flex-column sub-menu">
+                        <li class="nav-item"><a class="nav-link" href="{{route('users.index')}}">Usuários </a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{route('roles.index')}}">Perfil de Acesso </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
 
 
-        <li class="nav-item nav-category">Empresas</li>
-        <li class="nav-item">
-            <a class="nav-link" href="{{route('empresas.index')}}">
-                <i class="menu-icon mdi mdi-food"></i>
-                <span class="menu-title">Restaurantes</span>
-            </a>
-        </li>
+            <li class="nav-item nav-category">Empresas</li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{route('empresas.index')}}">
+                    <i class="menu-icon mdi mdi-food"></i>
+                    <span class="menu-title">Restaurantes</span>
+                </a>
+            </li>
         </ul>
 
     @else
@@ -47,8 +48,9 @@
                     </a>
                     <div class="collapse" id="ui-basic">
                         <ul class="nav flex-column sub-menu">
-                            <li class="nav-item"><a class="nav-link"
-                                                    href="{{route('categorias-cardapio.index')}}">Categorias</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{{route('mesas.index')}}">Mesas</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{{route('categorias-cardapio.index')}}">Categorias</a>
+                            </li>
                             <li class="nav-item"><a class="nav-link" href="{{route('sub-categorias-cardapio.index')}}">SubCategorias</a>
                             </li>
                             <li class="nav-item"><a class="nav-link" href="{{route('setores.index')}}">Setores</a></li>
@@ -69,7 +71,9 @@
                     </a>
                     <div class="collapse" id="form-elements">
                         <ul class="nav flex-column sub-menu">
-                            <li class="nav-item"><a class="nav-link" href="pages/forms/basic_elements.html">Pedidos
+                            <li class="nav-item"><a class="nav-link" href="{{route('pedidos.mesas')}}">Pedido Manual</a>
+                            </li>
+                            <li class="nav-item"><a class="nav-link" href="{{route('pedidos.recebidos')}}">Pedidos
                                     Recebidos</a></li>
                         </ul>
                     </div>
@@ -85,8 +89,10 @@
                     </a>
                     <div class="collapse" id="charts">
                         <ul class="nav flex-column sub-menu">
-                            <li class="nav-item"><a class="nav-link" href="pages/charts/chartjs.html">Cozinha</a></li>
-                            <li class="nav-item"><a class="nav-link" href="pages/charts/chartjs.html">Bar</a></li>
+                            @foreach($producao as $setor)
+                                <li class="nav-item"><a class="nav-link" href="{{route('producao.pedidos', strtolower($setor->nome))}}">{{$setor->nome}}</a>
+                                </li>
+                            @endforeach
                         </ul>
                     </div>
                 </li>

@@ -17,9 +17,10 @@ class CreateUsersTable extends Migration
             $table->id();
             $table->unsignedBigInteger('empresa_id');
             $table->foreign('empresa_id')->on('empresas')->references('id');
-
+            $table->enum('type', ['employee', 'client'])->default('employee');
             $table->string('name');
             $table->string('username')->unique();
+            $table->string('telefone', 18)->nullable();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');

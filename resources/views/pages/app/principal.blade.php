@@ -29,44 +29,44 @@
                 </div>
                 <!-- end title header -->
                 <!-- slider -->
-                <div class="slider">
-                    <div data-space-between="10" data-slides-per-view="auto"
-                         class="swiper-container swiper-init demo-swiper-auto">
-                        <div class="swiper-wrapper">
-                            <div class="swiper-slide">
-                                <div class="content">
-                                    <div class="mask"></div>
-                                    <img src="images/slider1.jpg" alt="">
-                                    <div class="caption">
-                                        <a href="/menu-single/"><h4>Fresh Grilled Salmon</h4></a>
-                                        <span>ABCD Restaurant</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="content">
-                                    <div class="mask"></div>
-                                    <img src="images/slider2.jpg" alt="">
-                                    <div class="caption">
-                                        <a href="/menu-single/"><h4>Minced Chicken Meat</h4></a>
-                                        <span>Yumy de Resto</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="content">
-                                    <div class="mask"></div>
-                                    <img src="images/slider3.jpg" alt="">
-                                    <div class="caption">
-                                        <a href="/menu-single/"><h4>Fresh Vegetable Burgers</h4></a>
-                                        <span>Special Night Cafe</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- end slider -->
+            {{--                <div class="slider">--}}
+            {{--                    <div data-space-between="10" data-slides-per-view="auto"--}}
+            {{--                         class="swiper-container swiper-init demo-swiper-auto">--}}
+            {{--                        <div class="swiper-wrapper">--}}
+            {{--                            <div class="swiper-slide">--}}
+            {{--                                <div class="content">--}}
+            {{--                                    <div class="mask"></div>--}}
+            {{--                                    <img src="images/slider1.jpg" alt="">--}}
+            {{--                                    <div class="caption">--}}
+            {{--                                        <a href="/menu-single/"><h4>Fresh Grilled Salmon</h4></a>--}}
+            {{--                                        <span>ABCD Restaurant</span>--}}
+            {{--                                    </div>--}}
+            {{--                                </div>--}}
+            {{--                            </div>--}}
+            {{--                            <div class="swiper-slide">--}}
+            {{--                                <div class="content">--}}
+            {{--                                    <div class="mask"></div>--}}
+            {{--                                    <img src="images/slider2.jpg" alt="">--}}
+            {{--                                    <div class="caption">--}}
+            {{--                                        <a href="/menu-single/"><h4>Minced Chicken Meat</h4></a>--}}
+            {{--                                        <span>Yumy de Resto</span>--}}
+            {{--                                    </div>--}}
+            {{--                                </div>--}}
+            {{--                            </div>--}}
+            {{--                            <div class="swiper-slide">--}}
+            {{--                                <div class="content">--}}
+            {{--                                    <div class="mask"></div>--}}
+            {{--                                    <img src="images/slider3.jpg" alt="">--}}
+            {{--                                    <div class="caption">--}}
+            {{--                                        <a href="/menu-single/"><h4>Fresh Vegetable Burgers</h4></a>--}}
+            {{--                                        <span>Special Night Cafe</span>--}}
+            {{--                                    </div>--}}
+            {{--                                </div>--}}
+            {{--                            </div>--}}
+            {{--                        </div>--}}
+            {{--                    </div>--}}
+            {{--                </div>--}}
+            <!-- end slider -->
 
                 <!-- chef home -->
                 <div class="chef-home segments">
@@ -78,7 +78,7 @@
                         </div>
                         <div class="row">
                             @foreach($categorias as $ca)
-                                <div class="col-20">
+                                <div class="col-10">
                                     <div class="content">
                                         <img src="{{asset('imgs/categorias/'. $ca->icone)}}" alt="">
                                         <div class="title-name">
@@ -94,34 +94,35 @@
                 <!-- end chef home -->
 
                 <!-- restaurant home -->
-                <div class="restaurant-home segments">
-                    <div class="section-title">
-                        <h3>Populares
-                            {{--                <a href="/restaurant/" class="see-all-link">See All</a>--}}
-                        </h3>
-                    </div>
-                    <div data-space-between="10" data-slides-per-view="auto"
-                         class="swiper-container swiper-init demo-swiper-auto">
-                        <div class="swiper-wrapper">
-                            @foreach($populares as $p)
-                                <div class="swiper-slide">
-                                    <div class="content sec">
-                                        <img src="{{asset('imgs/cardapios/'. $p->imagem)}}" alt="">
-                                        <div class="text">
-                                            <a class="link" href="{{route('detalhe.produto', $p->id)}}">
-                                                <h4>{{$p->nome}}</h4></a>
-                                            <span>{{$p->categoriasCardapio->nome}}</span>
-                                            <p class="price">@money($p->valor)</p>
+                @if(count($populares)> 0)
+                    <div class="restaurant-home segments">
+                        <div class="section-title">
+                            <h3>Populares
+                                {{--                <a href="/restaurant/" class="see-all-link">See All</a>--}}
+                            </h3>
+                        </div>
+                        <div data-space-between="3" data-slides-per-view="auto"
+                             class="swiper-container swiper-init demo-swiper-auto">
+                            <div class="swiper-wrapper">
+                                @foreach($populares as $p)
+                                    <div class="swiper-slide">
+                                        <div class="content sec">
+                                            <img src="{{asset('imgs/cardapios/'. $p->imagem)}}" alt="">
+                                            <div class="text">
+                                                <a class="link" href="{{route('detalhe.produto', $p->id)}}">
+                                                    <h4>{{$p->nome}}</h4></a>
+                                                <span>{{$p->categoriasCardapio->nome}}</span>
+                                                <p class="price">@money($p->valor)</p>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            @endforeach
+                                @endforeach
 
+                            </div>
                         </div>
                     </div>
-                </div>
-                <!-- end restaurant home -->
-
+            @endif
+            <!-- end restaurant home -->
                 <!-- popular menu -->
                 <div class="popular-menu segments">
                     <div class="container">
@@ -132,7 +133,7 @@
                         </div>
                         <div class="row">
                             @foreach($produtos as $p)
-                                <div class="col-50">
+                                <div class="col-33">
                                     <div class="content">
                                         <img src="{{asset('imgs/cardapios/'. $p->imagem)}}" alt="">
                                         <div class="text">

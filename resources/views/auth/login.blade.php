@@ -15,9 +15,7 @@
                            name="username" value="{{ old('username') }}"
                            placeholder="Usuário">
                     @error('username')
-                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
+                    <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
                     @enderror
                 </div>
                 <div class="form-group">

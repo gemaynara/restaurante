@@ -29,9 +29,14 @@
                                     </span>
                             @enderror
                         </div>
+
+                        <div class="item-input-wrap">
+                            <input type="text" placeholder="WhatsApp" class="telefone" required name="telefone" value="{{old('telefone')}}">
+                        </div>
                         <div class="item-input-wrap">
                             <input type="email" placeholder="E-mail" required name="email" value="{{old('email')}}">
                         </div>
+
                         <div class="item-input-wrap">
                             <input type="password" placeholder="Senha" required name="password" id="password">
                         </div>
