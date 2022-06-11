@@ -18,7 +18,9 @@ class ProdutosPedido extends Model
         'quantidade',
         'valor_unitario',
         'valor_subtotal',
-        'observacoes'
+        'observacoes',
+        'produzido',
+        'enviado'
     ];
 
     public function cardapio(){

@@ -108,8 +108,13 @@
 
                                             <td>@money($p->valor_subtotal+$adicionais)</td>
                                             <td>
-                                                @if($p->enviado == 'S')
+                                                @if($p->enviado == 'S' && $p->produzido == 'N')
                                                     <div class="badge badge-outline-primary">Em Produção</div>
+                                                    <p class="mb-0 text-muted text-small">
+                                                        às {{\Carbon\Carbon::parse($p->updated_at)->format('H:i')}}
+                                                    </p>
+                                                @elseif($p->produzido == 'S')
+                                                    <div class="badge badge-outline-primary">Produzido</div>
                                                     <p class="mb-0 text-muted text-small">
                                                         às {{\Carbon\Carbon::parse($p->updated_at)->format('H:i')}}
                                                     </p>

@@ -181,7 +181,8 @@ class PedidoController extends Controller
     {
         $pedidos = Pedido::with('mesas')
             ->orderBy('id', 'desc')
-            ->whereIn('status_pedido', ['Pedido Efetuado', 'Em Produção'])
+            ->whereIn('status_pedido', ['Pedido Efetuado', 'Em Produção', 'Comanda Encerrada'])
+            ->orWhere('status_pedido', 'LIKE', '%Produzido')
             ->get();
 
         return view('pages.admin.pedidos.recebidos', compact('pedidos'));

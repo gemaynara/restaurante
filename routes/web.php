@@ -103,6 +103,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::group(['prefix' => 'producao'], function () {
         Route::get('em-producao/{id}', [App\Http\Controllers\ProducaoController::class, 'producao'])->name('producao.pedidos');
+        Route::post('confirmar/{id}/{novoStatus}', [App\Http\Controllers\ProducaoController::class, 'confirmarPedido'])->name('producao.confirmar');
     });
 
     Route::group(['prefix' => 'caixa'], function () {

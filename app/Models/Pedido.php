@@ -48,6 +48,7 @@ class Pedido extends Model
             ->with('cardapio', 'adicionais');
     }
 
+
     public function endereco()
     {
         return $this->belongsTo(Endereco::class);
