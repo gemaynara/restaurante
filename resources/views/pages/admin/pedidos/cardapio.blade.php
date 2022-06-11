@@ -8,15 +8,12 @@
                     <div class="card-body">
                         <h4 class="card-title">Cardápio</h4>
                         <div class="table-responsive">
-                            <table class="table">
+                            <table class="table dt">
                                 <thead>
                                 <tr>
                                     <th class="pt-1 ps-0">
                                         Item
                                     </th>
-                                    {{--                                    <th class="pt-1">--}}
-                                    {{--                                        Valor--}}
-                                    {{--                                    </th>--}}
                                     <th class="pt-1">
                                         Ações
                                     </th>
@@ -36,7 +33,6 @@
                                                 </div>
                                             </div>
                                         </td>
-                                        {{--                                        <td> @money($p->valor)</td>--}}
                                         <td>
                                             <button type="button" class="btn btn-success btn-block btn-sm"
                                                     data-bs-toggle="modal"

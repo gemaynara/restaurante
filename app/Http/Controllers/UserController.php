@@ -6,6 +6,7 @@ use App\Models\Empresa;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
@@ -129,6 +130,41 @@ class UserController extends Controller
     {
         User::find($id)->delete();
 
+    }
+
+
+    public function viewProfile()
+    {
+
+        $user = User::query()->where('id', auth()->user()->id)
+            ->first();
+        $roles = $user->getRoleNames();
+        $permissions = $user->getAllPermissions();
+        return view('pages.admin.profile', compact('user', 'roles', 'permissions'));
+    }
+
+    public function changePassword(Request $request) {
+        if (!(Hash::check($request->get('current-password'), Auth::user()->password))) {
+            // The passwords matches
+            return redirect()->back()->with("error","Sua senha atual não corresponde à senha informada.");
+        }
+
+        if(strcmp($request->get('current-password'), $request->get('new-password')) == 0){
+            // Current password and new password same
+            return redirect()->back()->with("error","A nova senha não pode ser igual a senha atual.");
+        }
+
+        $validatedData = $request->validate([
+            'current-password' => 'required',
+            'new-password' => 'required|string|min:6|confirmed',
+        ]);
+
+        //Change Password
+        $user = Auth::user();
+        $user->password = bcrypt($request->get('new-password'));
+        $user->save();
+
+        return redirect()->back()->with("success","Senha alterada com sucesso!");
     }
 
     public function ativar($id)

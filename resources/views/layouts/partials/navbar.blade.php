@@ -25,19 +25,18 @@
         <ul class="navbar-nav ms-auto">
             <li class="nav-item dropdown d-none d-lg-block user-dropdown">
                 <a class="nav-link" id="UserDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false">
-                    <img class="img-xs rounded-circle" src="{{asset('images/faces/face8.jpg')}}" alt="Profile image">
+                    <img class="img-xs rounded-circle" src="{{asset('images/no-picture.jpg')}}"  alt="Profile image">
                 </a>
                 <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
                     <div class="dropdown-header text-center">
-                        <img class="img-md rounded-circle" src="{{asset('images/faces/face8.jpg')}}"
+                        <img class="img-md rounded-circle" src="{{asset('images/no-picture.jpg')}}" width="50px"
                              alt="Profile image">
                         <p class="mb-1 mt-3 font-weight-semibold">{{auth()->user()->name}}</p>
                         <p class="fw-light text-muted mb-0">{{auth()->user()->empresa->razao_social}}</p>
 
 
                     </div>
-                    <a class="dropdown-item"><i
-                            class="dropdown-item-icon mdi mdi-account-outline text-primary me-2"></i> Perfil </a>
+                    <a href="{{route('profile')}}" class="dropdown-item"><i class="dropdown-item-icon mdi mdi-account-outline text-primary me-2"></i> Perfil </a>
                     <a class="dropdown-item"
                        href="{{ route('logout') }}"
                        onclick="event.preventDefault();

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Comanda</title>
+    <title>Cupom não Fiscal</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
     <link rel="stylesheet" href="{{asset('css/style.css')}}">
 </head>
@@ -25,7 +25,7 @@
     </tr>
     <tr>
         <th class="ttu" colspan="3">
-            <b>Comanda nº {{$pedido->numero_pedido}}</b>
+            <b>CUPOM NÃO FISCAL</b>
         </th>
     </tr>
     </thead>
@@ -87,33 +87,38 @@
 
     @endif
 
-    {{--    <tr class="sup ttu p--0">--}}
-    {{--        <td colspan="3">--}}
-    {{--            <b>Pagamentos</b>--}}
-    {{--        </td>--}}
-    {{--    </tr>--}}
-    {{--    <tr class="ttu">--}}
-    {{--        <td colspan="2">Voucher</td>--}}
-    {{--        <td align="right">R$10,00</td>--}}
-    {{--    </tr>--}}
-    {{--    <tr class="ttu">--}}
-    {{--        <td colspan="2">Dinheiro</td>--}}
-    {{--        <td align="right">R$10,00</td>--}}
-    {{--    </tr>--}}
-    {{--    <tr class="ttu">--}}
-    {{--        <td colspan="2">Total pago</td>--}}
-    {{--        <td align="right">R$10,00</td>--}}
-    {{--    </tr>--}}
-    {{--    <tr class="ttu">--}}
-    {{--        <td colspan="2">Troco</td>--}}
-    {{--        <td align="right">R$0,44</td>--}}
-    {{--    </tr>--}}
-
-        <tr class="sup">
-            <td colspan="3" align="center">
-                {{\App\Helpers\Util::BaseUrl()}}
-            </td>
+    <tr class="sup ttu p--0">
+        <td colspan="3">
+            <b>Pagamentos</b>
+        </td>
+    </tr>
+    {{--        <tr class="ttu">--}}
+    {{--            <td colspan="2">Voucher</td>--}}
+    {{--            <td align="right">R$10,00</td>--}}
+    {{--        </tr>--}}
+    @foreach($movimentacoes as $mov)
+        <?php $saldo_pago = 0.00 ?>
+        <tr class="ttu">
+            <td colspan="2">{{$mov->forma_pagamento}}</td>
+            <td align="right">@money($mov->valor_pago)</td>
+            <?php $saldo_pago += $mov->valor_pago ?>
         </tr>
+    @endforeach
+    <tr class="ttu">
+        <td colspan="2">Total pago</td>
+        <td align="right">@money($saldo_pago)</td>
+    </tr>
+    @if($saldo_pago > $pedido->total)
+        <tr class="ttu">
+            <td colspan="2">Troco</td>
+            <td align="right"> @money($saldo_pago-$pedido->total)</td>
+        </tr>
+    @endif
+    <tr class="sup">
+        <td colspan="3" align="center">
+            {{\App\Helpers\Util::BaseUrl()}}
+        </td>
+    </tr>
     </tfoot>
 </table>
 

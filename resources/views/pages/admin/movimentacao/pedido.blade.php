@@ -2,7 +2,8 @@
 @section('content')
     <div class="content-wrapper">
         <div class="row">
-            <div class="col-md-12">
+            @include('layouts.partials.alerts')
+            <div class="col-md-8">
                 <div class="card px-2">
                     <div class="card-body">
                         <div class="container-fluid">
@@ -82,8 +83,73 @@
                                 Cupom</a>
 
 
-                            <a href="{{route('movimentacao.pagar-pedido', $pedido->id)}}" class="btn btn-warning float-right mt-4"><i class="ti-money me-1"></i>Ir para Pagamento</a>
+{{--                            <a href="#" class="btn btn-warning float-right mt-4"><i class="ti-money me-1"></i>Ir para Pagamento</a>--}}
 
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card px-2">
+                    <div class="card-body">
+                        <div class="container-fluid">
+                            <h3 class="text-right my-5">Histórico de Pagamento</h3>
+                            <hr>
+                        </div>
+                        <div class="card-body">
+                            <ul class="bullet-line-list">
+                                <?php $saldo_pago = 0.00 ?>
+                                @foreach($movimentacoes as $mov)
+                                    <li>
+                                        <h6>@money($mov->valor_pago)
+                                            <label
+                                                class="badge badge-success float-right pl-3">{{$mov->forma_pagamento}}</label>
+
+                                        </h6>
+                                        <p class="text-muted mb-4">
+                                            <i class="ti-time"></i>
+                                            {{$mov->created_at->diffForHumans(now())}}
+                                        </p>
+                                    </li>
+                                    <?php $saldo_pago += $mov->valor_pago ?>
+                                @endforeach
+                            </ul>
+                        </div>
+
+                        <div class="container-fluid mt-3 w-100">
+                            <p class="text-right mb-2">Subtotal: @money($pedido->subtotal+$pedido->adicionais)</p>
+                            <p class="text-right">Taxa ({{(int)app('restaurante')['parametros']['gorjeta']}}%) :
+                                @money($pedido->taxa)</p>
+                            <h4 class="text-right mb-5">Total : @money($pedido->total)</h4>
+                            <hr>
+                            @if($pedido->status_pedido == 'Pedido Finalizado')
+                                <h4 class="text-right text-success font-weight-bold">Total Pago:
+                                    @money($saldo_pago)</h4>
+                                <h4 class="text-right text-success font-weight-bold">Troco:
+                                    @money($saldo_pago-$pedido->total)</h4>
+                            @else
+                                <h4 class="text-right text-danger font-weight-bold mb-5">Saldo:
+                                    @money($pedido->total-$saldo_pago)</h4>
+                            @endif
+                        </div>
+                        <div class="container-fluid w-100">
+                            <a href="{{route('pedidos.comanda', ['id'=>$pedido->numero_pedido])}}" target="_blank"
+                               class="btn btn-primary float-right mt-4 ms-2"><i class="ti-printer me-1"></i>Imprimir
+                                Comanda</a>
+
+
+                            <button type="button" class="btn btn-success float-right mt-4"
+                                    data-bs-toggle="modal" {{!$existeCaixa ? 'disabled': ''}}
+                                    data-bs-target="#modal-pagamento"><i class="ti-money me-1"></i>Realizar
+                                Pagamento
+                            </button>
+                            @include('pages.admin.movimentacao.modal-pagamento')
+
+                            <div class="mt-1" @if($existeCaixa) style="display: none" @endif>
+                                <div class="alert alert-danger" role="alert">
+                                    Não é possível realizar movimentações com o caixa fechado.
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

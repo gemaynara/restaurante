@@ -18,6 +18,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->singleton('restaurante', function ($app) {
             return Empresa::query()->with('parametros')->find(auth()->user()->empresa->id);
         });
+
     }
 
     /**
@@ -30,5 +31,7 @@ class AppServiceProvider extends ServiceProvider
         Blade::directive('money', function ($money) {
             return 'R$ ' . "<?php echo number_format($money, 2, ',', '.'); ?>";
         });
+
+        \Carbon\Carbon::setLocale('pt_BR');
     }
 }

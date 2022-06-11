@@ -37,6 +37,8 @@ Route::group(['middleware' => ['guest']], function () {
 Route::group(['middleware' => ['auth']], function () {
     Route::post('/logout', [\App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    Route::get('/profile', [App\Http\Controllers\UserController::class, 'viewProfile'])->name('profile');
+    Route::post('/update-profile',[App\Http\Controllers\UserController::class, 'changePassword'])->name('profile.update');
     Route::get('dashboard', [\App\Http\Controllers\DashboardController::class, 'index']);
     Route::resource('roles', \App\Http\Controllers\RoleController::class);
     Route::resource('users', \App\Http\Controllers\UserController::class);
@@ -85,8 +87,11 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::group(['prefix' => 'pedidos'], function () {
         Route::get('imprimir-comanda/{id}', [App\Http\Controllers\PedidoController::class, 'imprimirComanda'])->name('pedidos.comanda');
+        Route::get('imprimir-cupom/{id}', [App\Http\Controllers\PedidoController::class, 'imprimirCupom'])->name('pedidos.cupom');
         Route::get('lista-mesas', [App\Http\Controllers\PedidoController::class, 'listaMesas'])->name('pedidos.mesas');
+        Route::get('todos-pedidos', [App\Http\Controllers\PedidoController::class, 'pedidos'])->name('pedidos.lista');
         Route::get('recebidos', [App\Http\Controllers\PedidoController::class, 'pedidosRecebidos'])->name('pedidos.recebidos');
+        Route::get('encerrados', [App\Http\Controllers\PedidoController::class, 'pedidosFinalizados'])->name('pedidos.encerrados');
         Route::get('show/{id}', [App\Http\Controllers\PedidoController::class, 'verPedido'])->name('pedidos.show');
         Route::post('abrir-comanda', [App\Http\Controllers\PedidoController::class, 'abrirComanda'])->name('pedidos.abrir-comanda');
         Route::post('add-item', [App\Http\Controllers\PedidoController::class, 'addItem'])->name('pedidos.add-item');
@@ -98,6 +103,19 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::group(['prefix' => 'producao'], function () {
         Route::get('em-producao/{id}', [App\Http\Controllers\ProducaoController::class, 'producao'])->name('producao.pedidos');
+    });
+
+    Route::group(['prefix' => 'caixa'], function () {
+        Route::get('controle-caixa', [App\Http\Controllers\ControleCaixaController::class, 'index'])->name('caixa.index');
+        Route::post('abrir-caixa', [App\Http\Controllers\ControleCaixaController::class, 'abrirCaixa'])->name('caixa.abrir-caixa');
+        Route::post('fechar-caixa', [App\Http\Controllers\ControleCaixaController::class, 'fecharCaixa'])->name('caixa.fechar-caixa');
+    });
+
+    Route::group(['prefix' => 'movimentacao'], function () {
+       Route::get('pagar-pedido/{id}', [App\Http\Controllers\MovimentacaoController::class, 'pagarPedido'])->name('movimentacao.pagar-pedido');
+       Route::post('pagamento-pedido', [App\Http\Controllers\MovimentacaoController::class, 'pagamentoPedido'])->name('movimentacao.pagamento-pedido');
+       Route::post('retirada-caixa', [App\Http\Controllers\MovimentacaoController::class, 'saidaCaixa'])->name('movimentacao.saida-caixa');
+       Route::get('retiradas-caixa', [App\Http\Controllers\MovimentacaoController::class, 'retiradasCaixa'])->name('movimentacao.retirada-caixa');
     });
 
 });

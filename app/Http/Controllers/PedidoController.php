@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Helpers\Helper;
 use App\Http\Services\CardapioService;
+use App\Http\Services\ControleCaixaService;
 use App\Http\Services\PedidoService;
 use App\Models\Cardapio;
 use App\Models\CategoriaCardapio;
 use App\Models\Mesa;
+use App\Models\Movimentacao;
 use App\Models\Pedido;
 use App\Models\ProdutosPedido;
 use Illuminate\Http\Request;
@@ -165,6 +167,16 @@ class PedidoController extends Controller
         }
     }
 
+
+    public function pedidos()
+    {
+        $pedidos = Pedido::with('mesas')
+            ->orderBy('id', 'desc')
+            ->get();
+
+        return view('pages.admin.pedidos.index', compact('pedidos'));
+    }
+
     public function pedidosRecebidos()
     {
         $pedidos = Pedido::with('mesas')
@@ -175,12 +187,27 @@ class PedidoController extends Controller
         return view('pages.admin.pedidos.recebidos', compact('pedidos'));
     }
 
+    public function pedidosFinalizados()
+    {
+        $pedidos = Pedido::with('mesas')
+            ->orderBy('id', 'desc')
+            ->whereIn('status_pedido', ['Comanda Encerrada'])
+            ->get();
+
+        return view('pages.admin.pedidos.encerrados', compact('pedidos'));
+    }
+
     public function verPedido($id)
     {
         $pedido = Pedido::with('detalhes', 'mesas','endereco')
             ->find($id);
 
-        return view('pages.admin.pedidos.show', compact('pedido'));
+        $existeCaixa = ControleCaixaService::getCaixa();
+        $movimentacoes = Movimentacao::query()->where('identificador', (int)$id)
+            ->where('tipo_identificacao', 'PEDIDO')
+            ->get();
+
+        return view('pages.admin.pedidos.show', compact('pedido', 'movimentacoes', 'existeCaixa'));
     }
 
     public function imprimirComanda($id)
@@ -188,5 +215,17 @@ class PedidoController extends Controller
         $pedido = PedidoService::getPedidoMesa($id);
 
         return view('prints.comanda', compact('pedido'));
+    }
+
+    public function imprimirCupom($id)
+    {
+
+        $pedido = PedidoService::getPedidoMesa($id);
+
+        $movimentacoes = Movimentacao::query()->where('identificador', $pedido->id)
+            ->where('tipo_identificacao', 'PEDIDO')
+            ->get();
+
+        return view('prints.cupom', compact('pedido', 'movimentacoes'));
     }
 }

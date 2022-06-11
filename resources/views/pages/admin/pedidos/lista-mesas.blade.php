@@ -26,15 +26,17 @@
                                             {{--                                            <li>Free upgrade for one year</li>--}}
                                             {{--                                        </ul>--}}
                                             <div class="wrapper">
-                                                @if(!is_null($mesa->numero_pedido))
-                                                    <a type="button" href="{{route('ver-cardapio', $mesa->numero_pedido)}}" class="btn btn-warning">Ver Pedido</a>
-                                                @else
-
+                                                @if($mesa->situacao == 'Livre')
                                                     <button type="button" class="btn btn-info btn-block"
                                                             data-bs-toggle="modal"
                                                             data-bs-target="#modal-mesa-{{$mesa->id}}">Iniciar
                                                     </button>
                                                     @include('pages.admin.pedidos.modal-inicial')
+                                                @elseif(!is_null($mesa->numero_pedido))
+                                                    <a type="button"
+                                                       href="{{route('ver-cardapio', $mesa->numero_pedido)}}"
+                                                       class="btn btn-warning">Ver Pedido</a>
+
                                                 @endif
                                             </div>
                                         </div>

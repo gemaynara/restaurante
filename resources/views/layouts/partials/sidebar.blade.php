@@ -73,8 +73,8 @@
                         <ul class="nav flex-column sub-menu">
                             <li class="nav-item"><a class="nav-link" href="{{route('pedidos.mesas')}}">Pedido Manual</a>
                             </li>
-                            <li class="nav-item"><a class="nav-link" href="{{route('pedidos.recebidos')}}">Pedidos
-                                    Recebidos</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{{route('pedidos.recebidos')}}">Pedidos Recebidos</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{{route('pedidos.lista')}}">Todos os Pedidos</a></li>
                         </ul>
                     </div>
                 </li>
@@ -194,9 +194,23 @@
                     </a>
                     <div class="collapse" id="auth">
                         <ul class="nav flex-column sub-menu">
-                            <li class="nav-item"><a class="nav-link" href="pages/samples/login.html">Pagamentos </a>
+                            <li class="nav-item"><a class="nav-link" href="{{route('caixa.index')}}">Resumo do Caixa </a>
                             </li>
                         </ul>
+                        <ul class="nav flex-column sub-menu">
+                            <li class="nav-item"><a class="nav-link" href="{{route('pedidos.encerrados')}}">Pagamento de Pedidos </a>
+                            </li>
+                        </ul>
+
+                        <ul class="nav flex-column sub-menu">
+                            <li class="nav-item"><a class="nav-link" href="{{route('movimentacao.retirada-caixa')}}">Retiradas do Caixa </a>
+                            </li>
+                        </ul>
+
+{{--                        <ul class="nav flex-column sub-menu">--}}
+{{--                            <li class="nav-item"><a class="nav-link" href="pages/samples/login.html">Pagamentos </a>--}}
+{{--                            </li>--}}
+{{--                        </ul>--}}
                     </div>
                 </li>
             @endcan
