@@ -32,9 +32,9 @@
                                                             data-bs-target="#modal-mesa-{{$mesa->id}}">Iniciar
                                                     </button>
                                                     @include('pages.admin.pedidos.modal-inicial')
-                                                @elseif(!is_null($mesa->numero_pedido))
+                                                @elseif(!is_null($mesa->pedido))
                                                     <a type="button"
-                                                       href="{{route('ver-cardapio', $mesa->numero_pedido)}}"
+                                                       href="{{route('ver-cardapio', $mesa->pedido->numero_pedido)}}"
                                                        class="btn btn-warning">Ver Pedido</a>
 
                                                 @endif

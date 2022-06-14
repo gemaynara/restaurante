@@ -21,8 +21,9 @@ class PedidoController extends Controller
     public function listaMesas()
     {
         $mesas = Mesa::query()
-            ->leftJoin('pedidos', 'pedidos.mesa_id', 'mesas.id')
-            ->select('mesas.*', 'pedidos.numero_pedido')
+            ->with('pedido')
+            ->select('mesas.*')
+            ->groupBy('mesas.id')
             ->orderBy('codigo')->get();
 
         return view('pages.admin.pedidos.lista-mesas', compact('mesas'));
@@ -59,8 +60,8 @@ class PedidoController extends Controller
             $data['pedido_id'] = $pedido->id;
             CardapioService::addItem($data);
 
-            $pedido->update(['status_pedido'=>'Comanda aberta']);
-            $pedido->mesas->update(['situacao'=> 'Comanda Aberta']);
+            $pedido->update(['status_pedido' => 'Comanda aberta']);
+            $pedido->mesas->update(['situacao' => 'Comanda Aberta']);
             $pedido = PedidoService::getPedidoMesa($pedido->numero_pedido);
             $categorias = CategoriaCardapio::where('empresa_id', $data['empresa_id'])->get();
 
@@ -157,6 +158,8 @@ class PedidoController extends Controller
                 ->where('numero_pedido', $data['numero_pedido'])
                 ->first();
 
+            PedidoService::incrementContator($pedido->detalhes);
+
             $pedido->mesas()->update(['situacao' => 'Comanda Encerrada']);
             $pedido->update(['status_pedido' => 'Comanda Encerrada']);
 
@@ -200,7 +203,7 @@ class PedidoController extends Controller
 
     public function verPedido($id)
     {
-        $pedido = Pedido::with('detalhes', 'mesas','endereco')
+        $pedido = Pedido::with('detalhes', 'mesas', 'endereco')
             ->find($id);
 
         $existeCaixa = ControleCaixaService::getCaixa();

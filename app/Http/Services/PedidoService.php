@@ -74,11 +74,17 @@ class PedidoService
                     'mesa_id' => $data['mesa_id'],
                     'nome' => '',
                     'tipo_pedido' => 'mesa',
+                    'numero_pessoas' => $data['numero_pessoas'],
                     'numero_pedido' => Helper::generateNumber(4),
                     'status_pedido' => 'Comanda Aberta'
                 ]);
     }
 
+    public static function incrementContator($pedidos){
+        foreach ($pedidos as $item){
+            $item->cardapio->increment('contador_pedidos', $item->quantidade);
+        }
+    }
     public static function getPedidoUsuario($user)
     {
 
