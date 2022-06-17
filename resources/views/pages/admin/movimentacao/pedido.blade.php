@@ -76,7 +76,7 @@
                             <hr>
                         </div>
                         <div class="container-fluid w-100">
-                            <a href="{{route('pedidos.encerrados')}}" class="btn btn-success float-right mt-4"><i
+                            <a href="{{\Illuminate\Support\Facades\URL::previous()}}" class="btn btn-success float-right mt-4"><i
                                     class="ti-arrow-circle-left me-1"></i>Voltar</a>
                             <a href="{{route('pedidos.cupom', ['id'=>$pedido->numero_pedido])}}" target="_blank"
                                class="btn btn-primary float-right mt-4 ms-2"><i class="ti-printer me-1"></i>Imprimir
@@ -139,7 +139,7 @@
 
 
                             <button type="button" class="btn btn-success float-right mt-4"
-                                    data-bs-toggle="modal" {{!$existeCaixa ? 'disabled': ''}}
+                                    data-bs-toggle="modal" {{((!$existeCaixa) || ($pedido->status_pedido == 'Pedido Cancelado' || $pedido->status_pedido == 'Pedido Finalizado')) ? 'disabled': ''}}
                                     data-bs-target="#modal-pagamento"><i class="ti-money me-1"></i>Realizar
                                 Pagamento
                             </button>

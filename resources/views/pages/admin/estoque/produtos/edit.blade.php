@@ -86,6 +86,28 @@
                                     </div>
                                 </div>
 
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">Estoque Min.</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control qnt" name="estoque_min"
+                                                       value="{{$produto->estoque_min}}" required>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">Estoque Máx.</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control qnt" name="estoque_max"
+                                                       value="{{$produto->estoque_max}}" required>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
                             </div>
                             <div class="row col-12">
                                 <div class="col-md-12">

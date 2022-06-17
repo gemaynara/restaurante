@@ -58,6 +58,7 @@
                             <i class="ti-printer"></i>
                         </a>
                         <h4 class="card-title">Comanda Núm.{{$pedido->numero_pedido}}</h4>
+                        <p>{{!is_null($pedido->nome)? 'Cliente: '. $pedido->nome : ''}}</p>
                         <span>Mesa {{$pedido->mesas->codigo}}</span>
                         <div class="table-responsive mt-2">
                             <table class="table">
@@ -75,7 +76,8 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <?php $enviar = false ?>
+                                <?php $enviar = false; $cancel = false;
+                                count($pedido->detalhes) == 0 ? $cancel = true : $cancel = false?>
                                 @if(count($pedido->detalhes) == 0)
                                     <tr>
                                         <td>Sem Pedidos</td>
@@ -165,6 +167,13 @@
                                 </tfoot>
                             </table>
 
+                            @if($cancel)
+                                <form action="{{route('pedidos.cancelar-comanda')}}" method="post">
+                                    @csrf
+                                    <input type="hidden" name="numero_pedido" value="{{$pedido->numero_pedido}}">
+                                    <button type="submit" class="btn btn-block btn-info">Cancelar Comanda</button>
+                                </form>
+                            @endif
                             @if(isset($enviar))
                                 @if(($enviar))
                                     <form action="{{route('pedidos.enviar-pedido')}}" method="post">
@@ -174,7 +183,7 @@
                                     </form>
                                 @endif
 
-                                @if($pedido->status_pedido != 'Comanda Encerrada' && $enviar == false)
+                                @if($pedido->status_pedido != 'Comanda Encerrada' && $enviar == false && count($pedido->detalhes)>0)
                                     <form action="{{route('pedidos.encerrar-pedido')}}" method="post" class="mt-2">
                                         @csrf
                                         <input type="hidden" name="numero_pedido" value="{{$pedido->numero_pedido}}">

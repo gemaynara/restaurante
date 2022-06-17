@@ -8,6 +8,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Barryvdh\DomPDF\Facade\Pdf as PDF;
 use Exception;
 
 class ControleCaixaController extends Controller
@@ -24,7 +25,8 @@ class ControleCaixaController extends Controller
             ->with('usuarios')
             ->where('empresa_id', auth()->user()->empresa->id)
             ->orderBy('id', 'desc')
-            ->whereDate('created_at', date('Y-m-d'))
+            ->take(10)
+//            ->whereDate('created_at', date('Y-m-d'))
             ->get();
 
         return view('pages.admin.caixa.index', compact('caixa', 'movimentacoes'));
@@ -89,5 +91,43 @@ class ControleCaixaController extends Controller
             Log::info($e->getMessage());
             return redirect()->route('caixa.index')->with('error', 'Ocorreu um erro ao fechar o caixa.');
         }
+    }
+
+    public function getResumoCaixa()
+    {
+        return view('pages.admin.caixa.resumo-caixa');
+    }
+
+    public function resumoCaixaPdf(Request $request)
+    {
+        $data = $request->data;
+
+//        if (strtotime($final) < strtotime($inicial)) {
+//            return back()->with('warning', 'Período inválido. Tente novamente');
+//        }
+
+        $caixa = ControleCaixa::query()
+            ->whereDate('updated_at', '<=',$data)
+            ->where('empresa_id', auth()->user()->empresa->id)
+            ->orderBy('id', 'desc')
+            ->first();
+
+        $movimentacoes = Movimentacao::query()
+            ->whereDate('created_at', '<=',$data)
+            ->where('empresa_id', auth()->user()->empresa->id)
+            ->where('tipo_movimentacao', 'ENTRADA')
+            ->select(DB::raw('SUM(valor_pago-valor_troco) as valor_pago'), 'forma_pagamento')
+            ->groupBy('forma_pagamento')
+            ->orderBy('forma_pagamento')
+            ->get();
+
+
+        $pdf = PDF::loadView('reports.pdf.resumo-caixa', compact('caixa', 'data', 'movimentacoes'))
+            ->setPaper('a4', 'portrait');
+
+//        return $pdf->stream('invoice.pdf');
+        return $pdf->download("resumo-caixa-".Carbon::parse($data)->format('d-m-Y').".pdf");
+
+
     }
 }

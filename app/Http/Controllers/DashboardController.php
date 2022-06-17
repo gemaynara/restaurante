@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Cardapio;
 use App\Models\EmpresaParametros;
 use App\Models\NotaFiscal;
+use App\Models\Pedido;
 use App\Models\Produto;
 use App\Models\Saida;
 use Illuminate\Http\Request;
@@ -21,6 +22,12 @@ class DashboardController extends Controller
 
         $itensCardapio = Cardapio::where('empresa_id', $user)->count();
         $produtos = Produto::where('empresa_id', $user)->count();
+
+        $vendas = Pedido::where('empresa_id', $user)
+            ->whereIn('status_pedido', ['Comanda Fechada', 'Pedido Finalizado'])
+            ->select(DB::raw('SUM(total) as total'))
+            ->first();
+
         $entradas = NotaFiscal::where('empresa_id', $user)
             ->select(DB::raw('SUM(valor_total) as total'))->first();
 
@@ -28,13 +35,27 @@ class DashboardController extends Controller
             ->whereDate('created_at', $today)
             ->count();
 
-        return [
+        $operadores = Pedido::join('users', 'users.id', 'pedidos.operador_id')
+            ->select(DB::raw('SUM(total) as valor_total'), 'users.name')
+            ->groupBy('operador_id')
+            ->orderByDesc('valor_total')
+            ->get();
+
+        $estoque = Produto::with('categoriasProduto')
+            ->where('empresa_id', $user)
+            ->orderBy('nome')
+            ->get();
+
+        return view('pages.dashboard', [
             'produtos' => $produtos,
-            'entradas' => is_null($entradas->total)? '0.00': $entradas->total,
-            'saidas' => is_null($saidas)? '0.00': $saidas,
+            'entradas' => is_null($entradas->total) ? '0.00' : $entradas->total,
+            'saidas' => is_null($saidas) ? '0.00' : $saidas,
             'itensCardapio' => $itensCardapio,
+            'vendas' => is_null($vendas->total) ? '0.00' : $vendas->total,
             'empresa' => $empresa,
-        ];
+            'operadores' => $operadores,
+            'estoque' => $estoque
+        ]);
 
     }
 }

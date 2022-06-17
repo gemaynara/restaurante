@@ -62,6 +62,104 @@ $(".delete").on('click', function (e) {
     })
 });
 
+$(".remove-item").on('click', function (e) {
+    e.preventDefault();
+    var url = $(this).data('remote');
+    var id = $(this).data("id");
+    Swal.fire({
+        icon: "question",
+        title: "Você tem certeza?",
+        text: `Que deseja remover o item ?`,
+        showDenyButton: true,
+        showCancelButton: false,
+        confirmButtonText: 'Sim',
+        denyButtonText: `Não`,
+        showLoaderOnConfirm: true,
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                url: url,
+                data: {
+                    "id": id
+                },
+                type: 'DELETE',
+                success: function (response) {
+                    Swal.fire(
+                        "Sucesso!",
+                        'O registro foi excluído com sucesso!',
+                        'success'
+                    )
+                    setTimeout(() => {
+                        location.reload();
+                    }, 1000);
+                },
+                error: function (err) {
+                    console.log(err)
+                    Swal.fire(
+                        "Oops!",
+                        'Ocorreu um erro!' + err,
+                        'error'
+                    )
+                }
+            });
+        }
+    })
+});
+
+$(".cancel-comanda").on('click', function (e) {
+    e.preventDefault();
+    var url = $(this).attr('href');
+    var id = $(this).data("id");
+    Swal.fire({
+        icon: "question",
+        title: "Você tem certeza?",
+        text: `Que deseja remover o item ?`,
+        showDenyButton: true,
+        showCancelButton: false,
+        confirmButtonText: 'Sim',
+        denyButtonText: `Não`,
+        showLoaderOnConfirm: true,
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                url: url,
+                data: {
+                    "id": id
+                },
+                type: 'POST',
+                success: function (response) {
+                    Swal.fire(
+                        "Sucesso!",
+                        'O registro foi excluído com sucesso!',
+                        'success'
+                    )
+                    setTimeout(() => {
+                        location.reload();
+                    }, 1000);
+                },
+                error: function (err) {
+                    console.log(err)
+                    Swal.fire(
+                        "Oops!",
+                        'Ocorreu um erro!' + err,
+                        'error'
+                    )
+                }
+            });
+        }
+    })
+});
+
 $(".disable").on('click', function (e) {
     e.preventDefault();
     var url = $(this).data('remote');
@@ -200,7 +298,7 @@ $(".dt").dataTable({
     //     }
     // },
     "order": [
-        [0, 'asc']
+        [1, 'asc']
     ],
 });
 

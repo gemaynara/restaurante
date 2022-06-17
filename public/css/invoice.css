@@ -1,0 +1,262 @@
+
+.clearfix:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+#serv {
+    text-align: left;
+}
+
+a {
+    color: #5D6975;
+    text-decoration: underline;
+}
+
+#logo-dir {
+    text-align: right;
+    margin-bottom: 10px;
+}
+
+body {
+    position: relative;
+    line-height: 1.3;
+    /*width: 21cm;*/
+    /*height: 29.7cm;*/
+    margin: 0 auto;
+    color: #242424;
+    background: #FFFFFF;
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+    /*font-family: Arial;*/
+
+}
+
+header {
+    padding: 10px 0;
+    margin-bottom: 30px;
+}
+
+#logo {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+#logo-dir {
+    float: right;
+    width: 50%;
+    padding-bottom: 20px;
+}
+
+#imagem {
+    margin-top: 5px;
+    width: 75px;
+}
+
+#logo img {
+    width: 150px;
+}
+
+h1 {
+    border-top: 1px solid #c3c3c3;
+    border-bottom: 1px solid #c3c3c3;
+    color: #242424;
+    font-size: 1.5em;
+    line-height: 1.4em;
+    font-weight: normal;
+    text-align: center;
+    margin: 0 0 20px 0;
+    /*background: url(dimension.png);*/
+}
+
+h4 {
+    color: #242424;
+    font-size: 1.2em;
+    line-height: 1.4em;
+    text-align: center;
+    margin: 0 0 20px 0;
+    text-transform: uppercase;
+    text-wrap: normal;
+    font-weight: bold;
+}
+
+#separa {
+
+    border: 1px solid #c3c3c3;
+}
+
+#project {
+    float: left;
+    padding-left: 30px;
+}
+
+#project span {
+    color: #242424;
+    text-align: left;
+    width: 50px;
+    padding-right: 30px;
+
+    /*margin-right: 10px;*/
+    display: inline-block;
+    font-size: 0.8em;
+    line-height: 1.5;
+}
+
+#company {
+    position: relative;
+    float: right;
+    /*text-align: right;*/
+}
+
+#project div,
+#company div {
+    white-space: nowrap;
+    line-height: 1.3;
+}
+
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    margin-bottom: 20px;
+
+}
+
+#tabela-relatorio {
+    margin-top: 150px;
+    font-size: 10px;
+}
+
+#tabela-relatorio p {
+    text-align: center;
+    font-size: 11px;
+    margin-top: -12px;
+    margin-left: -12px;
+    margin-bottom: -12px;
+
+}
+#relatorio{
+    text-align: center;
+
+}
+#table table th td {
+    border-top: 1px solid rgba(195, 195, 195, 0.6);
+    text-align: center;
+    word-wrap: break-word;
+    margin-bottom: 0;
+
+}
+
+#next {
+    clear: left;
+    margin-top: 30px;
+    display: block;
+}
+
+/*table tr:nth-child(2n-1) td {*/
+/*    background: #F5F5F5;*/
+/*}*/
+
+table th,
+table td {
+    text-align: center;
+    border-bottom: 1px solid rgba(160, 160, 160, 0.6);
+
+}
+
+table th {
+    padding: 3px 10px;
+    color: #242424;
+    border-bottom: 1px solid #c3c3c3;
+    white-space: nowrap;
+    font-weight: lighter;
+}
+
+table .service,
+table .desc {
+    text-align: center;
+    font-size: 12px;
+}
+
+#descr {
+    padding: 5px 20px;
+    color: #242424;
+    border-bottom: 1px solid #c3c3c3;
+    white-space: nowrap;
+    font-size: 12px;
+    font-weight: lighter;
+    text-transform: uppercase;
+}
+
+table td {
+    padding: 20px;
+    text-align: center;
+}
+
+table td.service,
+table td.desc {
+    vertical-align: top;
+}
+
+table td.unit,
+table td.qty,
+table td.total {
+    font-size: 12px;
+    text-align: justify;
+}
+
+table td.grand {
+    border-top: 1px solid #c3c3c3;;
+    font-size: 12px;
+}
+
+#notices .notice {
+    color: #5D6975;
+    font-size: 1.2em;
+}
+
+footer {
+    color: #242424;
+    width: 100%;
+    height: 30px;
+    position: absolute;
+    bottom: 0;
+    border-top: 1px solid #5D6975;
+    padding: 8px 0;
+    text-align: center;
+}
+
+#footer {
+    color: #242424;
+    width: 100%;
+    height: 30px;
+    position: absolute;
+    bottom: 0;
+    border-top: 1px solid #5D6975;
+    /*padding: 8px 0;*/
+    text-align: center;
+}
+
+#table {
+    width: 100%;
+    border-collapse: collapse;
+    /*border-spacing: 0;*/
+    margin-bottom: 0;
+    text-align: center;
+}
+
+#dados {
+    margin-top: 0;
+    margin-left: 2%;
+    margin-right: 2%;
+    text-align: left !important;
+}
+
+#header {
+    float: left;
+    text-align: left;
+    width: 50%;
+    font-size: 12px;
+}

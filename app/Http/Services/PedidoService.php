@@ -67,24 +67,26 @@ class PedidoService
     {
         return Pedido::query()
             ->firstOrCreate(
-                ['empresa_id' => $data['empresa_id'], 'nome' => '',
-                    'mesa_id' => $data['mesa_id'], 'tipo_pedido' => 'mesa',
-                    'status_pedido' => 'Comanda Aberta'],
+                ['empresa_id' => $data['empresa_id'], 'mesa_id' => $data['mesa_id'],
+                    'tipo_pedido' => 'salao', 'status_pedido' => 'Comanda Aberta'],
                 ['empresa_id' => $data['empresa_id'],
                     'mesa_id' => $data['mesa_id'],
-                    'nome' => '',
-                    'tipo_pedido' => 'mesa',
+                    'nome' => $data['nome'],
+                    'tipo_pedido' => 'salao',
+                    'operador_id' => auth()->user()->id,
                     'numero_pessoas' => $data['numero_pessoas'],
                     'numero_pedido' => Helper::generateNumber(4),
                     'status_pedido' => 'Comanda Aberta'
                 ]);
     }
 
-    public static function incrementContator($pedidos){
-        foreach ($pedidos as $item){
+    public static function incrementContator($pedidos)
+    {
+        foreach ($pedidos as $item) {
             $item->cardapio->increment('contador_pedidos', $item->quantidade);
         }
     }
+
     public static function getPedidoUsuario($user)
     {
 
@@ -95,6 +97,25 @@ class PedidoService
 
     }
 
+    public static function listPedidos(array $status)
+    {
+        return Pedido::with('mesas')
+            ->orderBy('id', 'desc')
+            ->whereIn('status_pedido', $status)
+            ->where('empresa_id', auth()->user()->empresa->id)
+            ->get();
+    }
+
+    public static function countPedidos(array $status)
+    {
+        return Pedido::with('mesas')
+            ->orderBy('id', 'desc')
+            ->whereIn('status_pedido', $status)
+            ->where('empresa_id', auth()->user()->empresa->id)
+            ->whereDate('created_at', date('Y-m-d'))
+            ->count();
+    }
+
     public static function getPedidoMesa($id)
     {
         return Pedido::with('detalhes', 'mesas')
@@ -103,8 +124,6 @@ class PedidoService
             ->first();
 
     }
-
-
 
 
 }

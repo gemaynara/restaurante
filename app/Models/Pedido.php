@@ -17,6 +17,7 @@ class Pedido extends Model
         'empresa_id',
         'mesa_id',
         'usuario_id',
+        'operador_id',
         'endereco_id',
         'tipo_pedido',
         'numero_pedido',
@@ -34,7 +35,12 @@ class Pedido extends Model
 
     public function usuarios()
     {
-        return $this->belongsTo(User::class, 'user_id');
+        return $this->belongsTo(User::class, 'usuario_id');
+    }
+
+    public function operador()
+    {
+        return $this->belongsTo(User::class, 'operador_id');
     }
 
     public function mesas()

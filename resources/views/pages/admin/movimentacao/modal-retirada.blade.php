@@ -19,6 +19,7 @@
                         <label for="recipient-name" class="col-form-label">Identificação:</label>
                         <select class="form-control" name="tipo_identificacao" required>
                             <option value="">Selecione</option>
+                            <option value="COMPRA">Compras</option>
                             <option value="PAGAMENTO">Pagamentos</option>
                             <option value="OUTROS">Outros</option>
                         </select>

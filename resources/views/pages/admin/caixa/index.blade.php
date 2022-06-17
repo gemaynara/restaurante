@@ -116,7 +116,7 @@
                                     @foreach($movimentacoes as $mov)
                                         <td class="py-1 ps-0">
 {{--                                            <div class="d-flex align-items-center">--}}
-                                                <label class="badge badge-success">{{$mov->tipo_identificacao}} </label>
+                                                <label class="badge badge-info">{{$mov->tipo_identificacao}} </label>
 
                                                 {{--                                                <img src="../../../../images/faces/face1.jpg" alt="profile">--}}
 

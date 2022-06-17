@@ -21,6 +21,7 @@ class CreateProdutosTable extends Migration
             $table->unsignedBigInteger('categoria_produto_id');
             $table->foreign('categoria_produto_id')->on('categoria_produtos')->references('id');
 
+            $table->string('codigo', 20)->nullable();
             $table->string('nome', 50);
             $table->string('descricao', 200)->nullable();
             $table->char('unidade', 3);

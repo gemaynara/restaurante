@@ -39,7 +39,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     Route::get('/profile', [App\Http\Controllers\UserController::class, 'viewProfile'])->name('profile');
     Route::post('/update-profile',[App\Http\Controllers\UserController::class, 'changePassword'])->name('profile.update');
-    Route::get('dashboard', [\App\Http\Controllers\DashboardController::class, 'index']);
+    Route::get('dashboard', [\App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard');
     Route::resource('roles', \App\Http\Controllers\RoleController::class);
     Route::resource('users', \App\Http\Controllers\UserController::class);
     Route::put('users/ativar/{id}', [\App\Http\Controllers\EmpresaController::class, 'ativar'])->name('users.ativar');
@@ -74,6 +74,9 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/adicionais/edit/{subcategoria}/{id}', [\App\Http\Controllers\AdicionalCardapioController::class, 'edit'])->name('adicionais.edit');
         Route::delete('/adicionais/delete/{id}', [\App\Http\Controllers\AdicionalCardapioController::class, 'destroy'])->name('adicionais.destroy');
 
+        Route::get('relatorio-vendas', [\App\Http\Controllers\CardapioController::class, 'getRelatorioCardapio'])->name('cardapio.rel-vendas');
+        Route::post('cardapios/vendas', [\App\Http\Controllers\CardapioController::class, 'cardapioVendasPdf'])->name('cardapio.vendas-pdf');
+
     });
 
 
@@ -92,12 +95,14 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('todos-pedidos', [App\Http\Controllers\PedidoController::class, 'pedidos'])->name('pedidos.lista');
         Route::get('recebidos', [App\Http\Controllers\PedidoController::class, 'pedidosRecebidos'])->name('pedidos.recebidos');
         Route::get('encerrados', [App\Http\Controllers\PedidoController::class, 'pedidosFinalizados'])->name('pedidos.encerrados');
+        Route::get('pdv', [App\Http\Controllers\PedidoController::class, 'pagamentoPedidos'])->name('pedidos.pdv');
         Route::get('show/{id}', [App\Http\Controllers\PedidoController::class, 'verPedido'])->name('pedidos.show');
         Route::post('abrir-comanda', [App\Http\Controllers\PedidoController::class, 'abrirComanda'])->name('pedidos.abrir-comanda');
         Route::post('add-item', [App\Http\Controllers\PedidoController::class, 'addItem'])->name('pedidos.add-item');
         Route::post('edit-item', [App\Http\Controllers\PedidoController::class, 'editItem'])->name('pedidos.edit-item');
         Route::delete('remove-item/{id}', [App\Http\Controllers\PedidoController::class, 'removeItem'])->name('pedidos.remove-item');
         Route::post('enviar-pedido', [App\Http\Controllers\PedidoController::class, 'enviarPedido'])->name('pedidos.enviar-pedido');
+        Route::post('cancelar-comanda', [App\Http\Controllers\PedidoController::class, 'cancelarComanda'])->name('pedidos.cancelar-comanda');
         Route::post('encerrar-pedido', [App\Http\Controllers\PedidoController::class, 'encerrarPedido'])->name('pedidos.encerrar-pedido');
     });
 
@@ -110,6 +115,8 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('controle-caixa', [App\Http\Controllers\ControleCaixaController::class, 'index'])->name('caixa.index');
         Route::post('abrir-caixa', [App\Http\Controllers\ControleCaixaController::class, 'abrirCaixa'])->name('caixa.abrir-caixa');
         Route::post('fechar-caixa', [App\Http\Controllers\ControleCaixaController::class, 'fecharCaixa'])->name('caixa.fechar-caixa');
+        Route::get('resumo-caixa', [App\Http\Controllers\ControleCaixaController::class, 'getResumoCaixa'])->name('caixa.rel-resumo');
+        Route::post('pdf-resumo-caixa', [App\Http\Controllers\ControleCaixaController::class, 'resumoCaixaPdf'])->name('caixa.pdf-resumo');
     });
 
     Route::group(['prefix' => 'movimentacao'], function () {
