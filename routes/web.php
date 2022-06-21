@@ -42,8 +42,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('dashboard', [\App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard');
     Route::resource('roles', \App\Http\Controllers\RoleController::class);
     Route::resource('users', \App\Http\Controllers\UserController::class);
-    Route::put('users/ativar/{id}', [\App\Http\Controllers\EmpresaController::class, 'ativar'])->name('users.ativar');
-    Route::put('users/desativar/{id}', [\App\Http\Controllers\EmpresaController::class, 'desativar'])->name('users.desativar');
+    Route::put('users/ativar/{id}', [\App\Http\Controllers\UserController::class, 'ativar'])->name('users.ativar');
+    Route::put('users/desativar/{id}', [\App\Http\Controllers\UserController::class, 'desativar'])->name('users.desativar');
     Route::resource('empresas', \App\Http\Controllers\EmpresaController::class);
     Route::resource('parametros', \App\Http\Controllers\ParametrosEmpresaController::class);
     Route::put('empresas/ativar/{id}', [\App\Http\Controllers\EmpresaController::class, 'ativar'])->name('empresas.ativar');
