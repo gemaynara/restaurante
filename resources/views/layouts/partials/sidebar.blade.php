@@ -1,4 +1,5 @@
-<?php //$producao = \App\Models\Setor::listaSetores() ?>
+<?php
+//$producao = \App\Models\Setor::listaSetores() ?>
 <nav class="sidebar sidebar-offcanvas" id="sidebar">
     @if(auth()->user()->hasRole('Super Admin'))
         <ul class="nav">
@@ -71,9 +72,12 @@
                     </a>
                     <div class="collapse" id="form-elements">
                         <ul class="nav flex-column sub-menu">
-                            <li class="nav-item"><a class="nav-link" href="{{route('pedidos.mesas')}}">Pedidos Salão</a></li>
-                            <li class="nav-item"><a class="nav-link" href="{{route('pedidos.recebidos')}}">Pedidos Recebidos</a></li>
-                            <li class="nav-item"><a class="nav-link" href="{{route('pedidos.lista')}}">Todos os Pedidos</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{{route('pedidos.mesas')}}">Pedidos Salão</a>
+                            </li>
+                            <li class="nav-item"><a class="nav-link" href="{{route('pedidos.recebidos')}}">Pedidos
+                                    Recebidos</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{{route('pedidos.lista')}}">Todos os
+                                    Pedidos</a></li>
                         </ul>
                     </div>
                 </li>
@@ -88,8 +92,10 @@
                     </a>
                     <div class="collapse" id="charts">
                         <ul class="nav flex-column sub-menu">
-                            <li class="nav-item"><a class="nav-link" href="{{route('producao.pedidos', 'mesa')}}">Pedidos Salão</a></li>
-                            <li class="nav-item"><a class="nav-link" href="{{route('producao.pedidos', 'delivery')}}">Pedidos Entrega/Retirada</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{{route('producao.pedidos', 'mesa')}}">Pedidos
+                                    Salão</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{{route('producao.pedidos', 'delivery')}}">Pedidos
+                                    Entrega/Retirada</a></li>
 
                         </ul>
                     </div>
@@ -192,43 +198,48 @@
                     </a>
                     <div class="collapse" id="auth">
                         <ul class="nav flex-column sub-menu">
-                            <li class="nav-item"><a class="nav-link" href="{{route('caixa.index')}}">Resumo do Caixa </a>
+                            <li class="nav-item"><a class="nav-link" href="{{route('caixa.index')}}">Resumo do
+                                    Caixa </a>
                             </li>
                         </ul>
                         <ul class="nav flex-column sub-menu">
-                            <li class="nav-item"><a class="nav-link" href="{{route('pedidos.pdv')}}">Pagamento de Pedidos </a>
+                            <li class="nav-item"><a class="nav-link" href="{{route('pedidos.pdv')}}">Pagamento de
+                                    Pedidos </a>
                             </li>
                         </ul>
 
                         <ul class="nav flex-column sub-menu">
-                            <li class="nav-item"><a class="nav-link" href="{{route('movimentacao.retirada-caixa')}}">Retiradas do Caixa </a>
+                            <li class="nav-item"><a class="nav-link" href="{{route('movimentacao.retirada-caixa')}}">Retiradas
+                                    do Caixa </a>
                             </li>
                         </ul>
 
-{{--                        <ul class="nav flex-column sub-menu">--}}
-{{--                            <li class="nav-item"><a class="nav-link" href="pages/samples/login.html">Pagamentos </a>--}}
-{{--                            </li>--}}
-{{--                        </ul>--}}
+                        {{--                        <ul class="nav flex-column sub-menu">--}}
+                        {{--                            <li class="nav-item"><a class="nav-link" href="pages/samples/login.html">Pagamentos </a>--}}
+                        {{--                            </li>--}}
+                        {{--                        </ul>--}}
                     </div>
                 </li>
             @endcan
-
-            <li class="nav-item nav-category">Relatórios</li>
-            <li class="nav-item">
-                <a class="nav-link" data-bs-toggle="collapse" href="#reports" aria-expanded="false"
-                   aria-controls="reports">
-                    <i class="menu-icon mdi mdi-printer-3d"></i>
-                    <span class="menu-title">Relatórios</span>
-                    <i class="menu-arrow"></i>
-                </a>
-                <div class="collapse" id="reports">
-                    <ul class="nav flex-column sub-menu">
-                        <li class="nav-item"><a class="nav-link" href="{{route('caixa.rel-resumo')}}">Resumo do Caixa</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{{route('cardapio.rel-vendas')}}">Itens Vendidos</a></li>
-                    </ul>
-                </div>
-            </li>
-
+            @can('relatorios')
+                <li class="nav-item nav-category">Relatórios</li>
+                <li class="nav-item">
+                    <a class="nav-link" data-bs-toggle="collapse" href="#reports" aria-expanded="false"
+                       aria-controls="reports">
+                        <i class="menu-icon mdi mdi-printer-3d"></i>
+                        <span class="menu-title">Relatórios</span>
+                        <i class="menu-arrow"></i>
+                    </a>
+                    <div class="collapse" id="reports">
+                        <ul class="nav flex-column sub-menu">
+                            <li class="nav-item"><a class="nav-link" href="{{route('caixa.rel-resumo')}}">Resumo do
+                                    Caixa</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{{route('cardapio.rel-vendas')}}">Itens
+                                    Vendidos</a></li>
+                        </ul>
+                    </div>
+                </li>
+            @endcan
             @can('acessos')
                 <li class="nav-item nav-category">controle de acesso</li>
                 <li class="nav-item">

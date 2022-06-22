@@ -90,7 +90,7 @@
                                                         <td>{{\Carbon\Carbon::parse($p->created_at)->format('d/m/Y')}}</td>
                                                         <td><label class="badge badge-info">{{$p->status_pedido}}</label></td>
                                                         <td>
-                                                            <a type="button" href="{{route('pedidos.show', $p->id)}}"
+                                                            <a type="button" href="{{route('movimentacao.pagar-pedido', $p->id)}}"
                                                                class="btn btn-outline-secondary btn-rounded btn-icon btn-sm">
                                                                 <i class="ti-eye text-primary"></i>
                                                             </a>
@@ -130,7 +130,7 @@
                                                         <td>{{\Carbon\Carbon::parse($p->created_at)->format('d/m/Y')}}</td>
                                                         <td><label class="badge badge-info">{{$p->status_pedido}}</label></td>
                                                         <td>
-                                                            <a type="button" href="{{route('pedidos.show', $p->id)}}"
+                                                            <a type="button" href="{{route('movimentacao.pagar-pedido', $p->id)}}"
                                                                class="btn btn-outline-secondary btn-rounded btn-icon btn-sm">
                                                                 <i class="ti-eye text-primary"></i>
                                                             </a>

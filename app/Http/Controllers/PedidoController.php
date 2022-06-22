@@ -194,11 +194,15 @@ class PedidoController extends Controller
 
     public function pedidos()
     {
+        $finalizados = PedidoService::countPedidos(['Pedido Finalizado']);
+        $fila = PedidoService::countPedidos(['Em Produção']);
+        $cancelados = PedidoService::countPedidos(['Pedido Cancelado']);
+
         $pedidos = Pedido::with('mesas')
             ->orderByDesc('id')
             ->get();
 
-        return view('pages.admin.pedidos.index', compact('pedidos'));
+        return view('pages.admin.pedidos.index', compact('pedidos', 'finalizados', 'cancelados', 'fila'));
     }
 
     public function pedidosRecebidos()
@@ -210,7 +214,7 @@ class PedidoController extends Controller
         $pedidos = Pedido::with('mesas')
             ->orderBy('id', 'desc')
             ->whereIn('status_pedido', ['Pedido Efetuado', 'Em Produção', 'Comanda Encerrada'])
-            ->orWhere('status_pedido', 'LIKE', '%Produzido')
+//            ->orWhere('status_pedido', 'LIKE', '%Produzido')
             ->get();
 
         return view('pages.admin.pedidos.recebidos', compact('pedidos', 'finalizados', 'fila', 'cancelados'));

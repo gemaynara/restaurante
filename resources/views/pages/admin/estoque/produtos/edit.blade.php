@@ -54,7 +54,7 @@
                                     <div class="form-group row">
                                         <label class="col-sm-3 col-form-label">Qnt. Estoque</label>
                                         <div class="col-sm-9">
-                                            <input type="text" class="form-control qnt" name="estoque"
+                                            <input type="text" class="form-control estoque" name="estoque"
                                                    value="{{$produto->estoque}}" required>
                                         </div>
                                     </div>
@@ -66,7 +66,7 @@
                                     <div class="form-group row">
                                         <label class="col-sm-3 col-form-label">Und. Medida</label>
                                         <div class="col-sm-9">
-                                            <select name="unidade" id="" class="form-control" required>
+                                            <select name="unidade" id="und" class="form-control" required>
                                                 <option >Selecione</option>
                                                 @foreach($medidas as $medida)
                                                     <option value="{{$medida['key']}}" {{$produto->unidade == $medida['key'] ? 'selected': ''}}>{{$medida['value']}}</option>
@@ -80,7 +80,7 @@
                                     <div class="form-group row">
                                         <label class="col-sm-3 col-form-label">Lote</label>
                                         <div class="col-sm-9">
-                                            <input type="text" class="form-control qnt" name="lote"
+                                            <input type="text" class="form-control" name="lote"
                                                    value="{{$produto->lote}}" maxlength="20">
                                         </div>
                                     </div>
@@ -91,7 +91,7 @@
                                         <div class="form-group row">
                                             <label class="col-sm-3 col-form-label">Estoque Min.</label>
                                             <div class="col-sm-9">
-                                                <input type="text" class="form-control qnt" name="estoque_min"
+                                                <input type="text" class="form-control estoque" name="estoque_min"
                                                        value="{{$produto->estoque_min}}" required>
                                             </div>
                                         </div>
@@ -101,7 +101,7 @@
                                         <div class="form-group row">
                                             <label class="col-sm-3 col-form-label">Estoque Máx.</label>
                                             <div class="col-sm-9">
-                                                <input type="text" class="form-control qnt" name="estoque_max"
+                                                <input type="text" class="form-control estoque" name="estoque_max"
                                                        value="{{$produto->estoque_max}}" required>
                                             </div>
                                         </div>
@@ -134,3 +134,22 @@
     </div>
 @endsection
 
+@push('scripts')
+    <script>
+        $(document).ready(function (e) {
+            var und = $("#und").val()
+            if (und === 'KG' || und === 'G') {
+                $(".estoque").mask("###.###", {reverse: true})
+            }
+            $('#und').on('change', function () {
+                var unidade = $("#und option:selected").val();
+                if (unidade === 'KG' || unidade === 'G') {
+                    $(".estoque").mask("###.###", {reverse: true})
+                } else {
+                    $(".estoque").mask("#####")
+                }
+
+            });
+        })
+    </script>
+@endpush

@@ -65,7 +65,7 @@
                                     <div class="form-group row">
                                         <label class="col-sm-3 col-form-label">Und. Medida</label>
                                         <div class="col-sm-9">
-                                            <select name="unidade" id="" class="form-control" required>
+                                            <select name="unidade" id="und" class="form-control" required>
                                                 <option>Selecione</option>
                                                 @foreach($medidas as $medida)
                                                     <option value="{{$medida['key']}}">{{$medida['value']}}</option>
@@ -132,4 +132,19 @@
         </div>
     </div>
 @endsection
+@push('scripts')
+    <script>
+        $(document).ready(function (e) {
+            $('#und').on('change', function () {
+                var unidade = $("#und option:selected").val();
+                if (unidade === 'KG' || unidade === 'G') {
+                    $(".qnt").mask("###.###", {reverse: true})
+                } else {
+                    $(".qnt").mask("#####")
+                }
 
+            });
+        })
+
+    </script>
+@endpush

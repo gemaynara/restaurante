@@ -19,7 +19,7 @@ class RoleTableSeeder extends Seeder
             'Admin',
             'Gerente',
             'Caixa',
-            'Pedidos'
+            'Garçom'
         ];
 
         foreach ($roles as $role) {

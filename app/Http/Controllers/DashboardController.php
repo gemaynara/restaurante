@@ -17,10 +17,13 @@ class DashboardController extends Controller
     {
         $user = auth()->user()->empresa->id;
         $today = date('Y-m-d');
+        $mes = date('m');
+
         $empresa = EmpresaParametros::where('empresa_id', $user)
             ->first();
 
         $itensCardapio = Cardapio::where('empresa_id', $user)->count();
+
         $produtos = Produto::where('empresa_id', $user)->count();
 
         $vendas = Pedido::where('empresa_id', $user)
@@ -29,14 +32,17 @@ class DashboardController extends Controller
             ->first();
 
         $entradas = NotaFiscal::where('empresa_id', $user)
+            ->whereMonth('created_at', $mes)
             ->select(DB::raw('SUM(valor_total) as total'))->first();
 
         $saidas = Saida::where('empresa_id', $user)
-            ->whereDate('created_at', $today)
+            ->whereMonth('created_at', $mes)
+//            ->whereDate('created_at', $today)
             ->count();
 
         $operadores = Pedido::join('users', 'users.id', 'pedidos.operador_id')
             ->select(DB::raw('SUM(total) as valor_total'), 'users.name')
+            ->whereMonth('pedidos.created_at', $mes)
             ->groupBy('operador_id')
             ->orderByDesc('valor_total')
             ->get();

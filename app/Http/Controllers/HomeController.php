@@ -28,14 +28,16 @@ class HomeController extends Controller
      */
     public function index()
     {
-        if (auth()->user()->type == 'employee') {
+        if (auth()->user()->hasAnyRole(['Gerente', 'Admin'])) {
             return redirect()->route('dashboard');
-
-        } elseif (auth()->user()->type == 'client') {
-            Session::flush();
-            Auth::logout();
-            return Redirect('/');
+        }else{
+            return view('welcome');
         }
+//        elseif (auth()->user()->type == 'client') {
+//            Session::flush();
+//            Auth::logout();
+//            return Redirect('/');
+//        }
     }
 
 }

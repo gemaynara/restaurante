@@ -92,7 +92,7 @@
                             <hr>
                         </div>
                         <div class="container-fluid w-100">
-                            <a href="{{\Illuminate\Support\Facades\URL::previous()}}" class="btn btn-success float-right mt-4"><i
+                            <a href="{{\URL::previous()}}" class="btn btn-success float-right mt-4"><i
                                     class="ti-arrow-circle-left me-1"></i>Voltar</a>
 
                             <a href="{{route('pedidos.cancelar-comanda')}}" data-id="{{$pedido->id}}"

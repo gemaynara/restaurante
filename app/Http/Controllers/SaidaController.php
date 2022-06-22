@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+
 use App\Models\Produto;
 use App\Models\ProdutosSaida;
 use App\Models\Saida;
@@ -48,7 +49,7 @@ class SaidaController extends Controller
             $saida = new Saida();
             $saida->empresa_id = auth()->user()->empresa->id;
             $saida->usuario_id = auth()->user()->id;
-            $saida->observacoes = $request->get('descricao');
+            $saida->observacoes = $request->get('observacoes');
             $saida->situacao = 'Registrado';
             $saida->save();
 
@@ -63,6 +64,7 @@ class SaidaController extends Controller
                 ]);
 
                 $produto->decrement('estoque', $value->quantidade);
+
             }
 
             DB::commit();

@@ -2,6 +2,47 @@
 @section('content')
     <div class="content-wrapper">
         <div class="row">
+            <div class="col-md-4 grid-margin">
+                <div class="card bg-facebook d-flex align-items-start">
+                    <div class="card-body">
+                        <div class="d-flex flex-row align-items-start">
+                            <i class="ti-view-list text-white icon-md"></i>
+                            <div class="ms-3">
+                                <h6 class="text-white">{{$finalizados}}</h6>
+                                <p class="mt-2 text-white card-text">Pedidos Finalizados</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 grid-margin">
+                <div class="card bg-linkedin d-flex align-items-start">
+                    <div class="card-body">
+                        <div class="d-flex flex-row align-items-start">
+                            <i class="ti-time text-white icon-md"></i>
+                            <div class="ms-3">
+                                <h6 class="text-white">{{$fila}}</h6>
+                                <p class="mt-2 text-white card-text">Pedidos na Fila</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 grid-margin">
+                <div class="card bg-youtube d-flex align-items-start">
+                    <div class="card-body">
+                        <div class="d-flex flex-row align-items-start">
+                            <i class="ti-close text-white icon-md"></i>
+                            <div class="ms-3">
+                                <h6 class="text-white">{{$cancelados}}</h6>
+                                <p class="mt-2 text-white card-text">Pedidos Cancelados</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
             <div class="col-lg-12 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">

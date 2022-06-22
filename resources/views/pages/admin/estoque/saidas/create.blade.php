@@ -19,8 +19,8 @@
                                         <label class="col-sm-3 col-form-label">Descrição</label>
                                         <div class="col-sm-9">
                                             <div class="col-sm-9">
-                                                <input type="text" class="form-control" name="observacao"
-                                                       value="{{old('observacao')}}" maxlength="50">
+                                                <input type="text" class="form-control" name="observacoes"
+                                                       value="{{old('observacoes')}}" maxlength="50">
                                             </div>
                                         </div>
                                     </div>
@@ -94,7 +94,6 @@
     <script>
         $('.select').on('change', function () {
             var produto = $("#produto option:selected").val().split("_");
-            ;
             var unidade = produto[1];
 
             if (unidade === 'KG' || unidade === 'G') {
