@@ -68,7 +68,7 @@
                                 <div class="media">
                                     <div class="media-body col-md-12">
                                         <div class="table-responsive">
-                                            <table class="table table-bordered dt">
+                                            <table class="table table-bordered dt-desc">
                                                 <thead>
                                                 <tr>
                                                     <th>#ID</th>

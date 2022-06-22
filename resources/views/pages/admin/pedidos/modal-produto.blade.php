@@ -1,7 +1,7 @@
 <?php $adicionais = \App\Http\Services\CardapioService::getAdicionaisProduto($p->subcategoria_cardapio_id) ?>
-<div class="modal fade" id="modal-produto-{{$p->id}}" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true"
+<div class="modal fade modal-fullscreen-md-down" id="modal-produto-{{$p->id}}" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true"
      style="display: none;">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="ModalLabel">Inserir Item no Pedido</h5>
@@ -26,7 +26,7 @@
                                 <p>{{$p->descricao}} </p>
                             </div>
 
-                            <div class="form-group">
+                            <div class="form-group mx-auto col-md-2">
                                 <div class="input-group">
                                     <div class="input-group-prepend btn-minus-{{$p->id}}">
                                         <span class="input-group-text btn-success text-white ">-</span>
@@ -42,7 +42,7 @@
                         </div>
                         @if(count($adicionais) > 0)
                             <div class="row mt-2">
-                                <div class="col-md-6">
+                                <div class="col-md-6 center-center mx-auto">
                                     <h6>Adicionais</h6>
                                     <div class="form-group">
                                         @foreach($adicionais as $key=> $adc)
@@ -59,10 +59,10 @@
                                 </div>
                             </div>
                         @endif
-                        <div class="row mt-2">
-                            <div class="form-group">
+                        <div class="row mt-2  ">
+                            <div class="form-group center-center mx-auto">
                                 <label for="exampleTextarea1">Observações</label>
-                                <textarea class="form-control" name="observacoes" rows="2" maxlength="200"></textarea>
+                                <textarea class="form-control" name="observacoes" rows="4" maxlength="200"></textarea>
                             </div>
                         </div>
                     </div>

@@ -92,12 +92,14 @@
                             <hr>
                         </div>
                         <div class="container-fluid w-100">
-                            <a href="{{route('pedidos.encerrados')}}" class="btn btn-success float-right mt-4"><i
+                            <a href="{{\Illuminate\Support\Facades\URL::previous()}}" class="btn btn-success float-right mt-4"><i
                                     class="ti-arrow-circle-left me-1"></i>Voltar</a>
 
-{{--                            <a href="{{route('pedidos.cancelar-comanda')}}" class="btn btn-danger float-right mt-4"--}}
-{{--                                {{$pedido->status_pedido == 'Pedido Cancelado' ? 'disabled': ''}}><i--}}
-{{--                                    class="ti-close me-1"></i>Cancelar Comanda</a>--}}
+                            <a href="{{route('pedidos.cancelar-comanda')}}" data-id="{{$pedido->id}}"
+                               class="btn btn-danger float-right mt-4 cancel-comanda
+ {{$pedido->status_pedido == 'Pedido Cancelado' || $pedido->status_pedido == 'Pedido Finalizado' ? 'disabled': ''}}"
+                            ><i
+                                    class="ti-close me-1"></i>Cancelar Comanda</a>
 
                             <a href="{{route('pedidos.cupom', ['id'=>$pedido->numero_pedido])}}" target="_blank"
                                class="btn btn-primary float-right mt-4 ms-2"><i class="ti-printer me-1"></i>Imprimir
@@ -109,12 +111,12 @@
                             ><i class="ti-money me-1"></i>Ir para
                                 Pagamento</a>
 
-                            <form action="{{route('pedidos.cancelar-comanda')}}" method="post" class="">
-                                @csrf
-                                <input type="hidden" name="numero_pedido" value="{{$pedido->numero_pedido}}">
-                                <button type="submit" class="btn btn-danger float-right mt-4"><i
-                                        class="ti-close me-1"></i> Cancelar Comanda</button>
-                            </form>
+                            {{--                            <form action="{{route('pedidos.cancelar-comanda')}}" method="post" class="">--}}
+                            {{--                                @csrf--}}
+                            {{--                                <input type="hidden" name="numero_pedido" value="{{$pedido->numero_pedido}}">--}}
+                            {{--                                <button type="submit" class="btn btn-danger float-right mt-4"><i--}}
+                            {{--                                        class="ti-close me-1"></i> Cancelar Comanda</button>--}}
+                            {{--                            </form>--}}
                         </div>
                     </div>
                 </div>

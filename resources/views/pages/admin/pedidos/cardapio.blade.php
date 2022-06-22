@@ -60,7 +60,7 @@
                         <h4 class="card-title">Comanda Núm.{{$pedido->numero_pedido}}</h4>
                         <p>{{!is_null($pedido->nome)? 'Cliente: '. $pedido->nome : ''}}</p>
                         <span>Mesa {{$pedido->mesas->codigo}}</span>
-                        <div class="table-responsive mt-2">
+                        <div class="table-responsive table-sm mt-2">
                             <table class="table">
                                 <thead>
                                 <tr>
@@ -89,10 +89,10 @@
                                             <?php $adicionais = 0.00; $p->enviado == 'S' ? $enviar = false : $enviar = true;?>
                                             <td class="py-1 ps-0">
                                                 <div class="d-flex align-items-center">
-                                                    <img src="{{asset('imgs/cardapios/'. $p->cardapio->imagem)}}"
-                                                         alt="profile">
+{{--                                                    <img src="{{asset('imgs/cardapios/'. $p->cardapio->imagem)}}" width="50px"--}}
+{{--                                                         alt="profile">--}}
                                                     <div class="ms-3">
-                                                        <p class="mb-0">{{$p->quantidade}} x {{$p->cardapio->nome}}</p>
+                                                        <p class="mb-0" style="word-break: break-all;">{{$p->quantidade}} x {{$p->cardapio->nome}}</p>
                                                         <p class="mb-0 text-muted text-small">
                                                             Vl. Unit. @money($p->cardapio->valor)
                                                         </p>
@@ -122,7 +122,7 @@
                                                     </p>
                                                 @else
                                                     <button type="button"
-                                                            class="btn btn-outline-secondary btn-rounded btn-icon btn-sm "
+                                                            class="btn btn-outline-secondary btn-rounded btn-icon btn-sm small"
                                                             data-bs-toggle="modal"
                                                             data-bs-target="#modal-editar-{{$p->id}}"><i
                                                             class="ti-pencil text-warning"></i>

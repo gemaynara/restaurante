@@ -157,16 +157,16 @@ class PedidoController extends Controller
             $data = $request->except('_token');
             $data['empresa_id'] = auth()->user()->empresa->id;
             $pedido = Pedido::query()->with('detalhes', 'mesas')
-                ->where('numero_pedido', $data['numero_pedido'])
+                ->where('id', $data['id'])
                 ->first();
             $pedido->detalhes()->where('enviado', 'N')->update(['enviado' => 'N']);
             $pedido->mesas()->update(['situacao' => 'Livre']);
             $pedido->update(['status_pedido' => 'Pedido Cancelado']);
 
-            return redirect()->route('pedidos.mesas')->with('success', 'Comanda Cancelada com Sucesso!');
+//            return redirect()->route('pedidos.mesas')->with('success', 'Comanda Cancelada com Sucesso!');
         } catch (\Exception $e) {
             Log::info('Ocorreu um erro: ' . $e->getMessage());
-            return redirect()->route('pedidos.mesas')->with('error', 'Ocorreu um erro ao cancelar pedido.');
+//            return redirect()->route('pedidos.mesas')->with('error', 'Ocorreu um erro ao cancelar pedido.');
         }
     }
 
@@ -195,7 +195,7 @@ class PedidoController extends Controller
     public function pedidos()
     {
         $pedidos = Pedido::with('mesas')
-            ->orderBy('id', 'desc')
+            ->orderByDesc('id')
             ->get();
 
         return view('pages.admin.pedidos.index', compact('pedidos'));

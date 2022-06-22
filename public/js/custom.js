@@ -118,7 +118,7 @@ $(".cancel-comanda").on('click', function (e) {
     Swal.fire({
         icon: "question",
         title: "Você tem certeza?",
-        text: `Que deseja remover o item ?`,
+        text: `Que deseja cancelar a comanda ?`,
         showDenyButton: true,
         showCancelButton: false,
         confirmButtonText: 'Sim',
@@ -140,7 +140,7 @@ $(".cancel-comanda").on('click', function (e) {
                 success: function (response) {
                     Swal.fire(
                         "Sucesso!",
-                        'O registro foi excluído com sucesso!',
+                        'Comanda cancelada com sucesso!',
                         'success'
                     )
                     setTimeout(() => {
@@ -299,6 +299,50 @@ $(".dt").dataTable({
     // },
     "order": [
         [1, 'asc']
+    ],
+});
+
+$(".dt-desc").dataTable({
+    responsive: true,
+    "language": {
+        "sProcessing": "Processando...",
+        "sLengthMenu": "Mostrar _MENU_ registros",
+        "sZeroRecords": "Nenhum dado encontrado, tente novamente...",
+        "sEmptyTable": "Nenhum dado encontrado",
+        "sInfo": "Mostrando _START_ &agrave; _END_ de _TOTAL_ resultados",
+        "sInfoEmpty": "Sem resultados para exibir",
+        "sInfoFiltered": "(filtrado um total de _MAX_ registros)",
+        "sInfoPostFix": "",
+        "sSearch": "Buscar:",
+        "sInfoThousands": ",",
+        "sLoadingRecords": "Carregando...",
+        "oPaginate": {
+            "sFirst": "Primero",
+            "sLast": "Último",
+            "sNext": "Próximo",
+            "sPrevious": "Anterior"
+        },
+        "oAria": {
+            "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+            "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+        }
+    },
+    // language: {
+    //     processing: "Processando os dados...",
+    //     search: "Busque um dado: ",
+    //     lengthMenu: "Mostrando _MENU_ elementos",
+    //     info: "Mostrando _START_ &agrave; _END_ de _TOTAL_ resultados",
+    //     sInfoEmpty: "Sem resultados para exibir",
+    //     zeroRecords: "Nenhum dado encontrado, tente novamente...",
+    //     paginate: {
+    //         first: "Primeira",
+    //         previous: "Anterior",
+    //         next: "Proxíma",
+    //         last: "Última"
+    //     }
+    // },
+    "order": [
+        [0, 'desc']
     ],
 });
 
