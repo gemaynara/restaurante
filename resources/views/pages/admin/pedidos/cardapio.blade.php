@@ -58,8 +58,9 @@
                             <i class="ti-printer"></i>
                         </a>
                         <h4 class="card-title">Comanda Núm.{{$pedido->numero_pedido}}</h4>
+                        <p>{{!is_null($pedido->nome)? 'Cliente: '. $pedido->nome : ''}}</p>
                         <span>Mesa {{$pedido->mesas->codigo}}</span>
-                        <div class="table-responsive mt-2">
+                        <div class="table-responsive table-sm mt-2">
                             <table class="table">
                                 <thead>
                                 <tr>
@@ -75,7 +76,8 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <?php $enviar = false ?>
+                                <?php $enviar = false; $cancel = false;
+                                count($pedido->detalhes) == 0 ? $cancel = true : $cancel = false?>
                                 @if(count($pedido->detalhes) == 0)
                                     <tr>
                                         <td>Sem Pedidos</td>
@@ -87,10 +89,10 @@
                                             <?php $adicionais = 0.00; $p->enviado == 'S' ? $enviar = false : $enviar = true;?>
                                             <td class="py-1 ps-0">
                                                 <div class="d-flex align-items-center">
-                                                    <img src="{{asset('imgs/cardapios/'. $p->cardapio->imagem)}}"
-                                                         alt="profile">
+{{--                                                    <img src="{{asset('imgs/cardapios/'. $p->cardapio->imagem)}}" width="50px"--}}
+{{--                                                         alt="profile">--}}
                                                     <div class="ms-3">
-                                                        <p class="mb-0">{{$p->quantidade}} x {{$p->cardapio->nome}}</p>
+                                                        <p class="mb-0" style="word-break: break-all;">{{$p->quantidade}} x {{$p->cardapio->nome}}</p>
                                                         <p class="mb-0 text-muted text-small">
                                                             Vl. Unit. @money($p->cardapio->valor)
                                                         </p>
@@ -120,7 +122,7 @@
                                                     </p>
                                                 @else
                                                     <button type="button"
-                                                            class="btn btn-outline-secondary btn-rounded btn-icon btn-sm "
+                                                            class="btn btn-outline-secondary btn-rounded btn-icon btn-sm small"
                                                             data-bs-toggle="modal"
                                                             data-bs-target="#modal-editar-{{$p->id}}"><i
                                                             class="ti-pencil text-warning"></i>
@@ -165,6 +167,13 @@
                                 </tfoot>
                             </table>
 
+                            @if($cancel)
+                                <form action="{{route('pedidos.cancelar-comanda')}}" method="post">
+                                    @csrf
+                                    <input type="hidden" name="numero_pedido" value="{{$pedido->numero_pedido}}">
+                                    <button type="submit" class="btn btn-block btn-info">Cancelar Comanda</button>
+                                </form>
+                            @endif
                             @if(isset($enviar))
                                 @if(($enviar))
                                     <form action="{{route('pedidos.enviar-pedido')}}" method="post">
@@ -174,7 +183,7 @@
                                     </form>
                                 @endif
 
-                                @if($pedido->status_pedido != 'Comanda Encerrada' && $enviar == false)
+                                @if($pedido->status_pedido != 'Comanda Encerrada' && $enviar == false && count($pedido->detalhes)>0)
                                     <form action="{{route('pedidos.encerrar-pedido')}}" method="post" class="mt-2">
                                         @csrf
                                         <input type="hidden" name="numero_pedido" value="{{$pedido->numero_pedido}}">

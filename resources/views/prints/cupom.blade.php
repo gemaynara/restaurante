@@ -96,8 +96,8 @@
     {{--            <td colspan="2">Voucher</td>--}}
     {{--            <td align="right">R$10,00</td>--}}
     {{--        </tr>--}}
+    <?php $saldo_pago = 0.00 ?>
     @foreach($movimentacoes as $mov)
-        <?php $saldo_pago = 0.00 ?>
         <tr class="ttu">
             <td colspan="2">{{$mov->forma_pagamento}}</td>
             <td align="right">@money($mov->valor_pago)</td>

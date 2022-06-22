@@ -2,7 +2,7 @@
 @section('content')
     <div class="content-wrapper">
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-12">
                 <div class="card px-2">
                     <div class="card-body">
                         <div class="container-fluid">
@@ -32,33 +32,50 @@
                         </div>
                         <div class="container-fluid mt-5 d-flex justify-content-center w-100">
                             <div class="table-responsive w-100">
-                                <table class="table table-sm">
+                                <table class="table">
                                     <thead>
                                     <tr class="bg-dark text-white">
                                         <th>Descrição</th>
                                         <th>Qnt.</th>
                                         <th>Vl. Unitário</th>
                                         <th>Total</th>
+                                        <th>Ação</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach($pedido->detalhes as $det)
-                                        <tr class="text-right">
-                                            <td class="text-left">{{$det->cardapio->nome}}<br>
-                                                @foreach($det->adicionais as $adc)
-                                                    <span class="mb-0 text-muted text-small">- {{$adc->adicionalPedido->nome}} - @money($adc->subtotal)</span>
-                                                    <br>
-                                                @endforeach
-                                                <span class="mb-0 text-muted text-small">@if(!empty($det->observacoes))
-                                                        Obs.{{$det->observacoes}}@endif</span>
-
+                                    @if(count($pedido->detalhes) == 0)
+                                        <tr>
+                                            <td>
+                                                Sem itens
                                             </td>
-                                            <td>{{$det->quantidade}}</td>
-                                            <td>@money($det->valor_unitario)</td>
-                                            <td>@money($det->valor_subtotal)</td>
                                         </tr>
+                                    @else
+                                        @foreach($pedido->detalhes as $det)
+                                            <tr class="text-right">
+                                                <td class="text-left">{{$det->cardapio->nome}}<br>
+                                                    @foreach($det->adicionais as $adc)
+                                                        <span class="mb-0 text-muted text-small">- {{$adc->adicionalPedido->nome}} - @money($adc->subtotal)</span>
+                                                        <br>
+                                                    @endforeach
+                                                    <span class="mb-0 text-muted text-small">@if(!empty($det->observacoes))
+                                                            Obs.{{$det->observacoes}}@endif</span>
 
-                                    @endforeach
+                                                </td>
+                                                <td>{{$det->quantidade}}</td>
+                                                <td>@money($det->valor_unitario)</td>
+                                                <td>@money($det->valor_subtotal)</td>
+                                                <td>
+                                                    <button type="button"
+                                                            data-remote="{{route('pedidos.remove-item', $det->id)}}"
+                                                            data-id="{{$det->id}}"
+                                                            {{$pedido->status_pedido == 'Pedido Finalizado' || $pedido->status_pedido == 'Pedido Cancelado' ? 'disabled': ''}}
+                                                            class="btn btn-outline-secondary btn-rounded btn-icon btn-sm remove-item">
+                                                        <i class="icon-close text-danger"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    @endif
                                     </tbody>
                                 </table>
                             </div>
@@ -75,15 +92,31 @@
                             <hr>
                         </div>
                         <div class="container-fluid w-100">
-                            <a href="{{route('pedidos.encerrados')}}" class="btn btn-success float-right mt-4"><i
+                            <a href="{{\Illuminate\Support\Facades\URL::previous()}}" class="btn btn-success float-right mt-4"><i
                                     class="ti-arrow-circle-left me-1"></i>Voltar</a>
+
+                            <a href="{{route('pedidos.cancelar-comanda')}}" data-id="{{$pedido->id}}"
+                               class="btn btn-danger float-right mt-4 cancel-comanda
+ {{$pedido->status_pedido == 'Pedido Cancelado' || $pedido->status_pedido == 'Pedido Finalizado' ? 'disabled': ''}}"
+                            ><i
+                                    class="ti-close me-1"></i>Cancelar Comanda</a>
+
                             <a href="{{route('pedidos.cupom', ['id'=>$pedido->numero_pedido])}}" target="_blank"
                                class="btn btn-primary float-right mt-4 ms-2"><i class="ti-printer me-1"></i>Imprimir
                                 Cupom</a>
 
 
-                            <a href="{{route('movimentacao.pagar-pedido', $pedido->id)}}" class="btn btn-warning float-right mt-4"><i class="ti-money me-1"></i>Ir para Pagamento</a>
+                            <a href="{{route('movimentacao.pagar-pedido', $pedido->id)}}"
+                               class="btn btn-warning float-right mt-4" {{$pedido->status_pedido == 'Pedido Cancelado' ? 'disabled': ''}}
+                            ><i class="ti-money me-1"></i>Ir para
+                                Pagamento</a>
 
+                            {{--                            <form action="{{route('pedidos.cancelar-comanda')}}" method="post" class="">--}}
+                            {{--                                @csrf--}}
+                            {{--                                <input type="hidden" name="numero_pedido" value="{{$pedido->numero_pedido}}">--}}
+                            {{--                                <button type="submit" class="btn btn-danger float-right mt-4"><i--}}
+                            {{--                                        class="ti-close me-1"></i> Cancelar Comanda</button>--}}
+                            {{--                            </form>--}}
                         </div>
                     </div>
                 </div>

@@ -24,4 +24,9 @@ class Mesa extends Model
     {
         return $this->hasMany(Pedido::class);
     }
+
+    public function pedido()
+    {
+        return $this->hasOne(Pedido::class)->orderBy('id', 'desc');
+    }
 }

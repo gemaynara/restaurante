@@ -7,7 +7,7 @@
                     <div class="card-body">
                         <h4 class="card-title">Todos os Pedidos</h4>
                         <div class="table-responsive">
-                            <table class="table table-bordered dt">
+                            <table class="table table-bordered dt-desc">
                                 <thead>
                                 <tr>
                                     <th>#ID</th>

@@ -27,7 +27,7 @@ class FornecedorRequest extends FormRequest
             case 'PUT':
                 $rules = [
                     'razao_social' => 'required|max:50',
-                    'cnpj' => 'required|cnpj|unique:fornecedores,id,:id',
+                    'cnpj' => 'nullable|cnpj|unique:fornecedores,id,:id',
                     'email'=>'email',
                     'endereco'=>'string|max:200|nullable',
                     'bairro'=>'string|max:100|nullable',
@@ -42,7 +42,7 @@ class FornecedorRequest extends FormRequest
             default:
                 $rules = [
                     'razao_social' => 'required|max:50',
-                    'cnpj' => 'required|cnpj|unique:fornecedores,empresa_id',
+                    'cnpj' => 'nullable|cnpj|unique:fornecedores,empresa_id',
                     'email'=>'email',
                     'endereco'=>'string|max:200|nullable',
                     'bairro'=>'string|max:100|nullable',

@@ -20,7 +20,8 @@
     <tr>
         <th colspan="3">
             Mesa: {{$pedido->mesas->codigo}} <br/>
-            <p>Nº Pessoas na mesa: {{$pedido->numero_pessoas}}</p>
+            {{!is_null($pedido->nome)? 'Cliente: '. $pedido->nome : ''}} <br/>
+            Nº Pessoas na mesa: {{$pedido->numero_pessoas}}
         </th>
     </tr>
     <tr>

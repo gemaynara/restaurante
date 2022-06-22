@@ -21,8 +21,9 @@ class PedidoController extends Controller
     public function listaMesas()
     {
         $mesas = Mesa::query()
-            ->leftJoin('pedidos', 'pedidos.mesa_id', 'mesas.id')
-            ->select('mesas.*', 'pedidos.numero_pedido')
+            ->with('pedido')
+            ->select('mesas.*')
+            ->groupBy('mesas.id')
             ->orderBy('codigo')->get();
 
         return view('pages.admin.pedidos.lista-mesas', compact('mesas'));
@@ -57,11 +58,11 @@ class PedidoController extends Controller
             $data['empresa_id'] = auth()->user()->empresa->id;
             $pedido = PedidoService::getPedidoMesa($data['numero_pedido']);
             $data['pedido_id'] = $pedido->id;
+
             CardapioService::addItem($data);
 
-            $pedido->update(['status_pedido'=>'Comanda aberta']);
-            $pedido->mesas->update(['situacao'=> 'Comanda Aberta']);
-            $pedido = PedidoService::getPedidoMesa($pedido->numero_pedido);
+            $pedido->update(['status_pedido' => 'Comanda aberta']);
+            $pedido->mesas->update(['situacao' => 'Comanda Aberta']);
             $categorias = CategoriaCardapio::where('empresa_id', $data['empresa_id'])->get();
 
             $cardapio = Cardapio::with('categoriasCardapio')
@@ -71,6 +72,7 @@ class PedidoController extends Controller
             return redirect()->back()->with('success', 'Produto Inserido com sucesso')
                 ->with('pedido', $pedido)->with('categorias', $categorias)
                 ->with('produtos', $produtos);
+
         } catch (\Exception $e) {
             Log::info('Ocorreu um erro: ' . $e->getMessage());
             return redirect()->back()->with('error', 'Ocorreu um erro ao inserir.');
@@ -148,6 +150,26 @@ class PedidoController extends Controller
         }
     }
 
+    public function cancelarComanda(Request $request)
+    {
+
+        try {
+            $data = $request->except('_token');
+            $data['empresa_id'] = auth()->user()->empresa->id;
+            $pedido = Pedido::query()->with('detalhes', 'mesas')
+                ->where('id', $data['id'])
+                ->first();
+            $pedido->detalhes()->where('enviado', 'N')->update(['enviado' => 'N']);
+            $pedido->mesas()->update(['situacao' => 'Livre']);
+            $pedido->update(['status_pedido' => 'Pedido Cancelado']);
+
+//            return redirect()->route('pedidos.mesas')->with('success', 'Comanda Cancelada com Sucesso!');
+        } catch (\Exception $e) {
+            Log::info('Ocorreu um erro: ' . $e->getMessage());
+//            return redirect()->route('pedidos.mesas')->with('error', 'Ocorreu um erro ao cancelar pedido.');
+        }
+    }
+
     public function encerrarPedido(Request $request)
     {
         try {
@@ -156,6 +178,8 @@ class PedidoController extends Controller
             $pedido = Pedido::query()->with('detalhes', 'mesas')
                 ->where('numero_pedido', $data['numero_pedido'])
                 ->first();
+
+            PedidoService::incrementContator($pedido->detalhes);
 
             $pedido->mesas()->update(['situacao' => 'Comanda Encerrada']);
             $pedido->update(['status_pedido' => 'Comanda Encerrada']);
@@ -171,7 +195,7 @@ class PedidoController extends Controller
     public function pedidos()
     {
         $pedidos = Pedido::with('mesas')
-            ->orderBy('id', 'desc')
+            ->orderByDesc('id')
             ->get();
 
         return view('pages.admin.pedidos.index', compact('pedidos'));
@@ -179,13 +203,17 @@ class PedidoController extends Controller
 
     public function pedidosRecebidos()
     {
+        $finalizados = PedidoService::countPedidos(['Pedido Finalizado']);
+        $fila = PedidoService::countPedidos(['Em Produção']);
+        $cancelados = PedidoService::countPedidos(['Pedido Cancelado']);
+
         $pedidos = Pedido::with('mesas')
             ->orderBy('id', 'desc')
             ->whereIn('status_pedido', ['Pedido Efetuado', 'Em Produção', 'Comanda Encerrada'])
             ->orWhere('status_pedido', 'LIKE', '%Produzido')
             ->get();
 
-        return view('pages.admin.pedidos.recebidos', compact('pedidos'));
+        return view('pages.admin.pedidos.recebidos', compact('pedidos', 'finalizados', 'fila', 'cancelados'));
     }
 
     public function pedidosFinalizados()
@@ -198,9 +226,20 @@ class PedidoController extends Controller
         return view('pages.admin.pedidos.encerrados', compact('pedidos'));
     }
 
+    public function pagamentoPedidos()
+    {
+        $finalizados = PedidoService::countPedidos(['Pedido Finalizado']);
+        $fila = PedidoService::countPedidos(['Em Produção']);
+        $cancelados = PedidoService::countPedidos(['Pedido Cancelado']);
+        $pedidos = PedidoService::listPedidos(['Pedido Efetuado', 'Em Produção']);
+        $recebidos = PedidoService::listPedidos(['Comanda Encerrada', 'Pedido Finalizado', 'Pedido Cancelado']);
+
+        return view('pages.admin.pedidos.pedidos-pdv', compact('pedidos', 'recebidos', 'finalizados', 'fila', 'cancelados'));
+    }
+
     public function verPedido($id)
     {
-        $pedido = Pedido::with('detalhes', 'mesas','endereco')
+        $pedido = Pedido::with('detalhes', 'mesas', 'endereco')
             ->find($id);
 
         $existeCaixa = ControleCaixaService::getCaixa();

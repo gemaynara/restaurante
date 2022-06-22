@@ -19,8 +19,7 @@ class ProducaoController extends Controller
             ->where('empresa_id', auth()->user()->empresa->id)
             ->first();
 
-        $pedidos = Pedido::
-            whereNotIn('status_pedido', ["Pedido $setor->nome Produzido", 'Pedido Finalizado', 'Pedido Finalizado', 'Aguardando Pagamento', 'Pedido Cancelado'])
+        $pedidos = Pedido::whereNotIn('status_pedido', ["Pedido $setor->nome Produzido", 'Pedido Finalizado', 'Pedido Finalizado', 'Aguardando Pagamento', 'Pedido Cancelado'])
             //            ->where('status_pedido', "<>", "Pedido {$setor} Produzido")
             ->with(['mesas', 'detalhes'])
             ->orderBy('pedidos.id', 'desc')

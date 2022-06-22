@@ -24,12 +24,13 @@ class HomeController extends Controller
     /**
      * Show the application dashboard.
      *
-     * @return \Illuminate\Contracts\Support\Renderable
+     * @return string
      */
     public function index()
     {
         if (auth()->user()->type == 'employee') {
-            return view('pages.dashboard');
+            return redirect()->route('dashboard');
+
         } elseif (auth()->user()->type == 'client') {
             Session::flush();
             Auth::logout();

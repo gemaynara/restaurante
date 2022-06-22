@@ -13,6 +13,11 @@
                 <input type="hidden" name="mesa_id" value="{{$mesa->id}}">
                 <div class="modal-body">
                     <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">Nome do Cliente (Opcional):</label>
+                        <input type="text" class="form-control" name="nome" maxlength="50">
+                    </div>
+
+                    <div class="form-group">
                         <label for="recipient-name" class="col-form-label">Número de Pessoas na Mesa:</label>
                         <input type="text" class="form-control qnt" name="numero_pessoas" required min="1">
                     </div>

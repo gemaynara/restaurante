@@ -7,9 +7,14 @@ use App\Http\Services\PedidoService;
 use App\Models\Cardapio;
 use App\Models\CategoriaCardapio;
 use App\Models\EmpresaParametros;
+use App\Models\Pedido;
+use App\Models\ProdutosPedido;
 use App\Models\Setor;
 use App\Models\SubCategoriaCardapio;
+use Barryvdh\DomPDF\Facade\Pdf as PDF;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Exception;
 
@@ -156,5 +161,45 @@ class CardapioController extends Controller
     public function desativar($id)
     {
         Cardapio::where('id', $id)->update(['ativo' => 0]);
+    }
+
+    public function getRelatorioCardapio()
+    {
+        return view('pages.admin.cardapio.cardapio.relatorio-vendas');
+    }
+
+    public function cardapioVendasPdf(Request $request)
+    {
+
+        $inicial = $request->data_inicial;
+        $final = $request->data_final;
+
+        if (strtotime($final) < strtotime($inicial)) {
+            return back()->with('warning', 'Período inválido. Tente novamente');
+        }
+
+        $vendas = ProdutosPedido::query()
+            ->join('pedidos', 'pedidos.id', 'produtos_pedido.pedido_id')
+            ->join('cardapios', 'cardapios.id', 'produtos_pedido.produto_id')
+            ->whereDate('pedidos.created_at', '>=', $inicial)
+            ->whereDate('pedidos.created_at', '<=', $final)
+            ->where('pedidos.empresa_id', auth()->user()->empresa->id)
+            ->select("cardapios.id", "cardapios.nome as produto", 'cardapios.valor as valor_produto',
+                DB::raw("COUNT('produtos_pedido.quantidade') as quantidade"))
+            ->groupBy("cardapios.id", "cardapios.nome", 'cardapios.valor')
+            ->orderBy('quantidade', 'desc')
+            ->whereNotIn('pedidos.status_pedido', ['Pedido Cancelado'])
+            ->get();
+
+
+        $pdf = PDF::loadView('reports.pdf.vendas-cardapio', compact('vendas', 'inicial', 'final'))
+            ->setPaper('a4', 'portrait');
+
+//        return $pdf->stream('invoice.pdf');
+        return $pdf->download("vendas-cardapio-" .
+            Carbon::parse($inicial)->format('d-m-Y') . " a ". Carbon::parse($final)->format('d-m-Y') .
+            ".pdf");
+
+
     }
 }
