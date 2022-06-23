@@ -27,7 +27,7 @@
                                         <label class="col-sm-3 col-form-label">CNPJ</label>
                                         <div class="col-sm-9">
                                             <input type="text" class="form-control cnpj" name="cnpj"
-                                                   value="{{old('cnpj')}}" required>
+                                                   value="{{old('cnpj')}}" >
                                         </div>
                                     </div>
                                 </div>

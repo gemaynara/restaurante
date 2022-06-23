@@ -26,7 +26,7 @@
                                         <label class="col-sm-3 col-form-label">CNPJ</label>
                                         <div class="col-sm-9">
                                             <input type="text" class="form-control cnpj" name="cnpj"
-                                                   value="{{$fornecedor->cnpj}}" required>
+                                                   value="{{$fornecedor->cnpj}}" >
                                         </div>
                                     </div>
                                 </div>
