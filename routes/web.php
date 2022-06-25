@@ -35,6 +35,8 @@ Route::group(['middleware' => ['guest']], function () {
 
 });
 Route::group(['middleware' => ['auth']], function () {
+    Route::get('logs', [\Rap2hpoutre\LaravelLogViewer\LogViewerController::class, 'index']);
+
     Route::post('/logout', [\App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     Route::get('/profile', [App\Http\Controllers\UserController::class, 'viewProfile'])->name('profile');
