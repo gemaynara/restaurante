@@ -942,10 +942,8 @@
 {{--        </div>--}}
         <div class="footer-info">
             <p>
-                &copy; <span id="displayYear"></span> All Rights Reserved By
-                <a href="https://html.design/">Free Html Templates</a><br><br>
-                &copy; <span id="displayYear"></span> Distributed By
-                <a href="https://themewagon.com/" target="_blank">ThemeWagon</a>
+                &copy; <span id="displayYear"></span>
+                <a href="https://brasazd.com.br/">Brasa ZD</a><br><br>
             </p>
         </div>
     </div>
