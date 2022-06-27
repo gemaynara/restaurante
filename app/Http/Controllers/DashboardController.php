@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cardapio;
+use App\Models\CategoriaCardapio;
 use App\Models\EmpresaParametros;
 use App\Models\NotaFiscal;
 use App\Models\Pedido;
@@ -13,6 +14,20 @@ use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
+
+    public function viewMenu($slug)
+    {
+        $restaurante = EmpresaParametros::query()->with('empresa')
+            ->where('slug', $slug)
+            ->first();
+
+        $categorias = CategoriaCardapio::all();
+        $cardapio = Cardapio::query()->with('categoriasCardapio')
+            ->get();
+
+        return view('menu', compact('categorias', 'cardapio', 'restaurante'));
+    }
+
     public function index()
     {
         $user = auth()->user()->empresa->id;
@@ -43,6 +58,7 @@ class DashboardController extends Controller
         $operadores = Pedido::join('users', 'users.id', 'pedidos.operador_id')
             ->select(DB::raw('SUM(total) as valor_total'), 'users.name')
             ->whereMonth('pedidos.created_at', $mes)
+            ->whereNotIn('status_pedido', ['Pedido Cancelado', 'Comanda aberta'])
             ->groupBy('operador_id')
             ->orderByDesc('valor_total')
             ->get();
@@ -62,6 +78,5 @@ class DashboardController extends Controller
             'operadores' => $operadores,
             'estoque' => $estoque
         ]);
-
     }
 }

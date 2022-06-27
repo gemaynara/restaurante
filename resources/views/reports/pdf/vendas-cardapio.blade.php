@@ -46,8 +46,8 @@
                         <td><p>{{ $p->id}}</p></td>
                         <td><p>{{ $p->produto}}</p></td>
                         <td><p>{{ $p->quantidade}}</p></td>
-                        <td><p>R$ @money($p->valor_produto)</p></td>
-                        <td><p>R$ @money($p->valor_produto*$p->quantidade)</p></td>
+                        <td><p>@money($p->valor_produto)</p></td>
+                        <td><p>@money($p->valor_produto*$p->quantidade)</p></td>
                         <?php $subtotal = $p->valor_produto * $p->quantidade?>
                         <?php $total += $subtotal?>
                     </tr>
@@ -67,7 +67,7 @@
 
 <div id="footer">
 
-    Total: <strong>R$ @money($total)</strong>
+    Total: <strong>@money($total)</strong>
 
 
 </div>

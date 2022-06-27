@@ -19,7 +19,10 @@ class SubCategoriaCardapioController extends Controller
      */
     public function index()
     {
-        $subcategorias = SubCategoriaCardapio::with('categoriaCardapio')
+        $subcategorias = SubCategoriaCardapio::query()
+            ->with(['categoriaCardapio' => function ($query) {
+                return $query->withTrashed();
+            }])
             ->where('empresa_id', auth()->user()->empresa->id)->get();
 
         return view('pages.admin.cardapio.subcategorias.index', compact('subcategorias'));
@@ -43,7 +46,10 @@ class SubCategoriaCardapioController extends Controller
      */
     public function create()
     {
-        $categorias = CategoriaCardapio::where('empresa_id', auth()->user()->empresa->id)->get();
+        $categorias = CategoriaCardapio::where('empresa_id', auth()->user()->empresa->id)
+            ->orderBy('nome', 'asc')
+            ->get();
+
         return view('pages.admin.cardapio.subcategorias.create', compact('categorias'));
     }
 
@@ -84,7 +90,9 @@ class SubCategoriaCardapioController extends Controller
     public function edit($id)
     {
         $subcategoria = SubCategoriaCardapio::find($id);
-        $categorias = CategoriaCardapio::query()->where('empresa_id', auth()->user()->empresa->id)->get();
+        $categorias = CategoriaCardapio::query()->where('empresa_id', auth()->user()->empresa->id)
+            ->orderBy('nome', 'asc')
+            ->get();
         return view('pages.admin.cardapio.subcategorias.edit', compact('subcategoria', 'categorias'));
     }
 

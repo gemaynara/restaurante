@@ -2,7 +2,7 @@
 @section('content')
     <div class="content-wrapper">
         <div class="row">
-            <div class="col-md-4 grid-margin">
+            <div class="col-md-3 grid-margin">
                 <div class="card d-flex align-items-start">
                     <div class="card-body">
                         <div class="d-flex flex-row align-items-start">
@@ -15,7 +15,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4 grid-margin">
+            <div class="col-md-3 grid-margin">
                 <div class="card d-flex align-items-start">
                     <div class="card-body">
                         <div class="d-flex flex-row align-items-start">
@@ -28,7 +28,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4 grid-margin">
+            <div class="col-md-3 grid-margin">
                 <div class="card d-flex align-items-start">
                     <div class="card-body">
                         <div class="d-flex flex-row align-items-start">
@@ -36,6 +36,20 @@
                             <div class="ms-3">
                                 <h6 class="text-twitter vendas">@money($vendas)</h6>
                                 <p class="mt-2 text-muted card-text">Vendas Realizadas</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-sm-flex flex-row flex-wrap text-start align-items-center">
+                            <img src="../../../../images/faces/face9.jpg" class="img-lg rounded" alt="profile image">
+                            <div class="ms-sm-3 ms-md-0 ms-xl-3 mt-2 mt-sm-0 mt-md-2 mt-xl-0">
+                                <h6 class="mb-0">Cardápio Digital</h6>
+                                <p class="text-muted mb-1">thomas@gmail.com</p>
+                                <p class="mb-0 text-success fw-bold">Developer</p>
                             </div>
                         </div>
                     </div>
@@ -73,7 +87,7 @@
                                     <tr>
                                         <td class="py-1 ps-0">
                                             <div class="d-flex align-items-center">
-{{--                                                <img src="../../../../images/faces/face1.jpg" alt="profile">--}}
+                                                {{--                                                <img src="../../../../images/faces/face1.jpg" alt="profile">--}}
                                                 <div class="ms-3">
                                                     <p class="mb-0">{{$est->nome}}</p>
                                                     <p class="mb-0 text-muted text-small">{{$est->categoriasProduto->nome}}</p>
@@ -140,6 +154,16 @@
     </div>
 @endsection
 @push('scripts')
+    <script>
+        $('.qr_code').on('click', function (e) {
+            e.preventDefault();
+            var remote = $(this).data('url');
+            var url = `https://api.qrserver.com/v1/create-qr-code/?size=400x400&data=${remote}`;
+            window.open(url)
+        })
+    </script>
+
+
     {{--    <script>--}}
     {{--        $(document).ready(function () {--}}
     {{--            var url = '{{env('URL_JS')}}';--}}

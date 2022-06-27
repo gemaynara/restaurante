@@ -24,7 +24,7 @@
                                     @foreach($produtos as $p)
                                         <td class="py-1 ps-0">
                                             <div class="d-flex align-items-center">
-                                                <img src="{{asset('imgs/cardapios/'. $p->imagem)}}" alt="profile">
+                                                <img src="{{asset('imgs/cardapios/'. $p->imagem)}}" alt="imagem">
                                                 <div class="ms-3">
                                                     <p class="mb-0">{{$p->nome}}</p>
                                                     <p class="mb-0 text-muted text-small">{{$p->categoriasCardapio->nome}}
@@ -168,11 +168,14 @@
                             </table>
 
                             @if($cancel)
-                                <form action="{{route('pedidos.cancelar-comanda')}}" method="post">
-                                    @csrf
-                                    <input type="hidden" name="numero_pedido" value="{{$pedido->numero_pedido}}">
-                                    <button type="submit" class="btn btn-block btn-info">Cancelar Comanda</button>
-                                </form>
+                                <a href="{{route('pedidos.cancelar-comanda')}}" data-id="{{$pedido->id}}"
+                                   class="btn btn-danger float-right mt-4 cancel-comanda
+ {{$pedido->status_pedido == 'Pedido Cancelado' || $pedido->status_pedido == 'Pedido Finalizado' ? 'disabled': ''}}">Cancelar Comanda</a>
+{{--                                <form action="{{route('pedidos.cancelar-comanda')}}" method="post">--}}
+{{--                                    @csrf--}}
+{{--                                    <input type="hidden" name="numero_pedido" value="{{$pedido->numero_pedido}}">--}}
+{{--                                    <button type="submit" class="btn btn-block btn-info">Cancelar Comanda</button>--}}
+{{--                                </form>--}}
                             @endif
                             @if(isset($enviar))
                                 @if(($enviar))

@@ -19,7 +19,7 @@
 
                     <div class="form-group">
                         <label for="recipient-name" class="col-form-label">Número de Pessoas na Mesa:</label>
-                        <input type="text" class="form-control qnt" name="numero_pessoas" required min="1">
+                        <input type="text" class="form-control pessoa" name="numero_pessoas" required min="1" value="1" maxlength="3" max="999">
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -32,3 +32,21 @@
         </div>
     </div>
 </div>
+@push('scripts')
+    <script>
+        var mask = "NUU",
+
+            pattern = {
+                'translation': {
+                    'N': {
+                        pattern: /[1-9]/
+                    },
+                    'U': {
+                        pattern: /[0-9]/
+                    }
+                }
+            };
+
+        $("input[name=numero_pessoas]").mask(mask, pattern);
+    </script>
+@endpush

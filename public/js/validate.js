@@ -8,6 +8,7 @@ $(".cpf").mask('000.000.000-00')
 $(".taxa").mask("###.00", {reverse: true})
 $(".qnt").mask("999999")
 $(".dec_estoque").mask("9999.999")
+$(".pessoa").mask("###")
 
 // $(".time").mask("HH:Mm:Ss", {
 // $(".time").mask("Mm:Ss", {
