@@ -28,7 +28,7 @@ use Illuminate\Support\Facades\Route;
 //    Route::post('/checkout', [\App\Http\Controllers\App\AppController::class, 'checkoutStep1'])->name('app.checkout');
 //    Route::post('/checkout/step2', [\App\Http\Controllers\App\AppController::class, 'checkoutStep2'])->name('app.checkout-step2');
 //});
-Route::get('/menu/{slug}', [\App\Http\Controllers\DashboardController::class, 'viewMenu']);
+Route::get('/menu/{slug}', [\App\Http\Controllers\DashboardController::class, 'viewMenu'])->name('cardapio-online');
 
 Route::group(['middleware' => ['guest']], function () {
 
