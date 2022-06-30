@@ -17,6 +17,7 @@ class DashboardController extends Controller
 
     public function viewMenu($slug)
     {
+
         $restaurante = EmpresaParametros::query()->with('empresa')
             ->where('slug', $slug)
             ->first();

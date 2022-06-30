@@ -126,20 +126,18 @@
             {{--            </div>--}}
             {{--          </li>--}}
             @can('delivery')
-                <li class="nav-item nav-category">delivery e retirada</li>
+                <li class="nav-item nav-category">entrega e retirada</li>
                 <li class="nav-item">
                     <a class="nav-link" data-bs-toggle="collapse" href="#delivery" aria-expanded="false"
                        aria-controls="delivery">
                         <i class="menu-icon mdi mdi-motorbike"></i>
-                        <span class="menu-title">DELIVERY E RETIRADA</span>
+                        <span class="menu-title">Entrega e Retirada</span>
                         <i class="menu-arrow"></i>
                     </a>
                     <div class="collapse" id="delivery">
                         <ul class="nav flex-column sub-menu">
-                            <li class="nav-item"><a class="nav-link" href="pages/samples/login.html">Horário de
-                                    Funcionamento </a></li>
-                            <li class="nav-item"><a class="nav-link" href="pages/samples/login.html">Cardápio
-                                    Mobile </a>
+{{--                            <li class="nav-item"><a class="nav-link" href="pages/samples/login.html">Horário de Funcionamento </a></li>--}}
+                            <li class="nav-item"><a class="nav-link" href="{{route('cardapio-online', ['slug'=>auth()->user()->empresa->parametros->slug])}}">Cardápio On-line</a>
                             </li>
                         </ul>
                     </div>
@@ -252,7 +250,6 @@
                     <div class="collapse" id="users">
                         <ul class="nav flex-column sub-menu">
                             <li class="nav-item"><a class="nav-link" href="{{route('usuarios.index')}}">Usuários </a>
-                            </li>
                             </li>
                         </ul>
                     </div>
