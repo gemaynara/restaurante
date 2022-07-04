@@ -10,9 +10,9 @@
         }
 
         header#banner {
-            height: 30vh;
+            padding-bottom: 40px;
             width: 100%;
-            background-color: red;
+            background-color: #db4d59;
         }
 
         section#menu {
@@ -26,6 +26,7 @@
             padding: 20px;
             top: -30px;
             border-radius: 30px 30px 0px 0px;
+            box-shadow: 0px 0px 13px 1px #afafaf3d;
         }
 
         section#menu .menu-contain header h1 {
@@ -46,7 +47,20 @@
             border-bottom: 1px solid #EEEEEE;
         }
 
-        section#menu .menu-contain nav ul {
+        section#menu ul {
+            overflow-y: auto;
+            gap: 20px;
+        }
+
+        section#menu li {
+            width: fit-content;
+            margin-right: 20px;
+            height: 21px;
+            margin-bottom: 20px;
+            white-space: pre;
+        }
+
+        ul {
             display: flex;
             list-style-type: none;
             justify-content: space-between;
@@ -60,19 +74,130 @@
             background: white;
             width: 100%;
         }
+
+        footer nav {
+            padding: 20px;
+        }
+
+        footer nav ul {
+            margin: 0px;
+        }
+
+        footer nav ul li {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 11px;
+            width: 15%;
+        }
+
+        footer nav ul li .fa {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .menu-active {
+            color: #db4d59;
+        }
+
+        #lista-produtos .desc-produto h3 {
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        #lista-produtos .desc-produto h4 {
+            font-size: 16px;
+            font-weight: 300;
+        }
+
+        #lista-produtos .produto {
+            display: flex;
+        }
+
+        #lista-produtos .desc-produto {
+            width: 75%;
+        }
+
+        #lista-produtos .desc-produto {
+            width: 75%;
+        }
+
+        #lista-produtos .produto {
+            margin-bottom: 30px;
+            border-bottom: 1px solid #EEEEEE;
+        }
+
+        #lista-produtos .produto #food-image {
+            width: 50%;
+            box-shadow: 0px 0px 13px 1px #afafaf3d;
+            border-radius: 15px;
+            background-position: center;
+            background-size: cover;
+        }
+
+        #lista-produtos .contain-produtos {
+            overflow: auto;
+            height: calc(70vh - 50px - 90px - 41px - 33px - 20px);
+        }
+
+        #banner {
+            position: relative;
+            background-position: center;
+            background-size: cover;
+        }
+        
+        #banner i.fa-info-circle {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 24px;
+            color: white;
+        }
+
+        #banner figure {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding-top: 20px;
+            margin: 0px
+        }
+
+        #banner img {
+            width: 35%;
+            margin-bottom: 10px;
+            border-radius: 15px;
+            box-shadow: 0px 0px 13px 1px #afafaf3d;
+            margin: 0px;
+        }
+
+        #banner .endereco,  #banner .horario{
+            text-align: center;
+            color: white;
+        }
+
+        #banner h3 {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0px 0px 13px 1px #afafaf3d;
+            width: fit-content;
+            padding: 10px;
+            font-size: 16px;
+            margin: auto;
+        }
+
+        .fechado {
+            color: #db4d59;
+        }
+        
     </style>
 
-    <header id="banner">
+    <header id="banner" style="background-image: linear-gradient(#0000006b, #680f0dad), url({{asset('/imgs/delivery/banner-delivery.jpg')}})">
+        <i class="fa fa-info-circle" aria-hidden="true"></i>
         <figure>
-            <img src="" alt="">
+            <img src="{{ asset('imgs/logo.jpg') }}" alt="">
         </figure>
-        <p class="endereco"></p>
-        <div class="status-estabelecimento"></div>
-        <div class="infos">
-            <p class="horario"></p>
-            <p class="valor-minimo"></p>
-            <button class="ver-mais"></button>
-        </div>
+        <p class="endereco"><i class="fa fa-map-marker" aria-hidden="true"></i> Avenida Litorânea, 100, São Luís, MA</p>
+        <h3 class="status-estabelecimento fechado">Fechado</h3>
     </header>
 
     <section id="menu">
@@ -83,10 +208,13 @@
             </header>
             <nav>
                 <ul>
-                    <li>Tudo</li>
+                    <li class="menu-active">Tudo</li>
                     <li>Entradas</li>
                     <li>Bebidas</li>
                     <li>Prato Principal</li>
+                    <li>Sobremesa</li>
+                    <li>Sobremesa</li>
+                    <li>Sobremesa</li>
                     <li>Sobremesa</li>
                 </ul>
             </nav>
@@ -94,13 +222,35 @@
                 <div class="contain-produtos">
                     <div class="produto">
                         <div class="desc-produto">
-                            <h3></h3>
-                            <h4></h4>
-                            <p></p>
+                            <h3>Pad Thai</h3>
+                            <h4>R$ 13,50</h4>
+                            <p>Noodle stir fried with chives, bean shoot, fried tofu, egg, crushed peanuts and lemon</p>
                         </div>
-                        <figure>
-                            <img src="" alt="">
-                        </figure>
+                        <figure id="food-image" style="background-image: url({{asset('/imgs/cardapios/1652047328-0q9RvuyikFhPfHxnUJWA2iF3eIg7bqEPDFjfZA9Q.jpg')}})"></figure>
+                    </div>
+                    <div class="produto">
+                        <div class="desc-produto">
+                            <h3>Pad Thai</h3>
+                            <h4>R$ 13,50</h4>
+                            <p>Noodle stir fried with chives, bean shoot, fried tofu, egg, crushed peanuts and lemon</p>
+                        </div>
+                        <figure id="food-image" style="background-image: url({{asset('/imgs/cardapios/1652047328-0q9RvuyikFhPfHxnUJWA2iF3eIg7bqEPDFjfZA9Q.jpg')}})"></figure>
+                    </div>
+                    <div class="produto">
+                        <div class="desc-produto">
+                            <h3>Pad Thai</h3>
+                            <h4>R$ 13,50</h4>
+                            <p>Noodle stir fried with chives, bean shoot, fried tofu, egg, crushed peanuts and lemon</p>
+                        </div>
+                        <figure id="food-image" style="background-image: url({{asset('/imgs/cardapios/1652047328-0q9RvuyikFhPfHxnUJWA2iF3eIg7bqEPDFjfZA9Q.jpg')}})"></figure>
+                    </div>
+                    <div class="produto">
+                        <div class="desc-produto">
+                            <h3>Pad Thai</h3>
+                            <h4>R$ 13,50</h4>
+                            <p>Noodle stir fried with chives, bean shoot, fried tofu, egg, crushed peanuts and lemon</p>
+                        </div>
+                        <figure id="food-image" style="background-image: url({{asset('/imgs/cardapios/1652047328-0q9RvuyikFhPfHxnUJWA2iF3eIg7bqEPDFjfZA9Q.jpg')}})"></figure>
                     </div>
                 </div>
             </section>
@@ -112,10 +262,22 @@
     <footer id="nav">
         <nav>
             <ul>
-                <li>Home</li>
-                <li>Pesquisar</li>
-                <li>Carrinho</li>
-                <li>Conta</li>
+                <li class="menu-active">
+                    <i class="fa fa-home" aria-hidden="true"></i>
+                    Home
+                </li>
+                <li>
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                    Pesquisar
+                </li>
+                <li>
+                    <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                    Carrinho
+                </li>
+                <li>
+                    <i class="fa fa-user" aria-hidden="true"></i>
+                    Conta
+                </li>
             </ul>
         </nav>
     </footer>
