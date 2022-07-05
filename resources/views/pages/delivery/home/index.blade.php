@@ -118,6 +118,10 @@
             width: 75%;
         }
 
+        #lista-produtos .desc-produto p {
+            color: #767676;
+        }
+
         #lista-produtos .desc-produto {
             width: 75%;
         }
@@ -145,7 +149,7 @@
             background-position: center;
             background-size: cover;
         }
-        
+
         #banner i.fa-info-circle {
             position: absolute;
             top: 20px;
@@ -170,7 +174,8 @@
             margin: 0px;
         }
 
-        #banner .endereco,  #banner .horario{
+        #banner .endereco,
+        #banner .horario {
             text-align: center;
             color: white;
         }
@@ -188,10 +193,126 @@
         .fechado {
             color: #db4d59;
         }
-        
+
+        .modal figure {
+            width: 100%;
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 15px;
+            box-shadow: 0px 0px 13px 1px #afafafba;
+        }
+
+        .modal .modal-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin: 0px;
+        }
+
+        .modal .descricao-produto {
+            color: #767676;
+        }
+
+        .modal .preco {
+            font-size: 18px;
+            font-weight: 700;
+            color: #db4d59;
+        }
+
+        .modal .quantidade-contain {
+            display: flex;
+            justify-content: center;
+        }
+
+        .modal .quantidade-contain div {
+            width: 40px;
+            height: 40px;
+            margin: 0px;
+            font-size: 26px;
+            border-radius: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 500;
+        }
+
+        .modal .quantidade-contain .menos {
+            background-color: #ffa2a9;
+        }
+
+        .modal .quantidade-contain .mais {
+            background-color: #db4d59;
+            color: white;
+        }
+
+        .modal table {
+            width: 100%;
+            margin-top: 20px;
+            font-size: 16px;
+        }
+
+        .modal table input {
+            min-width: 15px;
+            min-height: 15px;
+        }
+
+        .modal .add-carrinho {
+            margin-top: 20px;
+            border-radius: 10px;
+            color: white;
+            border: 0px;
+            font-size: 18px;
+            background-color: #db4d59;
+            height: 50px;
+        }
     </style>
 
-    <header id="banner" style="background-image: linear-gradient(#0000006b, #680f0dad), url({{asset('/imgs/delivery/banner-delivery.jpg')}})">
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Pad Thai</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <figure class="foto-produto"
+                        style="background-image: url({{ asset('/imgs/cardapios/1652047328-0q9RvuyikFhPfHxnUJWA2iF3eIg7bqEPDFjfZA9Q.jpg') }})">
+                    </figure>
+                    <p class="descricao-produto">Noodle stir fried with chives, bean shoot, fried tofu, egg, crushed peanuts
+                        and lemon</p>
+                    <h3 class="preco">R$ 13,50</h3>
+                    <div class="quantidade-contain">
+                        <div class="menos">-</div>
+                        <div class="quantidade">0</div>
+                        <div class="mais">+</div>
+                    </div>
+
+                    <table>
+                        <tr>
+                            <td>Mal Passado</td>
+                            <td>+ R$0,00</td>
+                            <td><input type="checkbox" name="select-adicional" id="select-adicional"></td>
+                        </tr>
+                        <tr>
+                            <td>Bem Passado</td>
+                            <td>+ R$0,00</td>
+                            <td><input type="checkbox" name="select-adicional" id="select-adicional"></td>
+                        </tr>
+                        <tr>
+                            <td>No ponto</td>
+                            <td>+ R$0,00</td>
+                            <td><input type="checkbox" name="select-adicional" id="select-adicional"></td>
+                        </tr>
+                    </table>
+
+                    <button class="add-carrinho">Adicionar ao carrinho</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <header id="banner"
+        style="background-image: linear-gradient(#0000006b, #680f0dad), url({{ asset('/imgs/delivery/banner-delivery.jpg') }})">
         <i class="fa fa-info-circle" aria-hidden="true"></i>
         <figure>
             <img src="{{ asset('imgs/logo.jpg') }}" alt="">
@@ -220,37 +341,45 @@
             </nav>
             <section id="lista-produtos">
                 <div class="contain-produtos">
-                    <div class="produto">
+                    <div data-bs-toggle="modal" data-bs-target="#exampleModal" class="produto">
                         <div class="desc-produto">
                             <h3>Pad Thai</h3>
                             <h4>R$ 13,50</h4>
                             <p>Noodle stir fried with chives, bean shoot, fried tofu, egg, crushed peanuts and lemon</p>
                         </div>
-                        <figure id="food-image" style="background-image: url({{asset('/imgs/cardapios/1652047328-0q9RvuyikFhPfHxnUJWA2iF3eIg7bqEPDFjfZA9Q.jpg')}})"></figure>
+                        <figure id="food-image"
+                            style="background-image: url({{ asset('/imgs/cardapios/1652047328-0q9RvuyikFhPfHxnUJWA2iF3eIg7bqEPDFjfZA9Q.jpg') }})">
+                        </figure>
                     </div>
-                    <div class="produto">
+                    <div data-bs-toggle="modal" data-bs-target="#exampleModal" class="produto">
                         <div class="desc-produto">
                             <h3>Pad Thai</h3>
                             <h4>R$ 13,50</h4>
                             <p>Noodle stir fried with chives, bean shoot, fried tofu, egg, crushed peanuts and lemon</p>
                         </div>
-                        <figure id="food-image" style="background-image: url({{asset('/imgs/cardapios/1652047328-0q9RvuyikFhPfHxnUJWA2iF3eIg7bqEPDFjfZA9Q.jpg')}})"></figure>
+                        <figure id="food-image"
+                            style="background-image: url({{ asset('/imgs/cardapios/1652047328-0q9RvuyikFhPfHxnUJWA2iF3eIg7bqEPDFjfZA9Q.jpg') }})">
+                        </figure>
                     </div>
-                    <div class="produto">
+                    <div data-bs-toggle="modal" data-bs-target="#exampleModal" class="produto">
                         <div class="desc-produto">
                             <h3>Pad Thai</h3>
                             <h4>R$ 13,50</h4>
                             <p>Noodle stir fried with chives, bean shoot, fried tofu, egg, crushed peanuts and lemon</p>
                         </div>
-                        <figure id="food-image" style="background-image: url({{asset('/imgs/cardapios/1652047328-0q9RvuyikFhPfHxnUJWA2iF3eIg7bqEPDFjfZA9Q.jpg')}})"></figure>
+                        <figure id="food-image"
+                            style="background-image: url({{ asset('/imgs/cardapios/1652047328-0q9RvuyikFhPfHxnUJWA2iF3eIg7bqEPDFjfZA9Q.jpg') }})">
+                        </figure>
                     </div>
-                    <div class="produto">
+                    <div data-bs-toggle="modal" data-bs-target="#exampleModal" class="produto">
                         <div class="desc-produto">
                             <h3>Pad Thai</h3>
                             <h4>R$ 13,50</h4>
                             <p>Noodle stir fried with chives, bean shoot, fried tofu, egg, crushed peanuts and lemon</p>
                         </div>
-                        <figure id="food-image" style="background-image: url({{asset('/imgs/cardapios/1652047328-0q9RvuyikFhPfHxnUJWA2iF3eIg7bqEPDFjfZA9Q.jpg')}})"></figure>
+                        <figure id="food-image"
+                            style="background-image: url({{ asset('/imgs/cardapios/1652047328-0q9RvuyikFhPfHxnUJWA2iF3eIg7bqEPDFjfZA9Q.jpg') }})">
+                        </figure>
                     </div>
                 </div>
             </section>
@@ -265,10 +394,6 @@
                 <li class="menu-active">
                     <i class="fa fa-home" aria-hidden="true"></i>
                     Home
-                </li>
-                <li>
-                    <i class="fa fa-search" aria-hidden="true"></i>
-                    Pesquisar
                 </li>
                 <li>
                     <i class="fa fa-shopping-cart" aria-hidden="true"></i>
