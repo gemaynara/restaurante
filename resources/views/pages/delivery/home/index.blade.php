@@ -3,12 +3,6 @@
     <link href="{{ asset('cardapio') }}/css/font-awesome.min.css" rel="stylesheet" />
 
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
-
-        * {
-            font-family: 'Poppins', sans-serif;
-        }
-
         header#banner {
             padding-bottom: 40px;
             width: 100%;

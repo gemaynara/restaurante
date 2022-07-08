@@ -34,6 +34,7 @@ Route::group(['prefix' => 'delivery'], function () {
     Route::get('home', [\App\Http\Controllers\Delivery\HomeController::class, 'index'])->name('delivery.home');
     Route::get('login', [\App\Http\Controllers\Delivery\LoginController::class, 'index'])->name('delivery.login');
     Route::get('cadastro', [\App\Http\Controllers\Delivery\CadastroController::class, 'index'])->name('delivery.cadastro');
+    Route::get('carrinho', [\App\Http\Controllers\Delivery\CarrinhoController::class, 'index'])->name('delivery.carrinho');
 });
 
 Route::group(['middleware' => ['guest']], function () {
