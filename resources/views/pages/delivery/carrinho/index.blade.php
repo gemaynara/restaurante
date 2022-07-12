@@ -13,6 +13,12 @@
             padding-bottom: 90.5px;
         }
 
+        #carrinho {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
         #carrinho header h1 {
             font-size: 15px;
             font-weight: 600;
@@ -156,23 +162,180 @@
             margin-bottom: 10px;
         }
 
-        #carrinho #forma-de-pagamento {
+        #carrinho #forma-de-pagamento,
+        #carrinho #endereco {
             padding: 0px 20px;
             display: flex;
             justify-content: space-between;
         }
 
-        #carrinho #forma-de-pagamento .pagamento i {
+        #carrinho #forma-de-pagamento .mudar,
+        #carrinho #endereco .mudar {
+            color: #db4d59;
+        }
+
+        .modal-title {
+            font-weight: bold;
+        }
+
+        #carrinho #forma-de-pagamento .pagamento i,
+        #carrinho #endereco .info-endereco i {
             font-size: 22px;
+            margin-right: 10px;
+        }
+
+        #carrinho #endereco .info-endereco i {
+            margin-right: 20px;
+        }
+
+        #carrinho #forma-de-pagamento .pagamento,
+        #carrinho #endereco .info-endereco {
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            width: 80%;
+            display: -webkit-box;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+        }
+
+        #carrinho #forma-de-pagamento p,
+        #carrinho #endereco p {
+            margin: 0px;
+            margin-top: 20px;
+        }
+
+        #formas-pagamento .forma-pagamento {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px 0px;
+            font-size: 18px;
+        }
+
+        #formas-pagamento .forma-pagamento input {
+            transform: scale(1.2);
+        }
+
+        #mudarEndereco input,
+        #mudarEndereco select {
+            width: 100%;
+            padding: 15px 10px;
+            box-shadow: 0px 0px 13px 1px #afafaf57;
+            margin-bottom: 10px;
+            border-radius: 10px;
+            color: rgb(138, 138, 138);
+        }
+
+        #mudarEndereco button,
+        #formas-pagamento button,
+        #carrinho button.submit-button {
+            margin-top: 10px;
+            background-color: #db4d59;
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            border: 0px;
+            box-shadow: 0px 0px 13px 1px #afafaf57;
+            font-weight: bold;
+        }
+
+        #carrinho button.submit-button {
+            width: 90%;
+            margin: 20px auto;
+            box-shadow: 0px 0px 13px 1px #afafaf57;
         }
     </style>
+
+    <div class="modal fade" id="modalFormaPagamento" tabindex="-1" aria-labelledby="modalFormaPagamentoLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Forma de pagamento</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <section id="formas-pagamento">
+                        <div class="forma-pagamento" action="">
+                            <label for="formaPagamento1"><i class="fa fa-money" aria-hidden="true"></i> Dinheiro</label>
+                            <input type="radio" name="formaPagamento" id="formaPagamento1">
+                        </div>
+                        <div class="forma-pagamento" action="">
+                            <label for="formaPagamento2"><i class="fa fa-credit-card" aria-hidden="true"></i> Cartão de
+                                débito</label>
+                            <input type="radio" name="formaPagamento" id="formaPagamento2">
+                        </div>
+                        <div class="forma-pagamento" action="">
+                            <label for="formaPagamento3"><i class="fa fa-credit-card" aria-hidden="true"></i> Cartão de
+                                crédito</label>
+                            <input type="radio" name="formaPagamento" id="formaPagamento3">
+                        </div>
+
+                        <button type="submit">Alterar forma de pagamento</button>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modalEndereco" tabindex="-1" aria-labelledby="modalEnderecoLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Endereço</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="mudarEndereco" action="">
+                        <input type="text" name="cep" id="cep" placeholder="Digite seu CEP">
+                        <input type="text" name="adress" id="adress" placeholder="Digite seu endereço">
+                        <input type="text" name="complemento" id="complemento" placeholder="Digite o complemento">
+                        <input type="text" name="bairro" id="bairro" placeholder="Digite seu bairro">
+                        <select id="estado" name="estado">
+                            <option value="AC" disabled selected>Escolha seu estado</option>
+                            <option value="AC">Acre</option>
+                            <option value="AL">Alagoas</option>
+                            <option value="AP">Amapá</option>
+                            <option value="AM">Amazonas</option>
+                            <option value="BA">Bahia</option>
+                            <option value="CE">Ceará</option>
+                            <option value="DF">Distrito Federal</option>
+                            <option value="ES">Espírito Santo</option>
+                            <option value="GO">Goiás</option>
+                            <option value="MA">Maranhão</option>
+                            <option value="MT">Mato Grosso</option>
+                            <option value="MS">Mato Grosso do Sul</option>
+                            <option value="MG">Minas Gerais</option>
+                            <option value="PA">Pará</option>
+                            <option value="PB">Paraíba</option>
+                            <option value="PR">Paraná</option>
+                            <option value="PE">Pernambuco</option>
+                            <option value="PI">Piauí</option>
+                            <option value="RJ">Rio de Janeiro</option>
+                            <option value="RN">Rio Grande do Norte</option>
+                            <option value="RS">Rio Grande do Sul</option>
+                            <option value="RO">Rondônia</option>
+                            <option value="RR">Roraima</option>
+                            <option value="SC">Santa Catarina</option>
+                            <option value="SP">São Paulo</option>
+                            <option value="SE">Sergipe</option>
+                            <option value="TO">Tocantins</option>
+                            <option value="EX">Estrangeiro</option>
+                        </select>
+                        <button type="submit">Alterar endereço</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <section id="carrinho">
         <header>
             <h1>Carrinho</h1>
         </header>
         <section id="pedidos">
-            <h2>Items</h2>
+            <h2>Pedidos</h2>
             <div id="pedido">
                 <div class="contain-info-pedido">
                     <div class="contain-info-pedido">
@@ -251,9 +414,20 @@
         <section id="forma-de-pagamento">
             <p class="pagamento">
                 <i class="fa fa-money" aria-hidden="true"></i>
+                Dinheiro
             </p>
-            <p>Mudar</p>
+            <p class="mudar" data-bs-toggle="modal" data-bs-target="#modalFormaPagamento">Mudar</p>
         </section>
+
+        <section id="endereco">
+            <p class="info-endereco">
+                <i class="fa fa-map-marker" aria-hidden="true"></i>
+                Rua Manoel Neves dos Santos 141 bloco D-12 apto
+            </p>
+            <p class="mudar" data-bs-toggle="modal" data-bs-target="#modalEndereco">Mudar</p>
+        </section>
+
+        <button class="submit-button" type="submit">Fazer pedido</button>
     </section>
 
     <footer id="nav">

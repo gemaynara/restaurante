@@ -92,6 +92,7 @@
         <form action="">
             <div>
                 <input type="text" name="name" id="name" placeholder="Digite seu nome">
+                <input type="text" name="usuario" id="usuario" placeholder="Digite seu nome de usuário">
                 <input type="tel" name="tel" id="tel" placeholder="Digite seu número de telefone">
                 <input type="text" name="cep" id="cep" placeholder="Digite seu CEP">
                 <input type="text" name="adress" id="adress" placeholder="Digite seu endereço">
