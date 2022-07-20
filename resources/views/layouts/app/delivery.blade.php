@@ -23,7 +23,7 @@
         @yield('content')
     </div>
 
-    <script src="{{ asset('app/js/framework7.js') }}"></script>
+    {{-- <script src="{{ asset('app/js/framework7.js') }}"></script> --}}
     <script src="{{ asset('app/js/routes.js') }}"></script>
     <script src="{{ asset('app/js/app.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"

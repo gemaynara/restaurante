@@ -433,15 +433,16 @@
     <footer id="nav">
         <nav>
             <ul>
-                <li>
+                <li onclick="window.location='{{ URL::route('delivery.home') }}'">
                     <i class="fa fa-home" aria-hidden="true"></i>
                     Home
                 </li>
-                <li class="menu-active">
+
+                <li onclick="window.location='{{ URL::route('delivery.carrinho') }}'" class="menu-active">
                     <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                     Carrinho
                 </li>
-                <li>
+                <li onclick="window.location='{{ URL::route('delivery.perfil') }}'">
                     <i class="fa fa-user" aria-hidden="true"></i>
                     Conta
                 </li>
